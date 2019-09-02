@@ -18,3 +18,9 @@ Route::get('/siswa', 'SiswaController@index');
 Route::post('/siswa', 'SiswaController@store');
 Route::get('/siswa/{id}/edit', 'SiswaController@edit');
 Route::put('/siswa/{id}/update', 'SiswaController@update');
+
+// Kelas;
+Route::get('/kelas', 'KelasController@index');
+Route::post('/kelas', 'KelasController@store');
+Route::get('/kelas/{id}/edit', 'KelasController@edit');
+Route::put('/kelas/{id}/update', 'KelasController@update');
