@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::delete('/siswa/{id}', 'SiswaController@destroy');
+Route::delete('/spp/{id}', 'AngkatanController@destroy');

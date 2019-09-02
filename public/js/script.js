@@ -46,6 +46,7 @@ $(document).ready(function () {
         });
     }
 
+    // crud siswa
     $('.btnSiswaModal').on('click', function () {
         let url = $(this).data('url')
         let id = $(this).data('id')
@@ -61,6 +62,7 @@ $(document).ready(function () {
             $('#jkp').prop("checked", false)
             $('#alamat').val('')
             $('#agama').val('');
+            $('#angkatan').val('');
             $('#siswaForm').attr('action', '/siswa')
             $('#siswaModalMethod').html('')
             $('#siswaModalTitle').html('Tambah Siswa')
@@ -79,10 +81,35 @@ $(document).ready(function () {
                 $('#tempatLahir').val(data.tempat_lahir)
                 $('#alamat').val(data.alamat)
                 $('#agama').val(data.agama);
+                $('#angkatan').val(data.angkatan_id);
             })
             $('#siswaForm').attr('action', '/siswa/' + id + '/update')
             $('#siswaModalMethod').html($(this).data('method'))
             $('#siswaModalTitle').html('Edit Siswa')
+        }
+        $('#exampleModalCenter').modal('show')
+    })
+
+    // crud spp
+    $('.btnSppModal').on('click', function () {
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let action = $(this).data('action')
+
+        if (action == 'add') {
+            $('#tahunMasuk').val('')
+            $('#tarif').val('')
+            $('#sppForm').attr('action', '/spp')
+            $('#sppModalMethod').html('')
+            $('#sppModalTitle').html('Tambah Spp')
+        } else {
+            $.get(url, function (data) {
+                $('#tahunMasuk').val(data.angkatan)
+                $('#tarif').val(data.tarifspp)
+            })
+            $('#sppForm').attr('action', '/spp/' + id + '/update')
+            $('#sppModalMethod').html($(this).data('method'))
+            $('#sppModalTitle').html('Edit Spp')
         }
         $('#exampleModalCenter').modal('show')
     })

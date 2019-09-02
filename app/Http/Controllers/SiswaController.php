@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Angkatan;
 use App\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -17,8 +18,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
+        $angkatan = Angkatan::orderBy('angkatan', 'asc')->get();
         $siswa = Siswa::all();
-        return view('siswa.siswa', compact('siswa'));
+        return view('siswa.siswa', compact('siswa', 'angkatan'));
     }
 
     /**
@@ -47,6 +49,7 @@ class SiswaController extends Controller
         $siswa->jk = $request->jk;
         $siswa->agama = $request->agama;
         $siswa->alamat = $request->alamat;
+        $siswa->angkatan_id = $request->angkatan;
 
         $siswa->save();
         Session::flash('success', 'Siswa berhasil ditambahkan');
@@ -96,6 +99,7 @@ class SiswaController extends Controller
         $siswa->jk = $request->jk;
         $siswa->agama = $request->agama;
         $siswa->alamat = $request->alamat;
+        $siswa->angkatan_id = $request->angkatan;
 
         $siswa->update();
         Session::flash('success', 'Siswa berhasil diedit');
