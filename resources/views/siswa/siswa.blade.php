@@ -38,6 +38,7 @@
                                             <th>Nis</th>
                                             <th>Nama</th>
                                             <th>JK</th>
+                                            <th>Tahun Masuk</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -48,6 +49,7 @@
                                             <td>{{ $sw->nis }}</td>
                                             <td>{{ $sw->nama }}</td>
                                             <td>{{ ($sw->jk == 'l') ? 'Laki-laki' : 'Perempuan' }}</td>
+                                            <td>{{ $sw->angkatan->angkatan }}</td>
                                             <td>
                                                 <div class="row">
                                                     <button type="button" class="btn btn-link btn-primary btnSiswaModal" data-url="/siswa/{{ Crypt::encrypt($sw->id) }}/edit" data-id="{{ Crypt::encrypt($sw->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
@@ -132,6 +134,17 @@
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
                         <textarea name="alamat" id="alamat" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="tahunMasuk">Tahun Masuk</label>
+                        <select name="angkatan" id="angkatan" class="form-control">
+                            <optgroup label="Pilih Angkatan">
+                                <option value=""></option>
+                                @foreach($angkatan as $ang)
+                                <option value="{{ $ang->id }}">{{ $ang->angkatan }}</option>
+                                @endforeach
+                            </optgroup>
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>

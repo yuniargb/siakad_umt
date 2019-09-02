@@ -18,3 +18,8 @@ Route::get('/siswa', 'SiswaController@index');
 Route::post('/siswa', 'SiswaController@store');
 Route::get('/siswa/{id}/edit', 'SiswaController@edit');
 Route::put('/siswa/{id}/update', 'SiswaController@update');
+
+Route::get('/spp', 'AngkatanController@index');
+Route::post('/spp', 'AngkatanController@store');
+Route::get('/spp/{id}/edit', 'AngkatanController@edit');
+Route::put('/spp/{id}/update', 'AngkatanController@update');
