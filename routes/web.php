@@ -11,6 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'DashboardController@dashboard');
+
+// Route::resource('siswa', 'SiswaController');
+Route::get('/siswa', 'SiswaController@index');
+Route::post('/siswa', 'SiswaController@store');
+Route::get('/siswa/{id}/edit', 'SiswaController@edit');
+Route::put('/siswa/{id}/update', 'SiswaController@update');
