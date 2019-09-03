@@ -275,7 +275,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="widgets.html">
+							<a href="/pembayaran">
 								<i class="fas fa-desktop"></i>
 								<p>Pembayaran</p>
 								<span class="badge badge-success">4</span>

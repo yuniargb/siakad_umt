@@ -2,11 +2,16 @@
 namespace App\Http\Controllers;
 
 use App\Kelas;
+use App\Siswa;
+use App\Angkatan;
+use App\Pembayaran;
+use Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-class KelasController extends Controller
+use Illuminate\Support\Facades\DB;
+class PembayaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +20,11 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::all();
-        return view('kelas.kelas', compact('kelas'));
+        // $pembayaran = Pembayaran::with('siswa')->first();
+        
+        $pembayaran = DB::table('pembayarans')
+                    ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
+        return view('pembayaran.pembayaran', compact('pembayaran'));
     }
 
     /**
@@ -37,11 +45,23 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        $kelas = new Kelas;
-        $kelas->namakelas = $request->kelas;
 
-        $kelas->save();
-        Session::flash('success', 'Kelas berhasil ditambahkan');
+         $resorce = $request->file('bukti');
+        $name   = $resorce->getClientOriginalExtension();
+        $newName = rand(100000, 1001238912) . "." . $name;
+        $resorce->move(\base_path() . "/public/images/paket", $newName);
+
+
+        $pembayaran = new Pembayaran;
+        $pembayaran->bukti = $newName;
+        $pembayaran->atm = $request->atm;
+        $pembayaran->bulan = $request->bulan;
+        $pembayaran->jumlah = $request->jumlah;
+        $pembayaran->tgl_transfer = $request->tgl;
+        $pembayaran->siswa_id = $request->nis;
+        $pembayaran->status = 0;
+        $pembayaran->save();
+        Session::flash('success', 'Pembayaran berhasil ditambahkan');
         return Redirect::back();
     }
 
@@ -65,7 +85,7 @@ class KelasController extends Controller
     public function edit($id)
     {
         $decrypt = Crypt::decrypt($id);
-        $kelas = Kelas::find($decrypt);
+        $kelas = Pembayaran::find($decrypt);
         return $kelas;
     }
 
@@ -97,10 +117,10 @@ class KelasController extends Controller
     public function destroy($id)
     {
         $decrypt = Crypt::decrypt($id);
-        $kelas = Kelas::find($decrypt);
-        $kelas->delete();
+        $pembayaran = Pembayaran::find($decrypt);
+        $pembayaran->delete();
 
-        Session::flash('success', 'Kelas berhasil dihapus');
-        return '/kelas';
+        Session::flash('success', 'Pembayaran berhasil dihapus');
+        return '/pembayaran';
     }
 }

@@ -113,4 +113,55 @@ $(document).ready(function () {
         }
         $('#exampleModalCenter').modal('show')
     })
+
+    // crud spp
+    $(document).on('click', '.btnKelasModal', function () {
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let action = $(this).data('action')
+
+        if (action == 'add') {
+            $('#kelas').val('')
+            $('#kelasForm').attr('action', '/kelas')
+            $('#kelasModalMethod').html('')
+            $('#kelasModalTitle').html('Tambah Kelas')
+        } else {
+            $.get(url, function (data) {
+                $('#kelas').val(data.namaKelas)
+            })
+            $('#kelasForm').attr('action', '/kelas/' + id + '/update')
+            $('#kelasModalMethod').html($(this).data('method'))
+            $('#kelasModalTitle').html('Edit Kelas')
+        }
+        $('#exampleModalCenter').modal('show')
+    })
+
+    $(document).on('click', '.btnPembayaranModal', function () {
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let action = $(this).data('action')
+
+        if (action == 'add') {
+            $('#nis').val('')
+            $('#atm').val('')
+            $('#jumlah').val('')
+            $('#tgl').val('')
+            $('#bukti').val('')
+            $('#pembayaranForm').attr('action', '/pembayaran')
+            $('#pembayaranModalMethod').html('')
+            $('#pembayaranModalTitle').html('Tambah Pembayaran')
+        } else {
+            $.get(url, function (data) {
+                $('#nis').val('')
+                $('#atm').val('')
+                $('#jumlah').val('')
+                $('#tgl').val('')
+                $('#bukti').val('')
+            })
+            $('#pembayaranForm').attr('action', '/pembayaran/' + id + '/update')
+            $('#pembayaranModalMethod').html($(this).data('method'))
+            $('#pembayaranModalTitle').html('Edit Pembayaran')
+        }
+        $('#exampleModalCenter').modal('show')
+    })
 })

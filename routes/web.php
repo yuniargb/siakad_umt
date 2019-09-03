@@ -30,3 +30,9 @@ Route::get('/spp', 'AngkatanController@index');
 Route::post('/spp', 'AngkatanController@store');
 Route::get('/spp/{id}/edit', 'AngkatanController@edit');
 Route::put('/spp/{id}/update', 'AngkatanController@update');
+
+// pembayaran
+Route::get('/pembayaran', 'PembayaranController@index');
+Route::post('/pembayaran', 'PembayaranController@store');
+Route::get('/pembayaran/{id}/edit', 'PembayaranController@edit');
+Route::put('/pembayaran/{id}/update', 'PembayaranController@update');
