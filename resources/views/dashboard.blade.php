@@ -17,7 +17,8 @@
                 <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
                     <div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-primary">Test</a>
+                            <h3>Selamat Datang di Aplikasi SPP <b class="text-primary">{{ auth()->user()->name }}</b></h3>
+                            <h5>Anda login sebagai <b class="text-primary">{{ (auth()->user()->role == 1) ? 'Admin' : 'Siswa' }}</b></h5>
                         </div>
                     </div>
                 </div>

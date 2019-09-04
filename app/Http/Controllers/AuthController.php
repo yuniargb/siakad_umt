@@ -13,7 +13,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function postLogin(Request $request)
+    public function loginpost(Request $request)
     {
         if (Auth::attempt($request->only('username', 'password'))) {
             return redirect('/');

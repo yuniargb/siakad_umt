@@ -94,7 +94,7 @@
                     <div id="PembayaranModalMethod"></div>
                     <div class="form-group">
                         <label for="nis">Nis</label>
-                        <input type="text" class="form-control" name="nis" id="nis">
+                        <input type="text" class="form-control" name="nis" id="nis" value="{{ $siswa->nis }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nis">ATM</label>

@@ -210,7 +210,7 @@
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">My Profile</a>
+										<a class="dropdown-item" href="/user">My Profile</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">Account Setting</a>
 										<div class="dropdown-divider"></div>
@@ -256,6 +256,15 @@
 							</span>
 							<h4 class="text-section">Components</h4>
 						</li>
+						@if(auth()->user()->role == 2)
+						<li class="nav-item">
+							<a href="/pembayaran">
+								<i class="fas fa-desktop"></i>
+								<p>Pembayaran</p>
+								<span class="badge badge-success">4</span>
+							</a>
+						</li>
+						@else
 						<li class="nav-item">
 							<a href="/siswa">
 								<i class="fas fa-users"></i>
@@ -272,13 +281,6 @@
 							<a href="/spp">
 								<i class="fas fa-paste"></i>
 								<p>SPP</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="/pembayaran">
-								<i class="fas fa-desktop"></i>
-								<p>Pembayaran</p>
-								<span class="badge badge-success">4</span>
 							</a>
 						</li>
 						<li class="nav-item">
@@ -307,6 +309,7 @@
 								</ul>
 							</div>
 						</li>
+						@endif
 					</ul>
 				</div>
 			</div>

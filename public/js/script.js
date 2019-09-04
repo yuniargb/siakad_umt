@@ -169,7 +169,6 @@ $(document).ready(function () {
         let action = $(this).data('action')
 
         if (action == 'add') {
-            $('#nis').val('')
             $('#atm').val('')
             $('#jumlah').val('')
             $('#tgl').val('')
