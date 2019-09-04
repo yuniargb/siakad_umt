@@ -23,6 +23,7 @@ class PembayaranController extends Controller
         // $pembayaran = Pembayaran::with('siswa')->first();
         
         $pembayaran = DB::table('pembayarans')
+                    ->select('*', 'pembayarans.id as id_p')
                     ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
         return view('pembayaran.pembayaran', compact('pembayaran'));
     }

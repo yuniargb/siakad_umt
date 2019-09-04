@@ -282,6 +282,13 @@
 							</a>
 						</li>
 						<li class="nav-item">
+							<a href="/konfirmasipembayaran">
+								<i class="fas fa-desktop"></i>
+								<p>Konfirmasi Pembayaran</p>
+								<span class="badge badge-success">5</span>
+							</a>
+						</li>
+						<li class="nav-item">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-layer-group"></i>
 								<p>Laporan</p>

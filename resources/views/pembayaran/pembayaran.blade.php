@@ -55,11 +55,10 @@
                                             <td>{{ $sw->bukti }}</td>
                                             <td>{{ $sw->jumlah }}</td>
                                             <td>{{ $sw->atm }}</td>
-                                            @php @endphp
                                             <td>{!! $sw->status == 0 ? '<span class="badge badge-danger">Menunggu Konfirmasi</span>' : '<span class="badge badge-danger">Sudah Di Konfirmasi</span>' !!}</td>
                                             <td>
                                                 <div class="row">
-                                                    <form action="/api/pembayaran/{{ Crypt::encrypt($sw->id) }}" method="post" class="d-inline btn-del">
+                                                    <form action="/api/pembayaran/{{ Crypt::encrypt($sw->id_p) }}" method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
                                                         <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></button>
