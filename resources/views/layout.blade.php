@@ -203,7 +203,7 @@
 										<div class="user-box">
 											<div class="avatar-lg"><img src="/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
-												<h4>Hizrian</h4>
+												<h4>{{ auth()->user()->name }}</h4>
 												<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
 											</div>
 										</div>
@@ -214,7 +214,7 @@
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">Account Setting</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Logout</a>
+										<a class="dropdown-item" href="/logout">Logout</a>
 									</li>
 								</div>
 							</ul>
@@ -236,8 +236,8 @@
 						<div class="info">
 							<a href="#" aria-expanded="true">
 								<span>
-									Hizrian
-									<span class="user-level">Administrator</span>
+									{{ auth()->user()->name }}
+									<span class="user-level">{{ (auth()->user()->role == 1) ? 'Admin' : 'Siswa' }}</span>
 								</span>
 							</a>
 							<div class="clearfix"></div>

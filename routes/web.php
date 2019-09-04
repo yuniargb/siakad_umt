@@ -11,34 +11,35 @@
 |
 */
 
-Route::get('/', 'DashboardController@dashboard');
+Route::get('/login', 'AuthController@login')->name('login');
+Route::post('/loginuser', 'AuthController@postlogin');
+Route::get('/logout', 'AuthController@logout')->name('logout');
 
-// Route::resource('siswa', 'SiswaController');
-Route::get('/siswa', 'SiswaController@index');
-Route::post('/siswa', 'SiswaController@store');
-Route::get('/siswa/{id}/edit', 'SiswaController@edit');
-Route::put('/siswa/{id}/update', 'SiswaController@update');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'DashboardController@dashboard');
+    // Route::resource('siswa', 'SiswaController');
+    Route::get('/siswa', 'SiswaController@index');
+    Route::post('/siswa', 'SiswaController@store');
+    Route::get('/siswa/{id}/edit', 'SiswaController@edit');
+    Route::put('/siswa/{id}/update', 'SiswaController@update');
 
-// Kelas;
-Route::get('/kelas', 'KelasController@index');
-Route::post('/kelas', 'KelasController@store');
-Route::get('/kelas/{id}/edit', 'KelasController@edit');
-Route::put('/kelas/{id}/update', 'KelasController@update');
+    // Kelas;
+    Route::get('/kelas', 'KelasController@index');
+    Route::post('/kelas', 'KelasController@store');
+    Route::get('/kelas/{id}/edit', 'KelasController@edit');
+    Route::put('/kelas/{id}/update', 'KelasController@update');
 
-// spp
-Route::get('/spp', 'AngkatanController@index');
-Route::post('/spp', 'AngkatanController@store');
-Route::get('/spp/{id}/edit', 'AngkatanController@edit');
-Route::put('/spp/{id}/update', 'AngkatanController@update');
+    // spp
+    Route::get('/spp', 'AngkatanController@index');
+    Route::post('/spp', 'AngkatanController@store');
+    Route::get('/spp/{id}/edit', 'AngkatanController@edit');
+    Route::put('/spp/{id}/update', 'AngkatanController@update');
 
-// pembayaran
-Route::get('/pembayaran', 'PembayaranController@index');
-Route::post('/pembayaran', 'PembayaranController@store');
+    // pembayaran Admin
+    Route::get('/accpembayaran', 'AccPembayaranController@index');
+    Route::get('/accpembayaran/{id}/{tipe}', 'AccPembayaranController@update');
 
-// pembayaran Admin
-Route::get('/accpembayaran', 'AccPembayaranController@index');
-Route::get('/accpembayaran/{id}/{tipe}', 'AccPembayaranController@update');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+    // pembayaran
+    Route::get('/pembayaran', 'PembayaranController@index');
+    Route::post('/pembayaran', 'PembayaranController@store');
+});
