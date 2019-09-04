@@ -81,6 +81,7 @@ $(document).ready(function () {
                 $('#tempatLahir').val(data.tempat_lahir)
                 $('#alamat').val(data.alamat)
                 $('#agama').val(data.agama);
+                $('#kelas').val(data.kelas_id);
                 $('#angkatan').val(data.angkatan_id);
             })
             $('#siswaForm').attr('action', '/siswa/' + id + '/update')

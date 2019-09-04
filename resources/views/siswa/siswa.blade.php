@@ -38,6 +38,7 @@
                                             <th>Nis</th>
                                             <th>Nama</th>
                                             <th>JK</th>
+                                            <th>Kelas</th>
                                             <th>Tahun Masuk</th>
                                             <th></th>
                                         </tr>
@@ -49,6 +50,7 @@
                                             <td>{{ $sw->nis }}</td>
                                             <td>{{ $sw->nama }}</td>
                                             <td>{{ ($sw->jk == 'l') ? 'Laki-laki' : 'Perempuan' }}</td>
+                                            <td>{{ $sw->kelas->namaKelas }}</td>
                                             <td>{{ $sw->angkatan->angkatan }}</td>
                                             <td>
                                                 <div class="row">
@@ -134,6 +136,17 @@
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
                         <textarea name="alamat" id="alamat" cols="30" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="kelas">Kelas</label>
+                        <select name="kelas" id="kelas" class="form-control">
+                            <optgroup label="Pilih Kelas">
+                                <option value=""></option>
+                                @foreach($kelas as $kls)
+                                <option value="{{ $kls->id }}">{{ $kls->namaKelas }}</option>
+                                @endforeach
+                            </optgroup>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="tahunMasuk">Tahun Masuk</label>

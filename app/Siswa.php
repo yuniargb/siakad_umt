@@ -10,8 +10,19 @@ class Siswa extends Model
     {
         return $this->belongsTo(Angkatan::class);
     }
+
     public function pembayaran()
     {
         return $this->belongsTo('App\Pembayaran');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
     }
 }

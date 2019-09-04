@@ -23,6 +23,8 @@ class CreateSiswasTable extends Migration
             $table->string('agama', 20);
             $table->string('alamat');
             $table->unsignedBigInteger('angkatan_id');
+            $table->unsignedBigInteger('kelas_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

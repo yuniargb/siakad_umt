@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Angkatan;
+use App\Kelas;
 use App\Siswa;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class SiswaController extends Controller
 {
@@ -20,7 +24,8 @@ class SiswaController extends Controller
     {
         $angkatan = Angkatan::orderBy('angkatan', 'asc')->get();
         $siswa = Siswa::all();
-        return view('siswa.siswa', compact('siswa', 'angkatan'));
+        $kelas = Kelas::all();
+        return view('siswa.siswa', compact('siswa', 'angkatan', 'kelas'));
     }
 
     /**
@@ -41,6 +46,7 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        // insert into siswa
         $siswa = new Siswa;
         $siswa->nis = $request->nis;
         $siswa->nama = $request->nama;
@@ -49,9 +55,23 @@ class SiswaController extends Controller
         $siswa->jk = $request->jk;
         $siswa->agama = $request->agama;
         $siswa->alamat = $request->alamat;
+        $siswa->user_id = 1;
         $siswa->angkatan_id = $request->angkatan;
-
+        $siswa->kelas_id = $request->kelas;
         $siswa->save();
+
+        // insert into user
+        $pass = date('dmy', strtotime($request->tgl_lahir));
+
+        $user = new User;
+        $user->name = $request->nama;
+        $user->role = 2;
+        $user->username = $request->nis;
+        $user->email_verified_at = now();
+        $user->password = Hash::make($pass);
+        $user->remember_token = Str::random(10);
+        $user->save();
+
         Session::flash('success', 'Siswa berhasil ditambahkan');
         return Redirect::back();
     }
@@ -100,6 +120,7 @@ class SiswaController extends Controller
         $siswa->agama = $request->agama;
         $siswa->alamat = $request->alamat;
         $siswa->angkatan_id = $request->angkatan;
+        $siswa->kelas_id = $request->kelas;
 
         $siswa->update();
         Session::flash('success', 'Siswa berhasil diedit');
