@@ -34,3 +34,11 @@ Route::put('/spp/{id}/update', 'AngkatanController@update');
 // pembayaran
 Route::get('/pembayaran', 'PembayaranController@index');
 Route::post('/pembayaran', 'PembayaranController@store');
+
+// pembayaran Admin
+Route::get('/accpembayaran', 'AccPembayaranController@index');
+Route::get('/accpembayaran/{id}/{tipe}', 'AccPembayaranController@update');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

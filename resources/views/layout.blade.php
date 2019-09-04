@@ -282,7 +282,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/konfirmasipembayaran">
+							<a href="/accpembayaran">
 								<i class="fas fa-desktop"></i>
 								<p>Konfirmasi Pembayaran</p>
 								<span class="badge badge-success">5</span>

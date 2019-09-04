@@ -24,6 +24,32 @@ $(document).ready(function () {
             }
         });
     });
+    // swal confirm
+    $('.kon').on('click', function (e) {
+        let url = $(this).data('url')
+        let text = $(this).data('original-title')
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: text
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        document.location.href = data;
+                    }
+                })
+            }
+        });
+    });
 
     // datatable
     $('.basic-datatables').DataTable();
