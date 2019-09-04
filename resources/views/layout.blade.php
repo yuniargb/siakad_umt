@@ -297,12 +297,12 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="/utility">
-											<span class="sub-item">Utility</span>
+										<a href="/laporanbulan">
+											<span class="sub-item">Laporan Pembayaran</span>
 										</a>
-										<a href="/product">
+										<!-- <a href="/product">
 											<span class="sub-item">Items</span>
-										</a>
+										</a> -->
 									</li>
 								</ul>
 							</div>
