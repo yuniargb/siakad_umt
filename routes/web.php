@@ -39,6 +39,12 @@ Route::post('/pembayaran', 'PembayaranController@store');
 Route::get('/accpembayaran', 'AccPembayaranController@index');
 Route::get('/accpembayaran/{id}/{tipe}', 'AccPembayaranController@update');
 
+// laporan bulan
+Route::get('/laporanbulan', 'LaporanController@bulan');
+Route::post('/cetaklaporanbulan', 'LaporanController@cetakbulan');
+// Route::post('/cetaklaporanbulan', 'LaporanController@cetakbulan');
+// Route::post('/pembayaran', 'PembayaranController@store');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
