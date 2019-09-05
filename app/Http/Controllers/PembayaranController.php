@@ -26,7 +26,8 @@ class PembayaranController extends Controller
         $siswa = Siswa::where('nis', auth()->user()->username)->first();
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
-            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
+            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
+            ->where('siswas.id',auth()->user()->id)->get();
         return view('pembayaran.pembayaran', compact('pembayaran', 'siswa'));
     }
 

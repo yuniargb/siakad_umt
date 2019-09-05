@@ -127,9 +127,9 @@
                                 <option value="protestan">Kristen Protestan</option>
                                 <option value="budha">Budha</option>
                                 <option value="hindu">Hindu</option>
-                                <option value="kong hu cu">Kong Hu Cu</option>
-                                <option value="yahudi">Yahudi</option>
-                                <option value="atheis">Atheis</option>
+                                <!-- <option value="kong hu cu">Kong Hu Cu</option> -->
+                                <!-- <option value="yahudi">Yahudi</option> -->
+                                <!-- <option value="atheis">Atheis</option> -->
                             </optgroup>
                         </select>
                     </div>

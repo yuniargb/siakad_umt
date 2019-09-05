@@ -24,6 +24,12 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('.detail-bukti').on('click', function () {
+        let gambar = $(this).data('image')
+
+        $('#datagambar').attr('src', gambar)
+    });
     // swal confirm
     $('.kon').on('click', function (e) {
         let url = $(this).data('url')
