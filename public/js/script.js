@@ -117,6 +117,40 @@ $(document).ready(function () {
         $('#exampleModalCenter').modal('show')
     })
 
+    // crud admin
+    $('.btnAdminModal').on('click', function () {
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let action = $(this).data('action')
+
+        if (action == 'add') {
+            $('#nama').val('')
+            $('#username').val('')
+            $('#adminForm').attr('action', '/admin')
+            $('#adminModalMethod').html('')
+            $('#adminModalTitle').html('Tambah Admin')
+        } else {
+            $.get(url, function (data) {
+                $('#nama').val(data.name)
+                $('#username').val(data.username)
+            })
+            $('#adminForm').attr('action', '/admin/' + id + '/update')
+            $('#adminModalMethod').html($(this).data('method'))
+            $('#adminModalTitle').html('Edit Admin')
+        }
+        $('#exampleModalCenter').modal('show')
+    })
+
+    // udit user
+    $('.btnEditUser').on('click', function () {
+        let url = $(this).data('url')
+        $.get(url, function(data){
+            $('#nama').val(data.name)
+            $('#username').val(data.username)
+        })
+        $('#editModalUser').modal('show')
+    })
+
     // crud spp
     $('.btnSppModal').on('click', function () {
         let url = $(this).data('url')
