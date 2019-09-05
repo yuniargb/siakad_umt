@@ -42,6 +42,7 @@
                                             <th>Jumlah Transfer</th>
                                             <th>Bank Transfer</th>
                                             <th>Status</th>
+                                            <th>Cetak</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -55,7 +56,22 @@
                                             <td>{{ $sw->bukti }}</td>
                                             <td>{{ $sw->jumlah }}</td>
                                             <td>{{ $sw->atm }}</td>
-                                            <td>{!! $sw->status == 0 ? '<span class="badge badge-danger">Menunggu Konfirmasi</span>' : '<span class="badge badge-danger">Sudah Di Konfirmasi</span>' !!}</td>
+                                            @php
+                                            if($sw->status == 0 )
+                                            $pesan = '<span class="badge badge-danger">Menunggu Konfirmasi</span>';
+                                            
+                                            elseif($sw->status == 3)
+                                            
+                                            $pesan = '<span class="badge badge-danger">Pembayaran Di Tolak</span>';
+                                           
+                                            else
+                                            
+                                            $pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';
+                                            @endphp
+                                            <td>{!! $pesan !!}</td>
+                                            <td>
+                                                <a class="btn btn-link btn-success" target="_blank" href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}"  data-toggle="tooltip" data-original-title="Cetak"><i class="fa fa-print"></i></a>
+                                            </td>
                                             <td>
                                                 <div class="row">
                                                     <form action="/api/pembayaran/{{ Crypt::encrypt($sw->id_p) }}" method="post" class="d-inline btn-del">
@@ -94,7 +110,8 @@
                     <div id="PembayaranModalMethod"></div>
                     <div class="form-group">
                         <label for="nis">Nis</label>
-                        <input type="text" class="form-control" name="nis" id="nis">
+                        <input type="text" class="form-control" name="idsiswa" id="idsiswa" value="{{ $siswa->nis }}" readonly>
+                        <input type="hidden" class="form-control" name="nis" id="nis" value="{{ $siswa->id }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nis">ATM</label>

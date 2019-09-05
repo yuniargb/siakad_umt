@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Kelas;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+
 class PembayaranController extends Controller
 {
     /**
@@ -21,11 +23,11 @@ class PembayaranController extends Controller
     public function index()
     {
         // $pembayaran = Pembayaran::with('siswa')->first();
-        
+        $siswa = Siswa::where('nis', auth()->user()->username)->first();
         $pembayaran = DB::table('pembayarans')
-                    ->select('*', 'pembayarans.id as id_p')
-                    ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
-        return view('pembayaran.pembayaran', compact('pembayaran'));
+            ->select('*', 'pembayarans.id as id_p')
+            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
+        return view('pembayaran.pembayaran', compact('pembayaran', 'siswa'));
     }
 
     /**
@@ -47,7 +49,7 @@ class PembayaranController extends Controller
     public function store(Request $request)
     {
 
-         $resorce = $request->file('bukti');
+        $resorce = $request->file('bukti');
         $name   = $resorce->getClientOriginalExtension();
         $newName = rand(100000, 1001238912) . "." . $name;
         $resorce->move(\base_path() . "/public/images/paket", $newName);

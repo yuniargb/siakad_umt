@@ -203,18 +203,18 @@
 										<div class="user-box">
 											<div class="avatar-lg"><img src="/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
-												<h4>Hizrian</h4>
+												<h4>{{ auth()->user()->name }}</h4>
 												<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">My Profile</a>
+										<a class="dropdown-item" href="/user">My Profile</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">Account Setting</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Logout</a>
+										<a class="dropdown-item" href="/logout">Logout</a>
 									</li>
 								</div>
 							</ul>
@@ -236,8 +236,8 @@
 						<div class="info">
 							<a href="#" aria-expanded="true">
 								<span>
-									Hizrian
-									<span class="user-level">Administrator</span>
+									{{ auth()->user()->name }}
+									<span class="user-level">{{ (auth()->user()->role == 1) ? 'Admin' : 'Siswa' }}</span>
 								</span>
 							</a>
 							<div class="clearfix"></div>
@@ -256,6 +256,15 @@
 							</span>
 							<h4 class="text-section">Components</h4>
 						</li>
+						@if(auth()->user()->role == 2)
+						<li class="nav-item">
+							<a href="/pembayaran">
+								<i class="fas fa-desktop"></i>
+								<p>Pembayaran</p>
+								<!-- <span class="badge badge-success">4</span> -->
+							</a>
+						</li>
+						@else
 						<li class="nav-item">
 							<a href="/siswa">
 								<i class="fas fa-users"></i>
@@ -275,17 +284,10 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="/pembayaran">
-								<i class="fas fa-desktop"></i>
-								<p>Pembayaran</p>
-								<span class="badge badge-success">4</span>
-							</a>
-						</li>
-						<li class="nav-item">
 							<a href="/accpembayaran">
 								<i class="fas fa-desktop"></i>
 								<p>Konfirmasi Pembayaran</p>
-								<span class="badge badge-success">5</span>
+								<!-- <span class="badge badge-success">5</span> -->
 							</a>
 						</li>
 						<li class="nav-item">
@@ -307,6 +309,7 @@
 								</ul>
 							</div>
 						</li>
+						@endif
 					</ul>
 				</div>
 			</div>
