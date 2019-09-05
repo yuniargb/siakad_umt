@@ -63,6 +63,7 @@ $(document).ready(function () {
             $('#alamat').val('')
             $('#agama').val('');
             $('#angkatan').val('');
+            $('.siswa-form').attr('id', 'siswaForm')
             $('#siswaForm').attr('action', '/siswa')
             $('#siswaModalMethod').html('')
             $('#siswaModalTitle').html('Tambah Siswa')
@@ -83,7 +84,8 @@ $(document).ready(function () {
                 $('#agama').val(data.agama);
                 $('#angkatan').val(data.angkatan_id);
             })
-            $('#siswaForm').attr('action', '/siswa/' + id + '/update')
+            $('.siswa-form').attr('id', 'siswaEditForm')
+            $('#siswaEditForm').attr('action', '/siswa/' + id + '/update')
             $('#siswaModalMethod').html($(this).data('method'))
             $('#siswaModalTitle').html('Edit Siswa')
         }

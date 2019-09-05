@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Angkatan;
+use App\Http\Requests\SiswaRequest;
 use App\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -39,7 +40,7 @@ class SiswaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SiswaRequest $request)
     {
         $siswa = new Siswa;
         $siswa->nis = $request->nis;

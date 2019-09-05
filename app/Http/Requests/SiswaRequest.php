@@ -13,7 +13,7 @@ class SiswaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class SiswaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nis' => 'required|unique:siswas,nis',
+            'nama' => 'required',
+            'tempat_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'jk' => 'required',
+            'agama' => 'required',
+            'alamat' => 'required',
+            'angkatan' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Filed ini wajib diisi',
+            'unique' => 'Nis sudah dipakai'
         ];
     }
 }

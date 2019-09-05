@@ -85,7 +85,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/siswa" id="siswaForm" method="post">
+                <form action="/siswa" id="siswaForm" class="siswa-form" method="post">
                     @csrf
                     <div id="siswaModalMethod"></div>
                     <div class="form-group">

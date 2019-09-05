@@ -19,7 +19,7 @@ Route::post('/siswa', 'SiswaController@store');
 Route::get('/siswa/{id}/edit', 'SiswaController@edit');
 Route::put('/siswa/{id}/update', 'SiswaController@update');
 
-// Kelas;
+// kelas;
 Route::get('/kelas', 'KelasController@index');
 Route::post('/kelas', 'KelasController@store');
 Route::get('/kelas/{id}/edit', 'KelasController@edit');
