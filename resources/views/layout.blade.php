@@ -209,10 +209,8 @@
 										</div>
 									</li>
 									<li>
-										@if(auth()->user()->role == 2)
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="/user">My Profile</a>
-										@endif
 										<!-- <div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">Account Setting</a> -->
 										<div class="dropdown-divider"></div>
@@ -310,6 +308,12 @@
 									</li>
 								</ul>
 							</div>
+						</li>
+						<li class="nav-item">
+							<a href="/admin">
+								<i class="fas fa-user"></i>
+								<p>Admin</p>
+							</a>
 						</li>
 						@endif
 					</ul>

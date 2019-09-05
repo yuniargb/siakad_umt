@@ -21,3 +21,4 @@ Route::delete('/siswa/{id}', 'SiswaController@destroy');
 Route::delete('/spp/{id}', 'AngkatanController@destroy');
 Route::delete('/kelas/{id}', 'KelasController@destroy');
 Route::delete('/pembayaran/{id}', 'PembayaranController@destroy');
+Route::delete('/admin/{id}', 'AdminController@destroy');

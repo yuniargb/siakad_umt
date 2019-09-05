@@ -91,4 +91,10 @@ Route::group(['middleware' => ['auth', 'checkRole:1']], function () {
     // Route::post('/cetaklaporanbulan', 'LaporanController@cetakbulan');
     // Route::post('/pembayaran', 'PembayaranController@store');
 
+    // admin
+    Route::get('/admin', 'AdminController@index');
+    Route::post('/admin', 'AdminController@store');
+    Route::get('/admin/{id}/edit', 'AdminController@edit');
+    Route::put('/admin/{id}/update', 'AdminController@update');
+
 });
