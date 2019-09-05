@@ -25,6 +25,38 @@ $(document).ready(function () {
         });
     });
 
+    $('.detail-bukti').on('click', function () {
+        let gambar = $(this).data('image')
+
+        $('#datagambar').attr('src', gambar)
+    });
+    // swal confirm
+    $('.kon').on('click', function (e) {
+        let url = $(this).data('url')
+        let text = $(this).data('original-title')
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: text
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        document.location.href = data;
+                    }
+                })
+            }
+        });
+    });
+
     // datatable
     $('.basic-datatables').DataTable();
 
@@ -82,6 +114,7 @@ $(document).ready(function () {
                 $('#tempatLahir').val(data.tempat_lahir)
                 $('#alamat').val(data.alamat)
                 $('#agama').val(data.agama);
+                $('#kelas').val(data.kelas_id);
                 $('#angkatan').val(data.angkatan_id);
             })
             $('.siswa-form').attr('id', 'siswaEditForm')
@@ -90,6 +123,40 @@ $(document).ready(function () {
             $('#siswaModalTitle').html('Edit Siswa')
         }
         $('#exampleModalCenter').modal('show')
+    })
+
+    // crud admin
+    $('.btnAdminModal').on('click', function () {
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let action = $(this).data('action')
+
+        if (action == 'add') {
+            $('#nama').val('')
+            $('#username').val('')
+            $('#adminForm').attr('action', '/admin')
+            $('#adminModalMethod').html('')
+            $('#adminModalTitle').html('Tambah Admin')
+        } else {
+            $.get(url, function (data) {
+                $('#nama').val(data.name)
+                $('#username').val(data.username)
+            })
+            $('#adminForm').attr('action', '/admin/' + id + '/update')
+            $('#adminModalMethod').html($(this).data('method'))
+            $('#adminModalTitle').html('Edit Admin')
+        }
+        $('#exampleModalCenter').modal('show')
+    })
+
+    // udit user
+    $('.btnEditUser').on('click', function () {
+        let url = $(this).data('url')
+        $.get(url, function(data){
+            $('#nama').val(data.name)
+            $('#username').val(data.username)
+        })
+        $('#editModalUser').modal('show')
     })
 
     // crud spp
@@ -112,6 +179,56 @@ $(document).ready(function () {
             $('#sppForm').attr('action', '/spp/' + id + '/update')
             $('#sppModalMethod').html($(this).data('method'))
             $('#sppModalTitle').html('Edit Spp')
+        }
+        $('#exampleModalCenter').modal('show')
+    })
+
+    // crud spp
+    $(document).on('click', '.btnKelasModal', function () {
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let action = $(this).data('action')
+
+        if (action == 'add') {
+            $('#kelas').val('')
+            $('#kelasForm').attr('action', '/kelas')
+            $('#kelasModalMethod').html('')
+            $('#kelasModalTitle').html('Tambah Kelas')
+        } else {
+            $.get(url, function (data) {
+                $('#kelas').val(data.namaKelas)
+            })
+            $('#kelasForm').attr('action', '/kelas/' + id + '/update')
+            $('#kelasModalMethod').html($(this).data('method'))
+            $('#kelasModalTitle').html('Edit Kelas')
+        }
+        $('#exampleModalCenter').modal('show')
+    })
+
+    $(document).on('click', '.btnPembayaranModal', function () {
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let action = $(this).data('action')
+
+        if (action == 'add') {
+            $('#atm').val('')
+            $('#jumlah').val('')
+            $('#tgl').val('')
+            $('#bukti').val('')
+            $('#pembayaranForm').attr('action', '/pembayaran')
+            $('#pembayaranModalMethod').html('')
+            $('#pembayaranModalTitle').html('Tambah Pembayaran')
+        } else {
+            $.get(url, function (data) {
+                $('#nis').val('')
+                $('#atm').val('')
+                $('#jumlah').val('')
+                $('#tgl').val('')
+                $('#bukti').val('')
+            })
+            $('#pembayaranForm').attr('action', '/pembayaran/' + id + '/update')
+            $('#pembayaranModalMethod').html($(this).data('method'))
+            $('#pembayaranModalTitle').html('Edit Pembayaran')
         }
         $('#exampleModalCenter').modal('show')
     })

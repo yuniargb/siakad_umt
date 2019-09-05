@@ -5,7 +5,7 @@
     <div class="page-inner py-5">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
             <div>
-                <h1 class="text-white pb-2 fw-bold">Siswa</h1>
+                <h1 class="text-white pb-2 fw-bold">Kelas</h1>
             </div>
         </div>
     </div>
@@ -15,13 +15,13 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-head-row">
-                    <div class="card-title">Daftar Siswa</div>
+                    <div class="card-title">Daftar Kelas</div>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-outline-primary btn-round btn-sm btnSiswaModal" data-action="add">
+                        <button type="button" class="btn btn-outline-primary btn-round btn-sm btnKelasModal" data-action="add">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Tambah Siswa
+                            Tambah Kelas
                         </button>
                     </div>
                 </div>
@@ -43,10 +43,10 @@
                                         @foreach($kelas as $sw)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $sw->namakelas }}</td>
+                                            <td>{{ $sw->namaKelas }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <button type="button" class="btn btn-link btn-primary btnSiswaModal" data-url="/siswa/{{ Crypt::encrypt($sw->id) }}/edit" data-id="{{ Crypt::encrypt($sw->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
+                                                    <button type="button" class="btn btn-link btn-primary btnKelasModal" data-url="/kelas/{{ Crypt::encrypt($sw->id) }}/edit" data-id="{{ Crypt::encrypt($sw->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
                                                     </button>
                                                     <form action="/api/kelas/{{ Crypt::encrypt($sw->id) }}" method="post" class="d-inline btn-del">
                                                         @csrf
@@ -73,18 +73,18 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="siswaModalTitle">Tambah Kelas Baru</h5>
+                <h5 class="modal-title" id="kelasModalTitle">Tambah Kelas Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/kelas" id="siswaForm" method="post">
+                <form action="/kelas" id="kelasForm" method="post">
                     @csrf
-                    <div id="siswaModalMethod"></div>
+                    <div id="kelasModalMethod"></div>
                     <div class="form-group">
                         <label for="nis">Kelas</label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <input type="text" class="form-control" name="kelas" id="kelas">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>

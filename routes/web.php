@@ -11,22 +11,90 @@
 |
 */
 
-Route::get('/', 'DashboardController@dashboard');
+// Route::get('/', 'DashboardController@dashboard');
 
 // Route::resource('siswa', 'SiswaController');
-Route::get('/siswa', 'SiswaController@index');
-Route::post('/siswa', 'SiswaController@store');
-Route::get('/siswa/{id}/edit', 'SiswaController@edit');
-Route::put('/siswa/{id}/update', 'SiswaController@update');
+// Route::get('/siswa', 'SiswaController@index');
+// Route::post('/siswa', 'SiswaController@store');
+// Route::get('/siswa/{id}/edit', 'SiswaController@edit');
+// Route::put('/siswa/{id}/update', 'SiswaController@update');
 
-// kelas;
-Route::get('/kelas', 'KelasController@index');
-Route::post('/kelas', 'KelasController@store');
-Route::get('/kelas/{id}/edit', 'KelasController@edit');
-Route::put('/kelas/{id}/update', 'KelasController@update');
+// Kelas;
+// Route::get('/kelas', 'KelasController@index');
+// Route::post('/kelas', 'KelasController@store');
+// Route::get('/kelas/{id}/edit', 'KelasController@edit');
+// Route::put('/kelas/{id}/update', 'KelasController@update');
 
 // spp
-Route::get('/spp', 'AngkatanController@index');
-Route::post('/spp', 'AngkatanController@store');
-Route::get('/spp/{id}/edit', 'AngkatanController@edit');
-Route::put('/spp/{id}/update', 'AngkatanController@update');
+// Route::get('/spp', 'AngkatanController@index');
+// Route::post('/spp', 'AngkatanController@store');
+// Route::get('/spp/{id}/edit', 'AngkatanController@edit');
+// Route::put('/spp/{id}/update', 'AngkatanController@update');
+
+// pembayaran
+// Route::get('/pembayaran', 'PembayaranController@index');
+// Route::post('/pembayaran', 'PembayaranController@store');
+
+// pembayaran Admin
+// Route::get('/accpembayaran', 'AccPembayaranController@index');
+// Route::get('/accpembayaran/{id}/{tipe}', 'AccPembayaranController@update');
+// Route::get('/cetakpembayaran/{id}', 'AccPembayaranController@cetak');
+
+// laporan bulan
+// Route::get('/laporanbulan', 'LaporanController@bulan');
+// Route::post('/cetaklaporanbulan', 'LaporanController@cetakbulan');
+// Route::post('/cetaklaporanbulan', 'LaporanController@cetakbulan');
+// Route::post('/pembayaran', 'PembayaranController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login', 'AuthController@login')->name('login');
+Route::post('/loginpost', 'AuthController@loginpost');
+Route::get('/logout', 'AuthController@logout');
+
+Route::get('/cetakpembayaran/{id}', 'AccPembayaranController@cetak');
+Route::group(['middleware' => ['auth', 'checkRole:1,2']], function () {
+    Route::get('/', 'DashboardController@dashboard');
+    Route::get('/user', 'DashboardController@user');
+    // pembayaran
+    Route::get('/pembayaran', 'PembayaranController@index');
+    Route::post('/pembayaran', 'PembayaranController@store');
+});
+
+Route::group(['middleware' => ['auth', 'checkRole:1']], function () {
+    // Route::resource('siswa', 'SiswaController');
+    Route::get('/siswa', 'SiswaController@index');
+    Route::post('/siswa', 'SiswaController@store');
+    Route::get('/siswa/{id}/edit', 'SiswaController@edit');
+    Route::put('/siswa/{id}/update', 'SiswaController@update');
+
+    // Kelas;
+    Route::get('/kelas', 'KelasController@index');
+    Route::post('/kelas', 'KelasController@store');
+    Route::get('/kelas/{id}/edit', 'KelasController@edit');
+    Route::put('/kelas/{id}/update', 'KelasController@update');
+
+    // spp
+    Route::get('/spp', 'AngkatanController@index');
+    Route::post('/spp', 'AngkatanController@store');
+    Route::get('/spp/{id}/edit', 'AngkatanController@edit');
+    Route::put('/spp/{id}/update', 'AngkatanController@update');
+
+    // pembayaran Admin
+    Route::get('/accpembayaran', 'AccPembayaranController@index');
+    Route::get('/accpembayaran/{id}/{tipe}', 'AccPembayaranController@update');
+
+    // laporan bulan
+    Route::get('/laporanbulan', 'LaporanController@bulan');
+    Route::post('/cetaklaporanbulan', 'LaporanController@cetakbulan');
+    // Route::post('/cetaklaporanbulan', 'LaporanController@cetakbulan');
+    // Route::post('/pembayaran', 'PembayaranController@store');
+
+    // admin
+    Route::get('/admin', 'AdminController@index');
+    Route::post('/admin', 'AdminController@store');
+    Route::get('/admin/{id}/edit', 'AdminController@edit');
+    Route::put('/admin/{id}/update', 'AdminController@update');
+
+});

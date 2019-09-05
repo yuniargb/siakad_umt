@@ -1,9 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
+
 use App\Kelas;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 class KelasController extends Controller
 {
     /**
@@ -79,7 +81,7 @@ class KelasController extends Controller
         $decrypt = Crypt::decrypt($id);
         $kelas = Kelas::find($decrypt);
 
-        $kelas->namakelas = $request->nama;
+        $kelas->namakelas = $request->kelas;
 
         $kelas->update();
         Session::flash('success', 'Kelas berhasil diedit');

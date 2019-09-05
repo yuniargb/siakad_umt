@@ -63,7 +63,7 @@
 								<i class="fa fa-search"></i>
 							</a>
 						</li>
-						<li class="nav-item dropdown hidden-caret">
+						<!-- <li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fa fa-envelope"></i>
 							</a>
@@ -132,8 +132,8 @@
 									<a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i> </a>
 								</li>
 							</ul>
-						</li>
-						<li class="nav-item dropdown hidden-caret">
+						</li> -->
+						<!-- <li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fa fa-bell"></i>
 								<span class="notification">4</span>
@@ -190,7 +190,7 @@
 									<a class="see-all" href="javascript:void(0);">See all notifications<i class="fa fa-angle-right"></i> </a>
 								</li>
 							</ul>
-						</li>
+						</li> -->
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
@@ -203,18 +203,18 @@
 										<div class="user-box">
 											<div class="avatar-lg"><img src="/assets/img/profile.jpg" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
-												<h4>Hizrian</h4>
-												<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+												<h4>{{ auth()->user()->name }}</h4>
+												<!-- <p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">View Profile</a> -->
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">My Profile</a>
+										<a class="dropdown-item" href="/user">My Profile</a>
+										<!-- <div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#">Account Setting</a> -->
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Account Setting</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Logout</a>
+										<a class="dropdown-item" href="/logout">Logout</a>
 									</li>
 								</div>
 							</ul>
@@ -236,8 +236,8 @@
 						<div class="info">
 							<a href="#" aria-expanded="true">
 								<span>
-									Hizrian
-									<span class="user-level">Administrator</span>
+									{{ auth()->user()->name }}
+									<span class="user-level">{{ (auth()->user()->role == 1) ? 'Admin' : 'Siswa' }}</span>
 								</span>
 							</a>
 							<div class="clearfix"></div>
@@ -256,6 +256,15 @@
 							</span>
 							<h4 class="text-section">Components</h4>
 						</li>
+						@if(auth()->user()->role == 2)
+						<li class="nav-item">
+							<a href="/pembayaran">
+								<i class="fas fa-desktop"></i>
+								<p>Pembayaran</p>
+								<!-- <span class="badge badge-success">4</span> -->
+							</a>
+						</li>
+						@else
 						<li class="nav-item">
 							<a href="/siswa">
 								<i class="fas fa-users"></i>
@@ -275,10 +284,10 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="widgets.html">
+							<a href="/accpembayaran">
 								<i class="fas fa-desktop"></i>
-								<p>Pembayaran</p>
-								<span class="badge badge-success">4</span>
+								<p>Konfirmasi Pembayaran</p>
+								<!-- <span class="badge badge-success">5</span> -->
 							</a>
 						</li>
 						<li class="nav-item">
@@ -290,16 +299,23 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="/utility">
-											<span class="sub-item">Utility</span>
+										<a href="/laporanbulan">
+											<span class="sub-item">Laporan Pembayaran</span>
 										</a>
-										<a href="/product">
+										<!-- <a href="/product">
 											<span class="sub-item">Items</span>
-										</a>
+										</a> -->
 									</li>
 								</ul>
 							</div>
 						</li>
+						<li class="nav-item">
+							<a href="/admin">
+								<i class="fas fa-user"></i>
+								<p>Admin</p>
+							</a>
+						</li>
+						@endif
 					</ul>
 				</div>
 			</div>
