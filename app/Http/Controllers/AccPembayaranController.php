@@ -18,6 +18,16 @@ class AccPembayaranController extends Controller
                     ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
         return view('pembayaranAdmin.accPembayaran', compact('pembayaran'));
     }
+    public function cetak($id)
+    {
+        // $pembayaran = Pembayaran::with('siswa')->first();
+        $decrypt = Crypt::decrypt($id);
+        $pembayaran = DB::table('pembayarans')
+                    ->select('*', 'pembayarans.id as id_p')
+                    ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
+                    ->where('pembayarans.id', $decrypt)->first();
+        return view('pembayaranAdmin.cetakPembayaran', compact('pembayaran'));
+    }
     public function update($id,$tipe)
     {
         $decrypt = Crypt::decrypt($id);

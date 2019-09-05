@@ -6,40 +6,19 @@
 	<title>Oyago | Admin</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="/assets/img/icon.ico" type="image/x-icon" />
-
-	<!-- Fonts and icons -->
-	<script src="/assets/js/plugin/webfont/webfont.min.js"></script>
-	<script>
-		WebFont.load({
-			google: {
-				"families": ["Lato:300,400,700,900"]
-			},
-			custom: {
-				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
-				urls: ['/assets/css/fonts.min.css']
-			},
-			active: function() {
-				sessionStorage.fonts = true;
-			}
-		});
-	</script>
-
-	<!-- CSS Files -->
-	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/assets/css/atlantis.css">
-	<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     @php
 	header("Content-type: application/vnd-ms-excel");
 	header("Content-Disposition: attachment; filename=Data Laporan-Pembayaran.xls");
 	@endphp
-	<h1 class="text-center">Laporan Pembayaran Bualanan</h1>
-	<h1 class="text-center">Bulan {{ $bulan }}</h1>
-	<table class="table basic-datatables">
+	<center><h1 class="text-center">Laporan Pembayaran Bualanan</h1></center>
+	<center><h1 class="text-center">Bulan {{ $bulan }}</h1></center>
+	<table border="1" class="table basic-datatables">
 		<thead>
 			<tr>
 				<th>No</th>
+				<th>NIS</th>
 				<th>Siswa</th>
 				<th>Tanggal Transfer</th>
 				<th>Pembayaran Bulan</th>
@@ -47,13 +26,13 @@
 				<th>Jumlah Transfer</th>
 				<th>Bank Transfer</th>
 				<th>Status</th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach($pembayaran as $sw)
 			<tr>
 				<td>{{ $loop->iteration }}</td>
+				<td>{{ $sw->nis }}</td>
 				<td>{{ $sw->nama }}</td>
 				<td>{{ $sw->tgl_transfer }}</td>
 				<td>{{ $sw->bulan }}</td>
@@ -73,14 +52,6 @@
 				$pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';
 				@endphp
 				<td>{!! $pesan !!}</td>
-				<td>
-					<div class="row">
-						
-							<button type="button" class="btn btn-link btn-danger kon" data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3"  data-toggle="tooltip" value="tolak" data-original-title="Tolak"><i class="fa fa-times"></i></button>
-							<button type="button" class="btn btn-link btn-primary kon" data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1" data-toggle="tooltip" value="konfirmasi" data-original-title="Konfirmasi"><i class="fa fa-check"></i></button>
-		
-					</div>
-				</td>
 			</tr>
 			@endforeach
 		</tbody>

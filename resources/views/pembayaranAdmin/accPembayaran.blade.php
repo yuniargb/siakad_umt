@@ -34,6 +34,7 @@
                                             <th>Jumlah Transfer</th>
                                             <th>Bank Transfer</th>
                                             <th>Status</th>
+                                            <th>Cetak</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -60,6 +61,9 @@
                                             $pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';
                                             @endphp
                                             <td>{!! $pesan !!}</td>
+                                            <td>
+                                                <a class="btn btn-link btn-success" target="_blank" href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}"  data-toggle="tooltip" data-original-title="Cetak"><i class="fa fa-print"></i></a>
+                                            </td>
                                             <td>
                                                 <div class="row">
                                                     

@@ -38,6 +38,7 @@ Route::post('/pembayaran', 'PembayaranController@store');
 // pembayaran Admin
 Route::get('/accpembayaran', 'AccPembayaranController@index');
 Route::get('/accpembayaran/{id}/{tipe}', 'AccPembayaranController@update');
+Route::get('/cetakpembayaran/{id}', 'AccPembayaranController@cetak');
 
 // laporan bulan
 Route::get('/laporanbulan', 'LaporanController@bulan');
