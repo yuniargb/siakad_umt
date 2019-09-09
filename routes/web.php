@@ -54,7 +54,7 @@ Route::post('/loginpost', 'AuthController@loginpost');
 Route::get('/logout', 'AuthController@logout');
 
 Route::get('/cetakpembayaran/{id}', 'AccPembayaranController@cetak');
-Route::group(['middleware' => ['auth', 'checkRole:1,2']], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'DashboardController@dashboard');
     Route::get('/user', 'DashboardController@user');
     // pembayaran
@@ -62,7 +62,7 @@ Route::group(['middleware' => ['auth', 'checkRole:1,2']], function () {
     Route::post('/pembayaran', 'PembayaranController@store');
 });
 
-Route::group(['middleware' => ['auth', 'checkRole:1']], function () {
+Route::group(['middleware' => 'auth'], function () {
     // Route::resource('siswa', 'SiswaController');
     Route::get('/siswa', 'SiswaController@index');
     Route::post('/siswa', 'SiswaController@store');
@@ -94,7 +94,9 @@ Route::group(['middleware' => ['auth', 'checkRole:1']], function () {
     // admin
     Route::get('/admin', 'AdminController@index');
     Route::post('/admin', 'AdminController@store');
-    Route::get('/admin/{id}/edit', 'AdminController@edit');
-    Route::put('/admin/{id}/update', 'AdminController@update');
 
+    // user
+    Route::get('/user/{id}/edit', 'UserController@edit');
+    Route::put('/user/{id}/update', 'UserController@update');
+    Route::get('/user/siswa/{id}/edit', 'UserController@editusersiswa');
 });
