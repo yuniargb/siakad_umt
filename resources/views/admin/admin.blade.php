@@ -49,11 +49,11 @@
                                             <td class="text-primary">{{ $adm->username }}</td>
                                             @php
                                             if($adm->role == 1){
-                                                $role = 'Admin';
+                                            $role = 'Admin';
                                             }elseif($adm->role == 3){
-                                                $role = 'Kepala Sekolah';
+                                            $role = 'Kepala Sekolah';
                                             }else{
-                                                $role = 'Super Admin';
+                                            $role = 'Super Admin';
                                             }
                                             @endphp
                                             <td>{{ $role }}</td>

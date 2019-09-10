@@ -53,24 +53,24 @@
                                             <td>{{ $sw->nama }}</td>
                                             <td>{{ $sw->tgl_transfer }}</td>
                                             <td>{{ $sw->bulan }}</td>
-                                            <td><img data-image="/images/paket/{{ $sw->bukti }}" src="/images/paket/{{ $sw->bukti }}" class="img-fluid detail-bukti" alt="{{ $sw->bukti }}"  data-toggle="modal" data-target="#exampleModal"></td>
+                                            <td><img data-image="/images/paket/{{ $sw->bukti }}" src="/images/paket/{{ $sw->bukti }}" class="img-fluid detail-bukti" alt="{{ $sw->bukti }}" data-toggle="modal" data-target="#exampleModal"></td>
                                             <td>{{ $sw->jumlah }}</td>
                                             <td>{{ $sw->atm }}</td>
                                             @php
                                             if($sw->status == 0 )
                                             $pesan = '<span class="badge badge-danger">Menunggu Konfirmasi</span>';
-                                            
+
                                             elseif($sw->status == 3)
-                                            
+
                                             $pesan = '<span class="badge badge-danger">Pembayaran Di Tolak</span>';
-                                           
+
                                             else
-                                            
+
                                             $pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';
                                             @endphp
                                             <td>{!! $pesan !!}</td>
                                             <td>
-                                                <a class="btn btn-link btn-success" target="_blank" href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}"  data-toggle="tooltip" data-original-title="Cetak"><i class="fa fa-print"></i></a>
+                                                <a class="btn btn-link btn-success" target="_blank" href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}" data-toggle="tooltip" data-original-title="Cetak"><i class="fa fa-print"></i></a>
                                             </td>
                                             <td>
                                                 <div class="row">
@@ -161,21 +161,21 @@
 </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Data Gambar</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <img src="" alt="" id="datagambar" class="img-fluid">
-      </div>
-      <!-- <div class="modal-footer">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Data Gambar</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img src="" alt="" id="datagambar" class="img-fluid">
+            </div>
+            <!-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Save changes</button>
       </div> -->
+        </div>
     </div>
-  </div>
-@stop
+    @stop
