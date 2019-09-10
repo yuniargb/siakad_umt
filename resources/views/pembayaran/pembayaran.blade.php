@@ -30,6 +30,16 @@
                 <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
                     <div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
                         <div class="col-md-12">
+                            <div class="container mb-3">
+                                <ul class="list-group">
+                                <li class="list-group-item">NIS     : {{ $siswa->nis }}</li>
+                                <li class="list-group-item">Nama    : {{ $siswa->nama }}</li>
+                                <li class="list-group-item">Kelas   : {{ $siswa->namaKelas }}</li>
+                                <li class="list-group-item">
+                                    <a class="btn btn-link btn-success" href="/cetakpembayaran"  data-toggle="tooltip" data-original-title="Download Excel"><i class="fa fa-download"></i></a>
+                                </li>
+                            </ul>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table basic-datatables">
                                     <thead>
@@ -109,12 +119,12 @@
                     @csrf
                     <div id="PembayaranModalMethod"></div>
                     <div class="form-group">
-                        <label for="nis">Nis</label>
+                        <label for="idsiswa">Nis</label>
                         <input type="text" class="form-control" name="idsiswa" id="idsiswa" value="{{ $siswa->nis }}" readonly>
-                        <input type="hidden" class="form-control" name="nis" id="nis" value="{{ $siswa->id }}" readonly>
+                        <input type="hidden" class="form-control" name="nis" id="nis" value="{{ $siswa->ids }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="nis">ATM</label>
+                        <label for="atm">ATM</label>
                         <select class="form-control" name="atm" id="atm">
                             <option value="Mandiri">Mandiri</option>
                             <option value="BCA">BCA</option>
@@ -122,8 +132,8 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="nis">Jumlah Transfer</label>
-                        <input type="number" class="form-control" name="jumlah" id="jumlah">
+                        <label for="jumlah">Jumlah Transfer</label>
+                        <input type="text" value="{{ $siswa->tarif }}" class="form-control" name="jumlah" id="jumlahd"  readonly>
                     </div>
                     <div class="form-group">
                         <label for="nis">Bulan</label>
@@ -146,6 +156,7 @@
                         <label for="nis">Tanggal Transfer</label>
                         <input type="date" class="form-control" name="tgl" id="tgl">
                     </div>
+                    
                     <div class="form-group">
                         <label for="nis">Bukti Transfer</label>
                         <input type="file" class="form-control" name="bukti" id="bukti">
