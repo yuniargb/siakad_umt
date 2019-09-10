@@ -22,12 +22,15 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        // $pembayaran = Pembayaran::with('siswa')->first();
-        $siswa = Siswa::where('nis', auth()->user()->username)->first();
+        $siswa= DB::table('siswas')
+        ->select('*','siswas.id as ids','angkatans.tarifspp as tarif')
+        ->join('angkatans', 'angkatans.id', '=', 'siswas.angkatan_id')
+        ->join('kelas', 'kelas.id', '=', 'siswas.kelas_id')
+        ->where('siswas.nis',auth()->user()->username)->first();
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-            ->where('siswas.nis', auth()->user()->username)->get();
+            ->where('siswas.nis',auth()->user()->username)->get();
         return view('pembayaran.pembayaran', compact('pembayaran', 'siswa'));
     }
 
@@ -67,6 +70,15 @@ class PembayaranController extends Controller
         $pembayaran->save();
         Session::flash('success', 'Pembayaran berhasil ditambahkan');
         return Redirect::back();
+    }
+
+    public function cetaksemua()
+    {
+        $pembayaran = DB::table('pembayarans')
+            ->select('*', 'pembayarans.id as id_p')
+            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
+            ->where('siswas.nis',auth()->user()->username)->get();
+        return view('pembayaran.cetak', compact('pembayaran'));
     }
 
     /**

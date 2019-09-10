@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user', 'DashboardController@user');
     // pembayaran
     Route::get('/pembayaran', 'PembayaranController@index');
+    Route::get('/cetakpembayaran', 'PembayaranController@cetaksemua');
     Route::post('/pembayaran', 'PembayaranController@store');
 });
 
