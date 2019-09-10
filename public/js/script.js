@@ -30,6 +30,19 @@ $(document).ready(function () {
 
         $('#datagambar').attr('src', gambar)
     });
+    $('#showpass').hide()
+    $('#password1').on('keyup', function () {
+        $p1 = $(this).val();
+        $p = $('#password').val();
+
+        if ($p1 != $p) {
+            $('#save').attr('disabled', true)
+            $('#showpass').show()
+        } else {
+            $('#showpass').hide()
+            $('#save').attr('disabled', false)
+        }
+    })
     // swal confirm
     $('.kon').on('click', function (e) {
         let url = $(this).data('url')
@@ -152,7 +165,7 @@ $(document).ready(function () {
     // udit user
     $('.btnEditUser').on('click', function () {
         let url = $(this).data('url')
-        $.get(url, function(data){
+        $.get(url, function (data) {
             $('#nama').val(data.name)
             $('#username').val(data.username)
         })

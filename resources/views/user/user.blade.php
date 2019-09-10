@@ -18,8 +18,8 @@
                     <div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
                         <div class="row">
                             <div class="col-md-6">
+                                @if(auth()->user()->role == 2)
                                 <table class="table table-bordered">
-                                    @if(auth()->user()->role == 2)
                                     <tr>
                                         <td>Nama</td>
                                         <td>{{ $user->nama }}</td>
@@ -36,7 +36,10 @@
                                         <td>Tarif SPP</td>
                                         <td>Rp {{ number_format($user->angkatan->tarifspp,0,',','.') }}</td>
                                     </tr>
-                                    @else
+                                </table>
+                                <button type="button" class="btn btn-primary btn-block btnEditUser" data-url="/user/siswa/{{ Crypt::encrypt($user->nis) }}/edit">Update Profile <i class="fa fa-pencil-alt"></i></button>
+                                @else
+                                <table class="table table-bordered">
                                     <tr>
                                         <td>Nama</td>
                                         <td>{{ $user->name }}</td>
@@ -46,12 +49,9 @@
                                         <td>{{ $user->username }}</td>
                                     </tr>
                                 </table>
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-primary btn-block btnEditUser" data-url="/admin/{{ Crypt::encrypt($user->id) }}/edit">Update Profile <i class="fa fa-pencil-alt"></i></button>
-                                </div>
+                                <button type="button" class="btn btn-primary btn-block btnEditUser" data-url="/user/{{ Crypt::encrypt($user->id) }}/edit">Update Profile <i class="fa fa-pencil-alt"></i></button>
                                 @endif
                             </div>
-                            <div class="col-md-6"></div>
                         </div>
                     </div>
                 </div>
@@ -70,20 +70,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/admin/{{ Crypt::encrypt($user->id) }}/update" id="adminForm" method="post">
+                <form action="/user/{{ Crypt::encrypt($user->id) }}/update" id="adminForm" method="post">
                     @csrf
                     @method('put')
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <input type="text" class="form-control" name="nama" id="nama" {{ (auth()->user()->role == 2) ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" name="username" class="form-control" id="username">
+                        <input type="text" name="username" class="form-control" id="username" {{ (auth()->user()->role == 2) ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
                         <label for="password">New Password</label>
                         <input type="password" name="password" class="form-control" id="password">
+                        <i class="text-danger">*Kosongkan bila tidak ingin mengubah password</i>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>

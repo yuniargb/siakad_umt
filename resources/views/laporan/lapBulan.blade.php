@@ -22,9 +22,9 @@
                 <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
                     <div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
                         <div class="col-md-12">
-                            <form action="/cetaklaporanbulan" id="pembayaranForm" method="post" enctype="multipart/form-data">
+                            <form action="/cetaklaporanbulan" class="form-row" id="pembayaranForm" method="post" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group">
+                                <div class="form-group col-md-6">
                                     <label for="nis">Bulan</label>
                                     <select class="form-control" name="bulan" id="bulan">
                                         <option value="Januari">Januari</option>
@@ -41,9 +41,17 @@
                                         <option value="Desmber">Desember</option>
                                     </select>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Cetak</button>
+                                <div class="form-group col-md-6">
+                                    <label for="nis">Kelas</label>
+                                    <select class="form-control" name="kelas" id="bulan">
+                                       @foreach($kelas as $k)
+                                            <option value="{{ $k->id }}">{{ $k->namaKelas }}</option>
+                                       @endforeach
+                                    </select>
+                                </div>
+                                <div class="modal-footer col-md-12">
+                                    <!-- <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button> -->
+                                    <button type="submit" class="btn btn-primary">Download</button>
                                 </div>
                             </form>
                         </div>

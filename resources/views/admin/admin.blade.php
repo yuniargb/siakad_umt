@@ -37,6 +37,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Username</th>
+                                            <th>Jabatan</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -46,10 +47,20 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $adm->name }}</td>
                                             <td class="text-primary">{{ $adm->username }}</td>
+                                            @php
+                                            if($adm->role == 1){
+                                                $role = 'Admin';
+                                            }elseif($adm->role == 3){
+                                                $role = 'Kepala Sekolah';
+                                            }else{
+                                                $role = 'Super Admin';
+                                            }
+                                            @endphp
+                                            <td>{{ $role }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <button type="button" class="btn btn-link btn-primary btnAdminModal" data-url="/admin/{{ Crypt::encrypt($adm->id) }}/edit" data-id="{{ Crypt::encrypt($adm->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
-                                                    </button>
+                                                    <!-- <button type="button" class="btn btn-link btn-primary btnAdminModal" data-url="/admin/{{ Crypt::encrypt($adm->id) }}/edit" data-id="{{ Crypt::encrypt($adm->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
+                                                    </button> -->
                                                     <form action="/api/admin/{{ Crypt::encrypt($adm->id) }}" method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
@@ -92,9 +103,27 @@
                         <label for="username">Username</label>
                         <input type="text" name="username" class="form-control" id="username">
                     </div>
+                    <div class="form-group">
+                        <label for="username">Password</label>
+                        <input type="password" name="password" class="form-control" id="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Re-Password</label>
+                        <input type="password" name="password1" class="form-control" id="password1">
+                        <small id="showpass" class="form-text text-danger hide">Password tidak sesuai</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Jabatan</label>
+                        <select name="role" id="role" class="form-control">
+                            <option value="">--PILIH JABATAN--</option>
+                            <option value="1">Admin</option>
+                            <option value="3">Kepsek</option>
+                            <option value="4">Super Admin</option>
+                        </select>
+                    </div>
                     <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="save">Save</button>
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
