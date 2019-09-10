@@ -106,19 +106,24 @@
 							<a href="#" aria-expanded="true">
 								<span>
 									{{ auth()->user()->name }}
-									<span class="user-level">{{ (auth()->user()->role == 1) ? 'Admin' : (auth()->user()->role == 2) ? 'Siswa' : 'Kepsek' }}</span>
+									@php
+									if(auth()->user()->role == 1){
+										$role = 'Admin';
+									}elseif(auth()->user()->role == 2){
+										$role = 'Siswa';
+									}elseif(auth()->user()->role == 3){
+										$role = 'Kepala Sekolah';
+									}else{
+										$role = 'Super Admin';
+									}
+									@endphp
+									<span class="user-level">{{ $role }}</span>
 								</span>
 							</a>
 							<div class="clearfix"></div>
 						</div>
 					</div>
 					<ul class="nav nav-primary">
-						<li class="nav-item">
-							<a href="/">
-								<i class="fas fa-home"></i>
-								<p>Dashboard</p>
-							</a>
-						</li>
 						<li class="nav-section">
 							<span class="sidebar-mini-icon">
 								<i class="fa fa-ellipsis-h"></i>
@@ -126,6 +131,12 @@
 							<h4 class="text-section">Components</h4>
 						</li>
 						@if(auth()->user()->role == 2)
+						<!-- <li class="nav-item">
+							<a href="/">
+								<i class="fas fa-home"></i>
+								<p>Dashboard</p>
+							</a>
+						</li> -->
 						<li class="nav-item">
 							<a href="/pembayaran">
 								<i class="fas fa-desktop"></i>
@@ -133,7 +144,7 @@
 								<!-- <span class="badge badge-success">4</span> -->
 							</a>
 						</li>
-						@elseif(auth()->user()->role == 1)
+						@elseif(auth()->user()->role == 1 || auth()->user()->role == 4)
 						<li class="nav-item">
 							<a href="/siswa">
 								<i class="fas fa-users"></i>
@@ -159,13 +170,34 @@
 								<!-- <span class="badge badge-success">5</span> -->
 							</a>
 						</li>
+						@if(auth()->user()->role == 4)
 						<li class="nav-item">
 							<a href="/admin">
 								<i class="fas fa-user"></i>
 								<p>Admin</p>
 							</a>
 						</li>
-						@else
+						@endif
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#base">
+								<i class="fas fa-layer-group"></i>
+								<p>Laporan</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="base">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/laporanbulan">
+											<span class="sub-item">Laporan Pembayaran</span>
+										</a>
+										<!-- <a href="/product">
+											<span class="sub-item">Items</span>
+										</a> -->
+									</li>
+								</ul>
+							</div>
+						</li>
+						@elseif(auth()->user()->role == 3)
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-layer-group"></i>

@@ -21,9 +21,12 @@ class AuthController extends Controller
             'username' => 'required|exists:users,username',
             'password' => 'required'
         ]);
-
         if (Auth::attempt($request->only('username', 'password'))) {
-            return redirect('/');
+            if(auth()->user()->role == 2){
+                return redirect('/pembayaran');
+            }else{
+                return redirect('/accpembayaran');
+            }
         }
         return redirect('/login')->withInput($request->only('username'));
     }

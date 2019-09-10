@@ -24,7 +24,7 @@ class AdminController extends Controller
         $user->name = $request->nama;
         $user->role = $request->role;
         $user->username = $request->username;
-        $user->password = Hash::make('password');
+        $user->password = Hash::make($request->password);
         $user->email_verified_at = now();
         $user->remember_token = Str::random(10);
         $user->save();
