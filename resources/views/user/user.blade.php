@@ -5,7 +5,7 @@
     <div class="page-inner py-5">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
             <div>
-                <h1 class="text-white pb-2 fw-bold">Profle</h1>
+                <h1 class="text-white pb-2 fw-bold">Profile</h1>
             </div>
         </div>
     </div>
@@ -87,8 +87,8 @@
                         <i class="text-danger">*Kosongkan bila tidak ingin mengubah password</i>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>

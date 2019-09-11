@@ -18,16 +18,13 @@ class DashboardController extends Controller
         $id = auth()->user()->id;
         $user = User::find($id);
 
-        switch ($user->role) {
-            case '2':
-                $user = Siswa::find($id);
-                break;
-
-            default:
-                $user = User::find($id);
-                break;
+        if ($user->role == 2) {
+            $user = Siswa::find($id);
+        } else {
+            $user = User::find($id);
         }
 
-        return view('user.user', compact('user'));
+        var_dump($user);
+        // return view('user.user', compact('user'));
     }
 }
