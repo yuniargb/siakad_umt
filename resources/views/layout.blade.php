@@ -108,13 +108,13 @@
 									{{ auth()->user()->name }}
 									@php
 									if(auth()->user()->role == 1){
-										$role = 'Admin';
+									$role = 'Admin';
 									}elseif(auth()->user()->role == 2){
-										$role = 'Siswa';
+									$role = 'Siswa';
 									}elseif(auth()->user()->role == 3){
-										$role = 'Kepala Sekolah';
+									$role = 'Kepala Sekolah';
 									}else{
-										$role = 'Super Admin';
+									$role = 'Super Admin';
 									}
 									@endphp
 									<span class="user-level">{{ $role }}</span>
@@ -148,13 +148,13 @@
 						<li class="nav-item">
 							<a href="/siswa">
 								<i class="fas fa-users"></i>
-								<p>Siswa</p>
+								<p>Data Siswa</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="/kelas">
 								<i class="fas fa-building"></i>
-								<p>Kelas</p>
+								<p>Data Kelas</p>
 							</a>
 						</li>
 						<li class="nav-item">

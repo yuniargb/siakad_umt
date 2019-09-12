@@ -87,8 +87,8 @@
                         <i class="text-danger">*Kosongkan bila tidak ingin mengubah password</i>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
