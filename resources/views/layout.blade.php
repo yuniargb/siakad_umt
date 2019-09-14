@@ -3,7 +3,7 @@
 
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Oyago | Admin</title>
+	<title>Administrasi MTs Al-Muhtadiin</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="/images/logo.jpg" type="image/x-icon" />
 
@@ -36,7 +36,7 @@
 			<!-- Logo Header -->
 			<div class="logo-header" data-background-color="blue2">
 
-				<a href="index.html" class="logo">
+				<a class="logo">
 					<!-- <img src="/assets/img/logo.svg" alt="navbar brand" class="navbar-brand"> -->
 					<h4 class="text-white navbar-brand">MTS AL Muhtadiin</h4>
 				</a>
@@ -128,7 +128,7 @@
 							<span class="sidebar-mini-icon">
 								<i class="fa fa-ellipsis-h"></i>
 							</span>
-							<h4 class="text-section">Components</h4>
+							<h4 class="text-section">Main Menu</h4>
 						</li>
 						@if(auth()->user()->role == 2)
 						<!-- <li class="nav-item">

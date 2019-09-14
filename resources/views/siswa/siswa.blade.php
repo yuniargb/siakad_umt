@@ -5,7 +5,7 @@
     <div class="page-inner py-5">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
             <div>
-                <h1 class="text-white pb-2 fw-bold">Siswa</h1>
+                <h1 class="text-white pb-2 fw-bold">Data Siswa</h1>
             </div>
         </div>
     </div>
@@ -127,9 +127,6 @@
                                 <option value="protestan">Kristen Protestan</option>
                                 <option value="budha">Budha</option>
                                 <option value="hindu">Hindu</option>
-                                <!-- <option value="kong hu cu">Kong Hu Cu</option> -->
-                                <!-- <option value="yahudi">Yahudi</option> -->
-                                <!-- <option value="atheis">Atheis</option> -->
                             </optgroup>
                         </select>
                     </div>

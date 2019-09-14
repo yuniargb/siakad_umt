@@ -32,13 +32,13 @@
                         <div class="col-md-12">
                             <div class="container mb-3">
                                 <ul class="list-group">
-                                <li class="list-group-item">NIS     : {{ $siswa->nis }}</li>
-                                <li class="list-group-item">Nama    : {{ $siswa->nama }}</li>
-                                <li class="list-group-item">Kelas   : {{ $siswa->namaKelas }}</li>
-                                <li class="list-group-item">
-                                    <a class="btn btn-link btn-success" href="/cetakpembayaran"  data-toggle="tooltip" data-original-title="Download Excel"><i class="fa fa-download"></i></a>
-                                </li>
-                            </ul>
+                                    <li class="list-group-item">NIS : {{ $siswa->nis }}</li>
+                                    <li class="list-group-item">Nama : {{ $siswa->nama }}</li>
+                                    <li class="list-group-item">Kelas : {{ $siswa->namaKelas }}</li>
+                                    <li class="list-group-item">
+                                        <a class="btn btn-link btn-success" href="/cetakpembayaran" data-toggle="tooltip" data-original-title="Download Excel"><i class="fa fa-download"></i></a>
+                                    </li>
+                                </ul>
                             </div>
                             <div class="table-responsive">
                                 <table class="table basic-datatables">
@@ -133,7 +133,7 @@
                     </div>
                     <div class="form-group">
                         <label for="jumlah">Jumlah Transfer</label>
-                        <input type="text" value="{{ $siswa->tarif }}" class="form-control" name="jumlah" id="jumlahd"  readonly>
+                        <input type="text" value="{{ $siswa->tarif }}" class="form-control" name="jumlah" id="jumlahd" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nis">Bulan</label>
@@ -156,14 +156,14 @@
                         <label for="nis">Tanggal Transfer</label>
                         <input type="date" class="form-control" name="tgl" id="tgl">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="nis">Bukti Transfer</label>
                         <input type="file" class="form-control" name="bukti" id="bukti">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
