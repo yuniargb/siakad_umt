@@ -21,7 +21,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $decrypt = Crypt::decrypt($id);
-        $user = User::find($decrypt);
+        $user = User::find(auth()->user()->id);
         $user->name = $request->nama;
         $user->username = $request->username;
         if ($request->password) {
@@ -31,6 +31,7 @@ class UserController extends Controller
 
         Session::flash('success', 'Data berhasil diupdate');
         return Redirect::back();
+        // echo $decrypt;
     }
 
     public function editUserSiswa($id)

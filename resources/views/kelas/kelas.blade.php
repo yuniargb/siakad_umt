@@ -36,7 +36,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Kelas</th>
-                                            <th></th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -84,7 +84,7 @@
                     <div id="kelasModalMethod"></div>
                     <div class="form-group">
                         <label for="nis">Kelas</label>
-                        <input type="text" class="form-control" name="kelas" id="kelas">
+                        <input required type="text" class="form-control" name="kelas" id="kelas">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>

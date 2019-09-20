@@ -37,7 +37,7 @@
                                             <th>No</th>
                                             <th>Tahun Masuk</th>
                                             <th>Tarif</th>
-                                            <th></th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,11 +86,11 @@
                     <div id="sppModalMethod"></div>
                     <div class="form-group">
                         <label for="tahunMasuk">Tahun Masuk</label>
-                        <input type="text" class="form-control" name="tahunMasuk" id="tahunMasuk">
+                        <input type="text" class="form-control" name="tahunMasuk" id="tahunMasuk" required>
                     </div>
                     <div class="form-group">
                         <label for="tarif">Tarif</label>
-                        <input type="text" class="form-control" name="tarif" id="tarif">
+                        <input type="text" class="form-control" name="tarif" id="tarif" required>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>

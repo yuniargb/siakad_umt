@@ -38,7 +38,7 @@
                                             <th>Nama</th>
                                             <th>Username</th>
                                             <th>Jabatan</th>
-                                            <th></th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,24 +97,24 @@
                     <div id="adminModalMethod"></div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <input type="text" class="form-control" required name="nama" id="nama">
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" name="username" class="form-control" id="username">
+                        <input type="text" name="username" class="form-control" required id="username">
                     </div>
                     <div class="form-group">
                         <label for="username">Password</label>
-                        <input type="password" name="password" class="form-control" id="password">
+                        <input type="password" name="password" class="form-control" required id="password">
                     </div>
                     <div class="form-group">
                         <label for="username">Re-Password</label>
-                        <input type="password" name="password1" class="form-control" id="password1">
+                        <input type="password" name="password1" class="form-control" required id="password1">
                         <small id="showpass" class="form-text text-danger hide">Password tidak sesuai</small>
                     </div>
                     <div class="form-group">
                         <label for="role">Jabatan</label>
-                        <select name="role" id="role" class="form-control">
+                        <select name="role" id="role" class="form-control" required>
                             <option value="">--PILIH JABATAN--</option>
                             <option value="1">Admin</option>
                             <option value="3">Kepsek</option>

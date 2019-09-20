@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Siswa;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -19,12 +20,19 @@ class DashboardController extends Controller
         $user = User::find($id);
 
         if ($user->role == 2) {
-            $user = Siswa::find($id);
+            // $user = User::with('siswa')->where('username', auth()->user()->username)->first();
+
+            $user = DB::table('users')
+                ->select('*', 'siswas.id as ids', 'angkatans.tarifspp as tarif')
+                ->join('siswas', 'users.username', '=', 'siswas.nis')
+                ->join('angkatans', 'angkatans.id', '=', 'siswas.angkatan_id')
+                ->join('kelas', 'kelas.id', '=', 'siswas.kelas_id')
+                ->where('siswas.nis', auth()->user()->username)->first();
         } else {
             $user = User::find($id);
         }
 
-        var_dump($user);
-        // return view('user.user', compact('user'));
+
+        return view('user.user', compact('user'));
     }
 }

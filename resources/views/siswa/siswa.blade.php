@@ -35,12 +35,12 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nis</th>
+                                            <th>NIS</th>
                                             <th>Nama</th>
                                             <th>JK</th>
                                             <th>Kelas</th>
                                             <th>Tahun Masuk</th>
-                                            <th></th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -54,12 +54,15 @@
                                             <td>{{ $sw->angkatan->angkatan }}</td>
                                             <td>
                                                 <div class="row">
+
+                                                    <a href="/siswa/{{ Crypt::encrypt($sw->id) }}/pass" class="btn btn-warning btn-link btn-passs" data-toggle="tooltip" data-original-title="Change Password"><i class="fa fa-key"></i></a>
+
                                                     <button type="button" class="btn btn-link btn-primary btnSiswaModal" data-url="/siswa/{{ Crypt::encrypt($sw->id) }}/edit" data-id="{{ Crypt::encrypt($sw->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
                                                     </button>
                                                     <form action="/api/siswa/{{ Crypt::encrypt($sw->id) }}" method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                                        <button type="submit" class="btn btn-link btn-danger " data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -91,35 +94,35 @@
                     @csrf
                     <div id="siswaModalMethod"></div>
                     <div class="form-group">
-                        <label for="nis">Nis</label>
-                        <input type="text" class="form-control" name="nis" id="nis">
+                        <label for="nis">NIS</label>
+                        <input required type="text" class="form-control" name="nis" id="nis">
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <input required type="text" class="form-control" name="nama" id="nama">
                     </div>
                     <div class="form-group">
                         <label for="tglLahir">Tanggal Lahir</label>
-                        <input type="date" name="tgl_lahir" class="form-control" id="tglLahir">
+                        <input required type="date" name="tgl_lahir" class="form-control" id="tglLahir">
                     </div>
                     <div class="form-group">
                         <label for="tempatLahir">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" class="form-control" id="tempatLahir">
+                        <input required type="text" name="tempat_lahir" class="form-control" id="tempatLahir">
                     </div>
                     <div class="form-check">
                         <label>Jenis Kelamin</label><br />
                         <label class="form-radio-label">
-                            <input class="form-radio-input" type="radio" name="jk" value="l" checked="" id="jkl">
+                            <input required class="form-radio-input" type="radio" name="jk" value="l" checked="" id="jkl">
                             <span class="form-radio-sign">Laki-laki</span>
                         </label>
                         <label class="form-radio-label ml-3">
-                            <input class="form-radio-input" type="radio" name="jk" value="p" id="jkp">
+                            <input required class="form-radio-input" type="radio" name="jk" value="p" id="jkp">
                             <span class="form-radio-sign">Perempuan</span>
                         </label>
                     </div>
                     <div class="form-group">
                         <label for="agama">Agama</label>
-                        <select name="agama" id="agama" class="form-control">
+                        <select required name="agama" id="agama" class="form-control">
                             <optgroup label="Pilih Agama">
                                 <option value=""></option>
                                 <option value="islam">Islam</option>
@@ -132,11 +135,11 @@
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat</label>
-                        <textarea name="alamat" id="alamat" cols="30" rows="5" class="form-control"></textarea>
+                        <textarea name="alamat" id="alamat" cols="30" rows="5" class="form-control" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="kelas">Kelas</label>
-                        <select name="kelas" id="kelas" class="form-control">
+                        <select required name="kelas" id="kelas" class="form-control">
                             <optgroup label="Pilih Kelas">
                                 <option value=""></option>
                                 @foreach($kelas as $kls)
@@ -147,7 +150,7 @@
                     </div>
                     <div class="form-group">
                         <label for="tahunMasuk">Tahun Masuk</label>
-                        <select name="angkatan" id="angkatan" class="form-control">
+                        <select required name="angkatan" id="angkatan" class="form-control">
                             <optgroup label="Pilih Angkatan">
                                 <option value=""></option>
                                 @foreach($angkatan as $ang)
@@ -166,4 +169,5 @@
         </div>
     </div>
 </div>
+
 @stop

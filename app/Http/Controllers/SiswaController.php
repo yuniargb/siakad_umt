@@ -88,6 +88,21 @@ class SiswaController extends Controller
         //
     }
 
+    public function pass($id)
+    {
+        $decrypt = Crypt::decrypt($id);
+        $siswa = Siswa::find($decrypt);
+        $pass = date('dmy', strtotime($siswa->tgl_lahir));
+
+        $user = User::where('username', $siswa->nis)->first();
+        $user->password = Hash::make($pass);
+
+        $user->update();
+        Session::flash('success', 'Password berhasil diedit');
+        return Redirect::back();
+
+        // return $siswa;
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -36,24 +36,24 @@
                                     <li class="list-group-item">Nama : {{ $siswa->nama }}</li>
                                     <li class="list-group-item">Kelas : {{ $siswa->namaKelas }}</li>
                                     <li class="list-group-item">
-                                        <a class="btn btn-link btn-success" href="/cetakpembayaran" data-toggle="tooltip" data-original-title="Download Excel"><i class="fa fa-download"></i></a>
+                                        <a class="btn btn-link bg-primary text-light" href="/cetakpembayaran" data-toggle="tooltip" data-original-title="Download Excel"><i class="fa fa-download"></i> Download</a>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="table-responsive">
+                            <div class="">
                                 <table class="table basic-datatables">
                                     <thead>
                                         <tr>
                                             <th>No</th>
                                             <th>Siswa</th>
-                                            <th>Tanggal Transfer</th>
-                                            <th>Pembayaran Bulan</th>
+                                            <th>Tanggal</th>
+                                            <th>Bulan</th>
                                             <th>Bukti</th>
-                                            <th>Jumlah Transfer</th>
-                                            <th>Bank Transfer</th>
+                                            <th>Jumlah </th>
+                                            <th>Bank</th>
                                             <th>Status</th>
                                             <th>Cetak</th>
-                                            <th></th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,15 +68,15 @@
                                             <td>{{ $sw->atm }}</td>
                                             @php
                                             if($sw->status == 0 )
-                                            $pesan = '<span class="badge badge-danger">Menunggu Konfirmasi</span>';
+                                            $pesan = '<span class="badge badge-danger">Menunggu</span>';
 
                                             elseif($sw->status == 3)
 
-                                            $pesan = '<span class="badge badge-danger">Pembayaran Di Tolak</span>';
+                                            $pesan = '<span class="badge badge-danger">Di Tolak</span>';
 
                                             else
 
-                                            $pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';
+                                            $pesan = '<span class="badge badge-success">Konfirmasi</span>';
                                             @endphp
                                             <td>{!! $pesan !!}</td>
                                             <td>
@@ -120,24 +120,31 @@
                     <div id="PembayaranModalMethod"></div>
                     <div class="form-group">
                         <label for="idsiswa">Nis</label>
-                        <input type="text" class="form-control" name="idsiswa" id="idsiswa" value="{{ $siswa->nis }}" readonly>
+                        <input type="text" class="form-control" name="idsiswa" id="idsiswa" value="{{ $siswa->nis }}" readonly required>
                         <input type="hidden" class="form-control" name="nis" id="nis" value="{{ $siswa->ids }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="atm">ATM</label>
-                        <select class="form-control" name="atm" id="atm">
+                        <select class="form-control" name="atm" id="atm" required>
                             <option value="Mandiri">Mandiri</option>
                             <option value="BCA">BCA</option>
                             <option value="BRI">BRI</option>
+                            <option value="BNI">BNI</option>
+                            <option value="BTN">BTN</option>
+                            <option value="CIMB NIAGA">CIMB NIAGA</option>
+                            <option value="PANIN">PANIN</option>
+                            <option value="BRI">OCBC NISP</option>
+                            <option value="BRI">MAYBANK INDONESIA</option>
+                            <option value="BRI">DANAMON</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="jumlah">Jumlah Transfer</label>
-                        <input type="text" value="{{ $siswa->tarif }}" class="form-control" name="jumlah" id="jumlahd" readonly>
+                        <input type="text" value="{{ $siswa->tarif }}" required class="form-control" name="jumlah" id="jumlahd" readonly>
                     </div>
                     <div class="form-group">
                         <label for="nis">Bulan</label>
-                        <select class="form-control" name="bulan" id="bulan">
+                        <select class="form-control" name="bulan" id="bulan" required>
                             <option value="Januari">Januari</option>
                             <option value="Februari">Februari</option>
                             <option value="Maret">Maret</option>
@@ -154,12 +161,12 @@
                     </div>
                     <div class="form-group">
                         <label for="nis">Tanggal Transfer</label>
-                        <input type="date" class="form-control" name="tgl" id="tgl">
+                        <input type="date" class="form-control" name="tgl" id="tgl" required>
                     </div>
 
                     <div class="form-group">
                         <label for="nis">Bukti Transfer</label>
-                        <input type="file" class="form-control" name="bukti" id="bukti">
+                        <input type="file" class="form-control" name="bukti" id="bukti" required>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save</button>

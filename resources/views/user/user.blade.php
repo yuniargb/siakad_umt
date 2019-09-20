@@ -26,15 +26,15 @@
                                     </tr>
                                     <tr>
                                         <td>Kelas</td>
-                                        <td>{{ $user->kelas->namaKelas }}</td>
+                                        <td>{{ $user->namaKelas }}</td>
                                     </tr>
                                     <tr>
                                         <td>Angkatan</td>
-                                        <td>{{ $user->angkatan->angkatan }}</td>
+                                        <td>{{ $user->angkatan }}</td>
                                     </tr>
                                     <tr>
                                         <td>Tarif SPP</td>
-                                        <td>Rp {{ number_format($user->angkatan->tarifspp,0,',','.') }}</td>
+                                        <td>Rp {{ number_format($user->tarifspp,0,',','.') }}</td>
                                     </tr>
                                 </table>
                                 <button type="button" class="btn btn-primary btn-block btnEditUser" data-url="/user/siswa/{{ Crypt::encrypt($user->nis) }}/edit">Update Profile <i class="fa fa-pencil-alt"></i></button>
@@ -59,7 +59,7 @@
         </div>
     </div>
 </div>
-Modal
+<!-- Modal -->
 <div class="modal fade" id="editModalUser" tabindex="-1" role="dialog" aria-labelledby="editModalUserTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -75,11 +75,11 @@ Modal
                     @method('put')
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="text" class="form-control" name="nama" id="nama" {{ (auth()->user()->role == 2) ? 'readonly' : '' }}>
+                        <input type="text" class="form-control" required name="nama" id="nama" {{ (auth()->user()->role == 2) ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" name="username" class="form-control" id="username" {{ (auth()->user()->role == 2) ? 'readonly' : '' }}>
+                        <input type="text" name="username" class="form-control" required id="username" {{ (auth()->user()->role == 2) ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
                         <label for="password">New Password</label>

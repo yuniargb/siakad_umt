@@ -103,7 +103,7 @@
 							<img src="/images/logo.jpg" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
-							<a href="#" aria-expanded="true">
+							<a aria-expanded="true">
 								<span>
 									{{ auth()->user()->name }}
 									@php
@@ -280,7 +280,30 @@
 
 	<!-- Laravel Javascript Validation -->
 	<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
-	{!! JsValidator::formRequest('App\Http\Requests\SiswaRequest', '#siswaForm'); !!}
+	<script>
+		$(document).ready(function() {
+			$('.btn-passs').on('click', function(e) {
+				console.log('ok')
+				let url = $(this).attr('href')
+				console.log(url)
+				let text = $(this).data('original-title')
+				e.preventDefault();
+				Swal.fire({
+					title: 'Are you sure?',
+					text: "You won't be change to revert this!",
+					type: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: text
+				}).then((result) => {
+					if (result.value) {
+						document.location.href = url;
+					}
+				});
+			});
+		});
+	</script>
 
 </body>
 

@@ -22,27 +22,27 @@
                 <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
                     <div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
                         <div class="col-md-12">
-                            <div class="table-responsive">
+                            <div class="">
                                 <table class="table basic-datatables">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
+                                            <!-- <th>No</th> -->
                                             <th>NIS</th>
                                             <th>Siswa</th>
-                                            <th>Tanggal Transfer</th>
-                                            <th>Pembayaran Bulan</th>
+                                            <th>Tanggal </th>
+                                            <th>Bulan</th>
                                             <th>Bukti</th>
-                                            <th>Jumlah Transfer</th>
-                                            <th>Bank Transfer</th>
+                                            <th>Jumlah</th>
+                                            <th>Bank</th>
                                             <th>Status</th>
-                                            <th>Cetak</th>
-                                            <th></th>
+                                            <!-- <th>Cetak</th> -->
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($pembayaran as $sw)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <!-- <td>{{ $loop->iteration }}</td> -->
                                             <td>{{ $sw->nis }}</td>
                                             <td>{{ $sw->nama }}</td>
                                             <td>{{ $sw->tgl_transfer }}</td>
@@ -52,23 +52,23 @@
                                             <td>{{ $sw->atm }}</td>
                                             @php
                                             if($sw->status == 0 )
-                                            $pesan = '<span class="badge badge-danger">Menunggu Konfirmasi</span>';
+                                            $pesan = '<span class="badge badge-danger">Tunggu</span>';
 
                                             elseif($sw->status == 3)
 
-                                            $pesan = '<span class="badge badge-danger">Pembayaran Di Tolak</span>';
+                                            $pesan = '<span class="badge badge-danger">Di Tolak</span>';
 
                                             else
 
-                                            $pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';
+                                            $pesan = '<span class="badge badge-success">Konfirmasi</span>';
                                             @endphp
                                             <td>{!! $pesan !!}</td>
-                                            <td>
-                                                <a class="btn btn-link btn-success" target="_blank" href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}" data-toggle="tooltip" data-original-title="Cetak"><i class="fa fa-print"></i></a>
-                                            </td>
+                                            <!-- <td> -->
+
+                                            <!-- </td> -->
                                             <td>
                                                 <div class="row">
-
+                                                    <a class="btn btn-link btn-success" target="_blank" href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}" data-toggle="tooltip" data-original-title="Cetak"><i class="fa fa-print"></i></a>
                                                     <button type="button" class="btn btn-link btn-danger kon" data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3" data-toggle="tooltip" value="tolak" data-original-title="Tolak"><i class="fa fa-times"></i></button>
                                                     <button type="button" class="btn btn-link btn-primary kon" data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1" data-toggle="tooltip" value="konfirmasi" data-original-title="Konfirmasi"><i class="fa fa-check"></i></button>
 

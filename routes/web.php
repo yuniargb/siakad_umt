@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/siswa', 'SiswaController@store');
     Route::get('/siswa/{id}/edit', 'SiswaController@edit');
     Route::put('/siswa/{id}/update', 'SiswaController@update');
+    Route::get('/siswa/{id}/pass', 'SiswaController@pass');
 
     // Kelas;
     Route::get('/kelas', 'KelasController@index');

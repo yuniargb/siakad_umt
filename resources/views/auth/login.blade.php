@@ -5,7 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-center"><img src="/images/logo.jpg" alt="..." class="img-fluid" width="100" height="100"></div>
+                <div class="card-header text-center">
+                    <img src="/images/logo.jpg" alt="..." class="img-fluid" width="100" height="100">
+                    <h1 class="text-uppercase">Administrasi SPP</h1>
+                    <h2 class="text-uppercase">MTS AL-mutaddin</h2>
+                </div>
 
                 <div class="card-body">
                     <form method="post" action="/loginpost">
