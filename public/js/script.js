@@ -25,6 +25,25 @@ $(document).ready(function () {
         });
     });
 
+
+    $('.btn-logout').on('click', function (e) {
+        let url = $(this).attr('href')
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Apakah kamu yakin ingin logout?!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+        }).then((result) => {
+            if (result.value) {
+                document.location.href = url;
+            }
+        });
+    });
+
     $('.btn-passs').on('click', function (e) {
         console.log('ok')
         // let url = $(this).data('url')

@@ -83,7 +83,7 @@
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="/user">My Profile</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="/logout">Logout</a>
+										<a class="dropdown-item  btn-logout" href="/logout">Logout</a>
 									</li>
 								</div>
 							</ul>
