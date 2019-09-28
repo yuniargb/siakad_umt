@@ -289,8 +289,8 @@
 				let text = $(this).data('original-title')
 				e.preventDefault();
 				Swal.fire({
-					title: 'Are you sure?',
-					text: "You won't be change to revert this!",
+					title: 'Kamu yakin ingin merubah password?',
+					text: "password secara default akan dirubah ke tanggal lahir siswa!",
 					type: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',

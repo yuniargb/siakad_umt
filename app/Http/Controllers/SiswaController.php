@@ -47,6 +47,15 @@ class SiswaController extends Controller
      */
     public function store(SiswaRequest $request)
     {
+
+        $rules = [
+            'nis' => 'unique:siswas,nis'
+        ];
+        $message = [
+            'unique' => 'Nis Sudah Ada!',
+        ];
+        $this->validate($request, $rules, $message);
+
         // insert into siswa
         $siswa = new Siswa;
         $siswa->nis = $request->nis;

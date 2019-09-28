@@ -69,9 +69,18 @@
                                             <td>
                                                 <div class="row">
                                                     <a class="btn btn-link btn-success" target="_blank" href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}" data-toggle="tooltip" data-original-title="Cetak"><i class="fa fa-print"></i></a>
+
+                                                    @if($sw->status == 0 )
+
                                                     <button type="button" class="btn btn-link btn-danger kon" data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3" data-toggle="tooltip" value="tolak" data-original-title="Tolak"><i class="fa fa-times"></i></button>
                                                     <button type="button" class="btn btn-link btn-primary kon" data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1" data-toggle="tooltip" value="konfirmasi" data-original-title="Konfirmasi"><i class="fa fa-check"></i></button>
 
+                                                    @elseif($sw->status == 3)
+                                                    <button type="button" class="btn btn-link btn-primary kon" data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1" data-toggle="tooltip" value="konfirmasi" data-original-title="Konfirmasi"><i class="fa fa-check"></i></button>
+
+                                                    @else
+                                                    <button type="button" class="btn btn-link btn-danger kon" data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3" data-toggle="tooltip" value="tolak" data-original-title="Tolak"><i class="fa fa-times"></i></button>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
