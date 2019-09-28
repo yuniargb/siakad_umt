@@ -29,7 +29,7 @@ class UserController extends Controller
         }
         $user->update();
 
-        Session::flash('success', 'Data berhasil diupdate');
+        Session::flash('success', 'Data berhasil diubah');
         return Redirect::back();
         // echo $decrypt;
     }

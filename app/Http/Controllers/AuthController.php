@@ -22,11 +22,11 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
         if (Auth::attempt($request->only('username', 'password'))) {
-            if(auth()->user()->role == 2){
+            if (auth()->user()->role == 2) {
                 return redirect('/pembayaran');
-            }else if(auth()->user()->role == 3){
+            } else if (auth()->user()->role == 3) {
                 return redirect('/laporanbulan');
-            }else{
+            } else {
                 return redirect('/accpembayaran');
             }
         }

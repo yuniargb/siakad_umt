@@ -87,7 +87,7 @@
                                                     <form action="/api/pembayaran/{{ Crypt::encrypt($sw->id_p) }}" method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Hapus"><i class="fa fa-times"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -133,9 +133,11 @@
                             <option value="BTN">BTN</option>
                             <option value="CIMB NIAGA">CIMB NIAGA</option>
                             <option value="PANIN">PANIN</option>
-                            <option value="BRI">OCBC NISP</option>
-                            <option value="BRI">MAYBANK INDONESIA</option>
-                            <option value="BRI">DANAMON</option>
+                            <option value="OCBC NISP">OCBC NISP</option>
+                            <option value="MAYBANK INDONESIA">MAYBANK INDONESIA</option>
+                            <option value="DANAMON">DANAMON</option>
+                            <option value="Bank BJB">Bank BJB</option>
+                            <option value="Bank lainnya">Bank lainnya</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -169,8 +171,8 @@
                         <input type="file" class="form-control" name="bukti" id="bukti" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>
@@ -183,7 +185,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Data Gambar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="Tutup" data-dismiss="modal" aria-label="Tutup">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

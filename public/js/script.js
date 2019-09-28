@@ -124,7 +124,7 @@ $(document).ready(function () {
     if (flashData) {
         let content = {};
         content.message = flashData;
-        content.title = 'Success :';
+        content.title = 's :';
         content.icon = "fa fa-check";
         $.notify(content, {
             type: 'primary',

@@ -1,21 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Pembayaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+
 class AccPembayaranController extends Controller
 {
     public function index()
     {
         // $pembayaran = Pembayaran::with('siswa')->first();
-        
+
         $pembayaran = DB::table('pembayarans')
-                    ->select('*', 'pembayarans.id as id_p')
-                    ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
+            ->select('*', 'pembayarans.id as id_p')
+            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
         return view('pembayaranAdmin.accPembayaran', compact('pembayaran'));
     }
     public function cetak($id)
@@ -23,12 +25,12 @@ class AccPembayaranController extends Controller
         // $pembayaran = Pembayaran::with('siswa')->first();
         $decrypt = Crypt::decrypt($id);
         $pembayaran = DB::table('pembayarans')
-                    ->select('*', 'pembayarans.id as id_p')
-                    ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-                    ->where('pembayarans.id', $decrypt)->first();
+            ->select('*', 'pembayarans.id as id_p')
+            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
+            ->where('pembayarans.id', $decrypt)->first();
         return view('pembayaranAdmin.cetakPembayaran', compact('pembayaran'));
     }
-    public function update($id,$tipe)
+    public function update($id, $tipe)
     {
         $decrypt = Crypt::decrypt($id);
         $bayar = Pembayaran::find($decrypt);

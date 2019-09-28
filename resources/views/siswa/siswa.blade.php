@@ -55,14 +55,14 @@
                                             <td>
                                                 <div class="row">
 
-                                                    <a href="/siswa/{{ Crypt::encrypt($sw->id) }}/pass" class="btn btn-warning btn-link btn-passs" data-toggle="tooltip" data-original-title="Change Password"><i class="fa fa-key"></i></a>
+                                                    <a href="/siswa/{{ Crypt::encrypt($sw->id) }}/pass" class="btn btn-warning btn-link btn-passs" data-toggle="tooltip" data-original-title="Atur Ulang Kata Sandi"><i class="fa fa-key"></i></a>
 
-                                                    <button type="button" class="btn btn-link btn-primary btnSiswaModal" data-url="/siswa/{{ Crypt::encrypt($sw->id) }}/edit" data-id="{{ Crypt::encrypt($sw->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
+                                                    <button type="button" class="btn btn-link btn-primary btnSiswaModal" data-url="/siswa/{{ Crypt::encrypt($sw->id) }}/edit" data-id="{{ Crypt::encrypt($sw->id) }}" data-toggle="tooltip" data-original-title="Ubah" data-action="ubah" data-method='@method("put")'><i class="fa fa-edit"></i>
                                                     </button>
                                                     <form action="/api/siswa/{{ Crypt::encrypt($sw->id) }}" method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-link btn-danger " data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                                        <button type="submit" class="btn btn-link btn-danger " data-toggle="tooltip" data-original-title="Hapus"><i class="fa fa-times"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -124,7 +124,6 @@
                         <label for="agama">Agama</label>
                         <select required name="agama" id="agama" class="form-control">
                             <optgroup label="Pilih Agama">
-                                <option value=""></option>
                                 <option value="islam">Islam</option>
                                 <option value="katholik">Kristen Katholik</option>
                                 <option value="protestan">Kristen Protestan</option>
@@ -160,8 +159,8 @@
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Tutup</button>
 
                     </div>
                 </form>

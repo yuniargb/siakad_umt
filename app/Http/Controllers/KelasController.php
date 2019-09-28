@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Kelas;
@@ -6,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+
 class KelasController extends Controller
 {
     /**
@@ -84,7 +86,7 @@ class KelasController extends Controller
         $kelas->namakelas = $request->kelas;
 
         $kelas->update();
-        Session::flash('success', 'Kelas berhasil diedit');
+        Session::flash('success', 'Kelas berhasil diubah');
         return Redirect::back();
     }
 

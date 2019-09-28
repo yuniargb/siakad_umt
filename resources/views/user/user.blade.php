@@ -5,7 +5,7 @@
     <div class="page-inner py-5">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
             <div>
-                <h1 class="text-white pb-2 fw-bold">Profile</h1>
+                <h1 class="text-white pb-2 fw-bold">Biodata</h1>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                                         <td>Rp {{ number_format($user->tarifspp,0,',','.') }}</td>
                                     </tr>
                                 </table>
-                                <button type="button" class="btn btn-primary btn-block btnEditUser" data-url="/user/siswa/{{ Crypt::encrypt($user->nis) }}/edit">Update Profile <i class="fa fa-pencil-alt"></i></button>
+                                <button type="button" class="btn btn-primary btn-block btnEditUser" data-url="/user/siswa/{{ Crypt::encrypt($user->nis) }}/edit">Ubah Biodata <i class="fa fa-pencil-alt"></i></button>
                                 @else
                                 <table class="table table-bordered">
                                     <tr>
@@ -45,11 +45,11 @@
                                         <td>{{ $user->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Username</td>
+                                        <td>Nama Pengguna</td>
                                         <td>{{ $user->username }}</td>
                                     </tr>
                                 </table>
-                                <button type="button" class="btn btn-primary btn-block btnEditUser" data-url="/user/{{ Crypt::encrypt($user->id) }}/edit">Update Profile <i class="fa fa-pencil-alt"></i></button>
+                                <button type="button" class="btn btn-primary btn-block btnEditUser" data-url="/user/{{ Crypt::encrypt($user->id) }}/edit">Ubah Biodata <i class="fa fa-pencil-alt"></i></button>
                                 @endif
                             </div>
                         </div>
@@ -64,7 +64,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="adminModalTitle">Update Profile</h5>
+                <h5 class="modal-title" id="adminModalTitle">Ubah Biodata</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -78,17 +78,17 @@
                         <input type="text" class="form-control" required name="nama" id="nama" {{ (auth()->user()->role == 2) ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username">Nama Pengguna</label>
                         <input type="text" name="username" class="form-control" required id="username" {{ (auth()->user()->role == 2) ? 'readonly' : '' }}>
                     </div>
                     <div class="form-group">
-                        <label for="password">New Password</label>
+                        <label for="password">kata Sandi Baru</label>
                         <input type="password" name="password" class="form-control" id="password">
-                        <i class="text-danger">*Kosongkan bila tidak ingin mengubah password</i>
+                        <i class="text-danger">*Kosongkan bila tidak ingin mengubah kata sandi</i>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>

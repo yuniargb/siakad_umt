@@ -98,7 +98,7 @@ class SiswaController extends Controller
         $user->password = Hash::make($pass);
 
         $user->update();
-        Session::flash('success', 'Password berhasil diedit');
+        Session::flash('success', 'Kata sandi berhasil diatur ulang');
         return Redirect::back();
 
         // return $siswa;
@@ -139,7 +139,7 @@ class SiswaController extends Controller
         $siswa->kelas_id = $request->kelas;
 
         $siswa->update();
-        Session::flash('success', 'Siswa berhasil diedit');
+        Session::flash('success', 'Siswa berhasil diubah');
         return Redirect::back();
     }
 

@@ -39,7 +39,7 @@ class SiswaRequest extends FormRequest
     {
         return [
             'required' => 'Filed ini wajib diisi',
-            'unique' => 'Nis sudah dipakai'
+            'unique' => 'NIS sudah dipakai'
         ];
     }
 }

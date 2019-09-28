@@ -81,9 +81,9 @@
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="/user">My Profile</a>
+										<a class="dropdown-item" href="/user">Biodata</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item  btn-logout" href="/logout">Logout</a>
+										<a class="dropdown-item  btn-logout" href="/logout">Keluar</a>
 									</li>
 								</div>
 							</ul>
@@ -128,7 +128,7 @@
 							<span class="sidebar-mini-icon">
 								<i class="fa fa-ellipsis-h"></i>
 							</span>
-							<h4 class="text-section">Main Menu</h4>
+							<h4 class="text-section">MENU UTAMA</h4>
 						</li>
 						@if(auth()->user()->role == 2)
 						<!-- <li class="nav-item">

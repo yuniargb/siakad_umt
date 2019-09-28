@@ -46,12 +46,12 @@
                                             <td>{{ $sw->namaKelas }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <button type="button" class="btn btn-link btn-primary btnKelasModal" data-url="/kelas/{{ Crypt::encrypt($sw->id) }}/edit" data-id="{{ Crypt::encrypt($sw->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
+                                                    <button type="button" class="btn btn-link btn-primary btnKelasModal" data-url="/kelas/{{ Crypt::encrypt($sw->id) }}/edit" data-id="{{ Crypt::encrypt($sw->id) }}" data-toggle="tooltip" data-original-title="Ubah" data-action="Ubah" data-method='@method("put")'><i class="fa fa-edit"></i>
                                                     </button>
                                                     <form action="/api/kelas/{{ Crypt::encrypt($sw->id) }}" method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Hapus"><i class="fa fa-times"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -87,8 +87,8 @@
                         <input required type="text" class="form-control" name="kelas" id="kelas">
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>

@@ -48,12 +48,12 @@
                                             <td>{{ $ang->tarifspp }}</td>
                                             <td>
                                                 <div class="row">
-                                                    <button type="button" class="btn btn-link btn-primary btnSppModal" data-url="/spp/{{ Crypt::encrypt($ang->id) }}/edit" data-id="{{ Crypt::encrypt($ang->id) }}" data-toggle="tooltip" data-original-title="Edit" data-action="edit" data-method='@method("put")'><i class="fa fa-edit"></i>
+                                                    <button type="button" class="btn btn-link btn-primary btnSppModal" data-url="/spp/{{ Crypt::encrypt($ang->id) }}/ubah" data-id="{{ Crypt::encrypt($ang->id) }}" data-toggle="tooltip" data-original-title="Ubah" data-action="ubah" data-method='@method("put")'><i class="fa fa-edit"></i>
                                                     </button>
                                                     <form action="/api/spp/{{ Crypt::encrypt($ang->id) }}" method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Hapus"><i class="fa fa-times"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -93,8 +93,8 @@
                         <input type="text" class="form-control" name="tarif" id="tarif" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>

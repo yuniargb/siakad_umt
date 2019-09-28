@@ -22,15 +22,15 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        $siswa= DB::table('siswas')
-        ->select('*','siswas.id as ids','angkatans.tarifspp as tarif')
-        ->join('angkatans', 'angkatans.id', '=', 'siswas.angkatan_id')
-        ->join('kelas', 'kelas.id', '=', 'siswas.kelas_id')
-        ->where('siswas.nis',auth()->user()->username)->first();
+        $siswa = DB::table('siswas')
+            ->select('*', 'siswas.id as ids', 'angkatans.tarifspp as tarif')
+            ->join('angkatans', 'angkatans.id', '=', 'siswas.angkatan_id')
+            ->join('kelas', 'kelas.id', '=', 'siswas.kelas_id')
+            ->where('siswas.nis', auth()->user()->username)->first();
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-            ->where('siswas.nis',auth()->user()->username)->get();
+            ->where('siswas.nis', auth()->user()->username)->get();
         return view('pembayaran.pembayaran', compact('pembayaran', 'siswa'));
     }
 
@@ -77,7 +77,7 @@ class PembayaranController extends Controller
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-            ->where('siswas.nis',auth()->user()->username)->get();
+            ->where('siswas.nis', auth()->user()->username)->get();
         return view('pembayaran.cetak', compact('pembayaran'));
     }
 
@@ -120,7 +120,7 @@ class PembayaranController extends Controller
         $kelas->namakelas = $request->kelas;
 
         $kelas->update();
-        Session::flash('success', 'Kelas berhasil diedit');
+        Session::flash('success', 'Kelas berhasil diubah');
         return Redirect::back();
     }
 

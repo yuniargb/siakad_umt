@@ -64,7 +64,7 @@
                                                     <form action="/api/admin/{{ Crypt::encrypt($adm->id) }}" method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></button>
+                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Hapus"><i class="fa fa-times"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -100,30 +100,30 @@
                         <input type="text" class="form-control" required name="nama" id="nama">
                     </div>
                     <div class="form-group">
-                        <label for="username">Username</label>
+                        <label for="username">Nama Pengguna</label>
                         <input type="text" name="username" class="form-control" required id="username">
                     </div>
                     <div class="form-group">
-                        <label for="username">Password</label>
+                        <label for="username">Kata Sandi</label>
                         <input type="password" name="password" class="form-control" required id="password">
                     </div>
                     <div class="form-group">
-                        <label for="username">Re-Password</label>
+                        <label for="username">Ulang Kata Sandi</label>
                         <input type="password" name="password1" class="form-control" required id="password1">
-                        <small id="showpass" class="form-text text-danger hide">Password tidak sesuai</small>
+                        <small id="showpass" class="form-text text-danger hide">Kata sandi tidak sesuai</small>
                     </div>
                     <div class="form-group">
                         <label for="role">Jabatan</label>
                         <select name="role" id="role" class="form-control" required>
                             <option value="">--PILIH JABATAN--</option>
                             <option value="1">Admin</option>
-                            <option value="3">Kepsek</option>
+                            <option value="3">Kepala Sekolah</option>
                             <option value="4">Super Admin</option>
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" id="save">Save</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="save">Simpan</button>
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Tutup</button>
                     </div>
                 </form>
             </div>

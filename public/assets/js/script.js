@@ -163,11 +163,11 @@ $(document).ready(function () {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Ya'
         }).then((result) => {
             if (result.value) {
                 $.ajax({
-                    type: 'delete',
+                    type: 'Hapus',
                     url: url,
                     data: $(this).serialize(),
                     success: function (data) {
