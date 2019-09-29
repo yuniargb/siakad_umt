@@ -96,6 +96,7 @@
                     <div class="form-group">
                         <label for="nis">NIS</label>
                         <input required type="text" class="form-control" name="nis" id="nis">
+                        <small class="text-danger">{{ $errors->first('nis') }}</small>
                     </div>
                     <div class="form-group">
                         <label for="nama">Nama</label>

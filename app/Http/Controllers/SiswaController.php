@@ -47,6 +47,15 @@ class SiswaController extends Controller
      */
     public function store(SiswaRequest $request)
     {
+
+        $rules = [
+            'nis' => 'unique:siswas,nis'
+        ];
+        $message = [
+            'unique' => 'Nis Sudah Ada!',
+        ];
+        $this->validate($request, $rules, $message);
+
         // insert into siswa
         $siswa = new Siswa;
         $siswa->nis = $request->nis;
@@ -139,7 +148,7 @@ class SiswaController extends Controller
         $siswa->kelas_id = $request->kelas;
 
         $siswa->update();
-        Session::flash('success', 'Siswa berhasil diubah');
+        Session::flash('Sukses', 'Siswa berhasil diubah');
         return Redirect::back();
     }
 
@@ -155,7 +164,7 @@ class SiswaController extends Controller
         $siswa = Siswa::find($decrypt);
         $siswa->delete();
 
-        Session::flash('success', 'Siswa berhasil dihapus');
+        Session::flash('Sukses', 'Siswa berhasil dihapus');
         return '/siswa';
     }
 }

@@ -58,11 +58,11 @@
 			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
 				<div class="container-fluid">
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-						<li class="nav-item toggle-nav-search hidden-caret">
-							<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
-								<i class="fa fa-search"></i>
-							</a>
-						</li>
+						<!-- <li class="nav-item toggle-nav-search hidden-caret"> -->
+						<!-- <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav"> -->
+						<!-- <i class="fa fa-search"></i> -->
+						<!-- </a> -->
+						<!-- </li> -->
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
@@ -231,7 +231,7 @@
 			<footer class="footer">
 				<div class="container-fluid">
 					<div class="copyright ml-auto">
-						2018, made with <i class="fa fa-heart heart text-danger"></i> by <a href="https://www.themekita.com">ThemeKita</a>
+						Copyright 2019 by M. Mustofa Baehaqi
 					</div>
 				</div>
 			</footer>
@@ -289,8 +289,8 @@
 				let text = $(this).data('original-title')
 				e.preventDefault();
 				Swal.fire({
-					title: 'Are you sure?',
-					text: "You won't be change to revert this!",
+					title: 'Kamu yakin ingin merubah password?',
+					text: "password secara default akan dirubah ke tanggal lahir siswa!",
 					type: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',

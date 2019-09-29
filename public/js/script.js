@@ -4,13 +4,14 @@ $(document).ready(function () {
         let url = $(this).attr('action')
         e.preventDefault();
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Anda yakin ingin menghapus data ini??',
+            text: "Data akan terhapus secara permanen!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
                 $.ajax({
@@ -30,13 +31,13 @@ $(document).ready(function () {
         let url = $(this).attr('href')
         e.preventDefault();
         Swal.fire({
-            title: 'Are you sure?',
-            text: "Apakah kamu yakin ingin logout?!",
+            title: 'Apakah anda yakin ingin keluar?',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!'
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
                 document.location.href = url;
@@ -95,8 +96,7 @@ $(document).ready(function () {
         let text = $(this).data('original-title')
         e.preventDefault();
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Kamu yakin ingin merubah data ini?',
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -124,7 +124,7 @@ $(document).ready(function () {
     if (flashData) {
         let content = {};
         content.message = flashData;
-        content.title = 's :';
+        content.title = 'Sukses :';
         content.icon = "fa fa-check";
         $.notify(content, {
             type: 'primary',
