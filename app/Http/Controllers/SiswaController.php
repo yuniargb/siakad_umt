@@ -148,7 +148,7 @@ class SiswaController extends Controller
         $siswa->kelas_id = $request->kelas;
 
         $siswa->update();
-        Session::flash('Sukses', 'Siswa berhasil diubah');
+        Session::flash('success', 'Siswa berhasil diubah');
         return Redirect::back();
     }
 
@@ -164,7 +164,7 @@ class SiswaController extends Controller
         $siswa = Siswa::find($decrypt);
         $siswa->delete();
 
-        Session::flash('Sukses', 'Siswa berhasil dihapus');
+        Session::flash('success', 'Siswa berhasil dihapus');
         return '/siswa';
     }
 }

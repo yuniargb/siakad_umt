@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Administrasi MTS AL Muhtadiin</title>
+    <title>Administrasi SPP MTs AL-MUHTADIIN</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

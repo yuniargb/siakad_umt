@@ -6,9 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">
-                    <img src="/images/logo.jpg" alt="..." class="img-fluid" width="100" height="100">
+                    <img src="/images/Logo1.png" alt="..." class="img-fluid" width="100" height="100">
                     <h1 class="text-uppercase">Administrasi SPP</h1>
-                    <h2 class="text-uppercase">MTS AL-mutaddin</h2>
+                    <h2 class="text-uppercase">MTs AL-MUHTADIIN</h2>
                 </div>
 
                 <div class="card-body">

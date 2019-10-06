@@ -3,9 +3,9 @@
 
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Administrasi MTs Al-Muhtadiin</title>
+	<title>Administrasi SPP MTs AL-MUHTADIIN</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="/images/logo.jpg" type="image/x-icon" />
+	<link rel="icon" href="/images/Logo1.png" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
 	<script src="/assets/js/plugin/webfont/webfont.min.js"></script>
@@ -66,14 +66,14 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="/images/logo.jpg" alt="..." class="avatar-img rounded-circle">
+									<img src="/images/Biodata1.png" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
 								<div class="dropdown-user-scroll scrollbar-outer">
 									<li>
 										<div class="user-box">
-											<div class="avatar-lg"><img src="/images/logo.jpg" alt="image profile" class="avatar-img rounded"></div>
+											<div class="avatar-lg"><img src="/images/Biodata.png" alt="image profile" class="avatar-img rounded"></div>
 											<div class="u-text">
 												<h4>{{ auth()->user()->name }}</h4>
 											</div>
@@ -100,7 +100,7 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="/images/logo.jpg" alt="..." class="avatar-img rounded-circle">
+							<img src="/images/Logo1.png" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a aria-expanded="true">
@@ -289,8 +289,8 @@
 				let text = $(this).data('original-title')
 				e.preventDefault();
 				Swal.fire({
-					title: 'Kamu yakin ingin merubah password?',
-					text: "password secara default akan dirubah ke tanggal lahir siswa!",
+					title: 'Kamu yakin ingin merubah kata sandi',
+					text: "kata sandi secara default akan dirubah ke tanggal lahir siswa!",
 					type: 'warning',
 					showCancelButton: true,
 					confirmButtonColor: '#3085d6',
