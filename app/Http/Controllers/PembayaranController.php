@@ -56,6 +56,7 @@ class PembayaranController extends Controller
         $resorce = $request->file('bukti');
         $name   = $resorce->getClientOriginalExtension();
         $newName = rand(100000, 1001238912) . "." . $name;
+        \Image::make($resorce)->resize(300, 200);
         $resorce->move(\base_path() . "/public/images/paket", $newName);
 
 
