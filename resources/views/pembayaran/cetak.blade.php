@@ -1,62 +1,87 @@
-@php
-header("Content-type: application/vnd-ms-excel");
-header("Content-Disposition: attachment; filename=Data Laporan-Pembayaran.xls");
-@endphp
-<table>
-	<tr>
-		<td colspan="3">
+<!DOCTYPE html>
+<html lang="en">
 
-		</td>
-		<td height="60" style="border:none !important; text-align:center;" align="center">
-			<center>
-				<img src="{{ url('images/logo.jpg') }}" width="80" height="60" alt="" style="text-align: center;">
-			</center>
-		</td>
-		<td colspan="4">
-			<h1 class="text-center">Data Pembayaran</h1>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Cetak Pembayaran</title>
 
-		</td>
-	</tr>
-</table>
-<table border="1" class="table basic-datatables">
-	<thead>
-		<tr>
-			<th border="1">No</th>
-			<th>NIS</th>
-			<th>Siswa</th>
-			<th>Tanggal Transfer</th>
-			<th>Pembayaran Bulan</th>
-			<!-- <th>Bukti</th> -->
-			<th>Jumlah Transfer</th>
-			<th>Bank Transfer</th>
-			<th>Status</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach($pembayaran as $sw)
-		<tr border="1">
-			<td>{{ $loop->iteration }}</td>
-			<td>{{ $sw->nis }}</td>
-			<td>{{ $sw->nama }}</td>
-			<td>{{ $sw->tgl_transfer }}</td>
-			<td>{{ $sw->bulan }}</td>
-			<!-- <td>{{ $sw->bukti }}</td> -->
-			<td>{{ $sw->jumlah }}</td>
-			<td>{{ $sw->atm }}</td>
-			@php
-			if($sw->status == 0 )
-			$pesan = '<span class="badge badge-danger">Menunggu Konfirmasi</span>';
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        /* @page {
+            @bottom-right {
+                content: counter(page) " of "counter(pages);
+            }
+        } */
 
-			elseif($sw->status == 3)
+        table.table {
+            font-size: 12 px;
+        }
 
-			$pesan = '<span class="badge badge-danger">Pembayaran Di Tolak</span>';
+    </style>
+</head>
 
-			else
+<body>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="3">
 
-			$pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';
-			@endphp
-			<td>{!! $pesan !!}</td>
-		</tr>
-		@endforeach
-	</tbody>
-</table>
+                    </td>
+                    <td height="60" style="border:none !important; text-align:center;" align="center">
+                        <!-- <img src="{{ url('images/logo.jpg') }}" width="80" height="60" alt="" style="text-align: center;"> -->
+                    </td>
+                    <td colspan="4">
+                        <h1 class="text-center">Data Pembayaran</h1>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>NIS</th>
+                    <th>Siswa</th>
+                    <th>Tanggal Transfer</th>
+                    <th>Pembayaran Bulan</th>
+                    <!-- <th>Bukti</th> -->
+                    <th>Jumlah Transfer</th>
+                    <th>Bank Transfer</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($pembayaran as $sw)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $sw->nis }}</td>
+                    <td>{{ $sw->nama }}</td>
+                    <td>{{ $sw->tgl_transfer }}</td>
+                    <td>{{ $sw->bulan }}</td>
+                    <!-- <td>{{ $sw->bukti }}</td> -->
+                    <td>{{ $sw->jumlah }}</td>
+                    <td>{{ $sw->atm }}</td>
+                    @php
+                    if($sw->status == 0 )
+                    $pesan = 'Menunggu Konfirmasi';
+
+                    elseif($sw->status == 3)
+
+                    $pesan = 'Pembayaran Di Tolak';
+
+                    else
+
+                    $pesan = 'Sudah Di Konfirmasi';
+                    @endphp
+                    <td>{{ $pesan }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,15 +1,6 @@
 @extends('layout')
+@section('title', 'Data Pembayaran')
 @section('content')
-<div class="flash-data" data-flashdata="{{ Session::get('success') }}"></div>
-<div class="panel-header bg-primary">
-    <div class="page-inner py-5">
-        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-            <div>
-                <h1 class="text-white pb-2 fw-bold">Pembayaran</h1>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="page-inner mt--5">
     <div class="col-md-12">
         <div class="card">
@@ -17,7 +8,8 @@
                 <div class="card-head-row">
                     <div class="card-title">Daftar Pembayaran</div>
                     <div class="card-tools">
-                        <button type="button" class="btn btn-outline-primary btn-round btn-sm btnPembayaranModal" data-action="add">
+                        <button type="button" class="btn btn-outline-primary btn-round btn-sm btnPembayaranModal"
+                            data-action="add">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
@@ -28,7 +20,8 @@
             </div>
             <div class="card-body">
                 <div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
+                    <div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel"
+                        aria-labelledby="pills-home-tab-nobd">
                         <div class="col-md-12">
                             <div class="container mb-3">
                                 <ul class="list-group">
@@ -36,7 +29,9 @@
                                     <li class="list-group-item">Nama : {{ $siswa->nama }}</li>
                                     <li class="list-group-item">Kelas : {{ $siswa->namaKelas }}</li>
                                     <li class="list-group-item">
-                                        <a class="btn btn-link bg-primary text-light" href="/cetakpembayaran" data-toggle="tooltip" data-original-title="Download Excel"><i class="fa fa-download"></i> Download</a>
+                                        <a class="btn  bg-primary text-light" href="/cetakpembayaran"
+                                            data-toggle="tooltip" data-original-title="Download Excel"><i
+                                                class="fa fa-download"></i> Download</a>
                                     </li>
                                 </ul>
                             </div>
@@ -48,6 +43,7 @@
                                             <th>Siswa</th>
                                             <th>Tanggal</th>
                                             <th>Bulan</th>
+                                            <th>Tipe</th>
                                             <th>Bukti</th>
                                             <th>Jumlah </th>
                                             <th>Bank</th>
@@ -63,7 +59,11 @@
                                             <td>{{ $sw->nama }}</td>
                                             <td>{{ $sw->tgl_transfer }}</td>
                                             <td>{{ $sw->bulan }}</td>
-                                            <td><img data-image="/images/paket/{{ $sw->bukti }}" src="/images/paket/{{ $sw->bukti }}" class="img-fluid detail-bukti" alt="{{ $sw->bukti }}" data-toggle="modal" data-target="#exampleModal"></td>
+                                            <td>{{ $sw->namatipe }}</td>
+                                            <td><img data-image="/images/paket/{{ $sw->bukti }}"
+                                                    src="/images/paket/{{ $sw->bukti }}" class="img-fluid detail-bukti"
+                                                    alt="{{ $sw->bukti }}" data-toggle="modal"
+                                                    data-target="#exampleModal"></td>
                                             <td>{{ $sw->jumlah }}</td>
                                             <td>{{ $sw->atm }}</td>
                                             @php
@@ -80,14 +80,20 @@
                                             @endphp
                                             <td>{!! $pesan !!}</td>
                                             <td>
-                                                <a class="btn btn-link btn-success" target="_blank" href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}" data-toggle="tooltip" data-original-title="Cetak"><i class="fa fa-print"></i></a>
+                                                <a class="btn  btn-success" target="_blank"
+                                                    href="/cetakpembayaran/{{ Crypt::encrypt($sw->id_p) }}"
+                                                    data-toggle="tooltip" data-original-title="Cetak"><i
+                                                        class="fa fa-print"></i></a>
                                             </td>
                                             <td>
                                                 <div class="row">
-                                                    <form action="/api/pembayaran/{{ Crypt::encrypt($sw->id_p) }}" method="post" class="d-inline btn-del">
+                                                    <form action="/api/pembayaran/{{ Crypt::encrypt($sw->id_p) }}"
+                                                        method="post" class="d-inline btn-del">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-link btn-danger" data-toggle="tooltip" data-original-title="Hapus"><i class="fa fa-times"></i></button>
+                                                        <button type="submit" class="btn  btn-danger"
+                                                            data-toggle="tooltip" data-original-title="Hapus"><i
+                                                                class="fa fa-times"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
@@ -105,7 +111,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -120,8 +127,10 @@
                     <div id="PembayaranModalMethod"></div>
                     <div class="form-group">
                         <label for="idsiswa">Nis</label>
-                        <input type="text" class="form-control" name="idsiswa" id="idsiswa" value="{{ $siswa->nis }}" readonly required>
-                        <input type="hidden" class="form-control" name="nis" id="nis" value="{{ $siswa->ids }}" readonly>
+                        <input type="text" class="form-control" name="idsiswa" id="idsiswa" value="{{ $siswa->nis }}"
+                            readonly required>
+                        <input type="hidden" class="form-control" name="nis" id="nis" value="{{ $siswa->ids }}"
+                            readonly>
                     </div>
                     <div class="form-group">
                         <label for="atm">ATM</label>
@@ -142,7 +151,8 @@
                     </div>
                     <div class="form-group">
                         <label for="jumlah">Jumlah Transfer</label>
-                        <input type="text" value="{{ $siswa->tarif }}" required class="form-control" name="jumlah" id="jumlahd" readonly>
+                        <input type="text" value="{{ $siswa->tarif }}" required class="form-control" name="jumlah"
+                            id="jumlahd">
                     </div>
                     <div class="form-group">
                         <label for="nis">Bulan</label>
@@ -170,6 +180,14 @@
                         <label for="nis">Bukti Transfer</label>
                         <input type="file" class="form-control" name="bukti" id="bukti" required>
                     </div>
+                    <div class="form-group">
+                        <label for="tipepembayaran">Tipe Pembayaran</label>
+                        <select class="form-control" name="tipepembayaran" id="tipepembayaran" required>
+                            @foreach($tipe as $sw)
+                            <option value="{{ $sw->id }}">{{ $sw->namatipe }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>
                         <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Tutup</button>
@@ -180,7 +198,8 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

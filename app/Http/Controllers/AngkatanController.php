@@ -23,10 +23,10 @@ class AngkatanController extends Controller
         $ang->tarifspp = $request->tarif;
 
         $ang->save();
-        Session::flash('success', 'SPP berhasil ditambahkan');
+        Session::flash('success', 'Pembayaran Siswa berhasil ditambahkan');
         return Redirect::back();
     }
-
+// 
     public function edit($id)
     {
         $decrypt = Crypt::decrypt($id);
@@ -42,7 +42,7 @@ class AngkatanController extends Controller
         $ang->tarifspp = $request->tarif;
 
         $ang->update();
-        Session::flash('success', 'SPP berhasil diubah');
+        Session::flash('success', 'Pembayaran Siswa berhasil diubah');
         return Redirect::back();
     }
 
@@ -52,7 +52,7 @@ class AngkatanController extends Controller
         $ang = Angkatan::find($decrypt);
         $ang->delete();
 
-        Session::flash('success', 'SPP berhasil dihapus');
+        Session::flash('success', 'Pembayaran Siswa berhasil dihapus');
         return '/spp';
     }
 }

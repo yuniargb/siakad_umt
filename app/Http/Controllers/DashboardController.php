@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Siswa;
 use App\User;
+use App\Logo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,7 +12,8 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('dashboard');
+        $logo = Logo::find(1);
+        return view('dashboard',compact('logo'));
     }
 
     public function user()

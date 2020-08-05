@@ -12,39 +12,32 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class SiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $angkatan = Angkatan::orderBy('angkatan', 'asc')->get();
-        $siswa = Siswa::all();
+       
+        $siswa = DB::table('siswas')
+            ->select('siswas.*','kelas.*','angkatans.*','users.email')
+            ->join('users', 'siswas.nis', '=', 'users.username')
+            ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
+            ->join('angkatans', 'siswas.angkatan_id', '=', 'angkatans.id')
+            ->get();
         $kelas = Kelas::all();
         return view('siswa.siswa', compact('siswa', 'angkatan', 'kelas'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function getSiswa($kelas){
+        $siswa = DB::table('siswas')
+            ->select('*', 'users.id as id')
+            ->join('users', 'siswas.nis', '=', 'users.username')
+            ->where('role','=',2)
+            ->where('siswas.kelas_id','=',$kelas)->get();
+        return $siswa;
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(SiswaRequest $request)
     {
 
@@ -77,6 +70,7 @@ class SiswaController extends Controller
         $user->name = $request->nama;
         $user->role = 2;
         $user->username = $request->nis;
+        $user->email = $request->email;
         $user->email_verified_at = now();
         $user->password = Hash::make($pass);
         $user->remember_token = Str::random(10);
@@ -84,17 +78,6 @@ class SiswaController extends Controller
 
         Session::flash('success', 'Siswa berhasil ditambahkan');
         return Redirect::back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     public function pass($id)
@@ -107,31 +90,23 @@ class SiswaController extends Controller
         $user->password = Hash::make($pass);
 
         $user->update();
+        
         Session::flash('success', 'Kata sandi berhasil diatur ulang');
         return Redirect::back();
 
         // return $siswa;
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $decrypt = Crypt::decrypt($id);
-        $siswa = Siswa::find($decrypt);
-        return $siswa;
+        // $siswa = Siswa::find($decrypt);
+         $siswa = DB::table('siswas')
+            ->select('*')
+            ->join('users', 'siswas.nis', '=', 'users.username')
+            ->where('siswas.id',$decrypt)
+            ->first();
+        return json_encode($siswa);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $decrypt = Crypt::decrypt($id);
@@ -148,16 +123,14 @@ class SiswaController extends Controller
         $siswa->kelas_id = $request->kelas;
 
         $siswa->update();
+
+        $user = User::where('username', $request->nis)->first();
+        $user->email = $request->email;
+        $user->remember_token = Str::random(10);
+        $user->update();
         Session::flash('success', 'Siswa berhasil diubah');
         return Redirect::back();
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $decrypt = Crypt::decrypt($id);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kelas;
+use App\TipePembayaran;
 use App\Siswa;
 use App\Angkatan;
 use App\Pembayaran;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class PembayaranController extends Controller
 {
@@ -30,8 +32,10 @@ class PembayaranController extends Controller
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
+            ->join('tipe_pembayarans', 'pembayarans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
             ->where('siswas.nis', auth()->user()->username)->get();
-        return view('pembayaran.pembayaran', compact('pembayaran', 'siswa'));
+        $tipe = TipePembayaran::all();
+        return view('pembayaran.pembayaran', compact('pembayaran', 'siswa','tipe'));
     }
 
     /**
@@ -66,6 +70,7 @@ class PembayaranController extends Controller
         $pembayaran->bulan = $request->bulan;
         $pembayaran->jumlah = $request->jumlah;
         $pembayaran->tgl_transfer = $request->tgl;
+        $pembayaran->tipe_pembayaran_id = $request->tipepembayaran;
         $pembayaran->siswa_id = $request->nis;
         $pembayaran->status = 0;
         $pembayaran->save();
@@ -79,65 +84,10 @@ class PembayaranController extends Controller
             ->select('*', 'pembayarans.id as id_p')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
             ->where('siswas.nis', auth()->user()->username)->get();
-        return view('pembayaran.cetak', compact('pembayaran'));
-    }
+        // return view('pembayaran.cetak', compact('pembayaran'));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $decrypt = Crypt::decrypt($id);
-        $kelas = Pembayaran::find($decrypt);
-        return $kelas;
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $decrypt = Crypt::decrypt($id);
-        $kelas = Kelas::find($decrypt);
-
-        $kelas->namakelas = $request->kelas;
-
-        $kelas->update();
-        Session::flash('success', 'Kelas berhasil diubah');
-        return Redirect::back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $decrypt = Crypt::decrypt($id);
-        $pembayaran = Pembayaran::find($decrypt);
-        $pembayaran->delete();
-
-        Session::flash('success', 'Pembayaran berhasil dihapus');
-        return '/pembayaran';
+        // $pegawai = Pegawai::all();
+        $pdf = PDF::loadview('pembayaran.cetak',compact('pembayaran'));
+    	return $pdf->download('pembayaran');
     }
 }

@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $admin = User::where('role', '!=', 2)->get();
+        $admin = User::where('role', '!=', 2)->where('role', '!=', 7)->get();
         return view('admin.admin', compact('admin'));
     }
 
@@ -22,6 +22,7 @@ class AdminController extends Controller
     {
         $user = new User;
         $user->name = $request->nama;
+        $user->email = $request->email;
         $user->role = $request->role;
         $user->username = $request->username;
         $user->password = Hash::make($request->password);
@@ -29,7 +30,32 @@ class AdminController extends Controller
         $user->remember_token = Str::random(10);
         $user->save();
 
-        Session::flash('success', 'Data admin berhasil diinput');
+        Session::flash('success', 'Data staf berhasil diinput');
+        return Redirect::back();
+    }
+
+    public function edit($id)
+    {
+        $decrypt = Crypt::decrypt($id);
+        $ang = User::find($decrypt);
+        return $ang;
+    }
+
+    public function update(Request $request, $id)
+    {
+        $decrypt = Crypt::decrypt($id);
+        $ang = User::find($decrypt);
+        $ang->name = $request->nama;
+        $ang->role = $request->role;
+        $ang->username = $request->username;
+        $ang->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $ang->email_verified_at = now();
+        $ang->remember_token = Str::random(10);
+        $ang->update();
+        Session::flash('success', 'Staf berhasil diubah');
         return Redirect::back();
     }
 

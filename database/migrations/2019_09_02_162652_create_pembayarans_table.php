@@ -19,6 +19,7 @@ class CreatePembayaransTable extends Migration
             $table->string('atm');
             $table->string('bulan');
             $table->bigInteger('siswa_id');
+            $table->bigInteger('tipe_pembayaran_id');
             $table->bigInteger('jumlah');
             $table->date('tgl_transfer');
             $table->boolean('status')->default(null);
