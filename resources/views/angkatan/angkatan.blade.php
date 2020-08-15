@@ -1,19 +1,19 @@
 @extends('layout')
-@section('title', 'Data Pembayaran Siswa')
+@section('title', 'Data Angkatan Siswa')
 @section('content')
 <div class="page-inner mt--5">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <div class="card-head-row">
-                    <div class="card-title">Daftar Pembayaran Siswa</div>
+                    <div class="card-title">Daftar Angkatan Siswa</div>
                     <div class="card-tools">
                         <button type="button" class="btn btn-outline-primary btn-round btn-sm btnSppModal"
                             data-action="add">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Tambah Pembayaran
+                            Tambah Angkatan
                         </button>
                     </div>
                 </div>

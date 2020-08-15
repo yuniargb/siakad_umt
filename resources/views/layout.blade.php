@@ -81,7 +81,7 @@
                         <a class="collapse-item" href="/guru">Data Guru</a>
                         @endif
                         @if(auth()->user()->role == 4 || auth()->user()->role == 1 )
-                        <a class="collapse-item" href="/spp">Data Pembayaran Siswa</a>
+                        <a class="collapse-item" href="/spp">Data Angkatan Siswa</a>
                         <a class="collapse-item" href="/tipepembayaran">Data Tipe Pembayaran</a>
                         <a class="collapse-item" href="/detailpembayaran">Data Detail Pembayaran</a>
                         @endif
