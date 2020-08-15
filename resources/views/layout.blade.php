@@ -83,7 +83,6 @@
                         @if(auth()->user()->role == 4 || auth()->user()->role == 1 )
                         <a class="collapse-item" href="/spp">Data Angkatan Siswa</a>
                         <a class="collapse-item" href="/tipepembayaran">Data Tipe Pembayaran</a>
-                        <a class="collapse-item" href="/detailpembayaran">Data Detail Pembayaran</a>
                         @endif
                         @if(auth()->user()->role == 4 || auth()->user()->role == 5 || auth()->user()->role == 7)
                         <a class="collapse-item" href="/matapelajaran">Data Mata Pelajaran</a>
