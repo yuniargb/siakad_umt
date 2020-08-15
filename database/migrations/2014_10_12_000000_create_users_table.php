@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 50);
             $table->unsignedTinyInteger('role');
             $table->string('username')->unique();
+            $table->string('no_kartu'); 
             $table->string('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

@@ -26,7 +26,7 @@
     <h6 class="text-center">{{ $logo->namasekolah }}</h6>
     <h6 class="text-center">{{ $logo->alamat }}</h6>
     <h6 class="text-center">Laporan Pembayaran</h6>
-    <h6 class="text-center">{{ $bulan.' - '.$kelas->namaKelas }} </h6>
+    <h6 class="text-center">{{ $bulan.' - '.$angkatan->angkatan }} </h6>
 
     <table border="1" class="table table-bordered table-condensed">
         <thead>
@@ -34,6 +34,7 @@
                 <th>No</th>
                 <th>NIS</th>
                 <th>Siswa</th>
+                <th>Kelas</th>
                 <th>Tanggal Transfer</th>
                 <th>Pembayaran Bulan</th>
                 <th>Tipe</th>
@@ -48,6 +49,7 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $sw->nis }}</td>
                 <td>{{ $sw->nama }}</td>
+                <td>{{ $sw->namaKelas }}</td>
                 <td>{{ $sw->tgl_transfer }}</td>
                 <td>{{ $sw->bulan }}</td>
                 <td>{{ $sw->namatipe }}</td>

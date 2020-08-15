@@ -19,13 +19,20 @@
 
     <!-- Custom styles for this template-->
     <link href="/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/assets/css/custom.css" rel="stylesheet">
     <!-- Data Tables Style -->
     <link href="/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Select2 Style -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@1.4.0/dist/select2-bootstrap4.min.css"
         rel="stylesheet">
+    <style>
+        #no_kartu_auto {
+            /* display: none !important; */
+            z-index: -999;
+        }
 
+    </style>
 </head>
 
 <body id="page-top">
@@ -76,6 +83,7 @@
                         @if(auth()->user()->role == 4 || auth()->user()->role == 1 )
                         <a class="collapse-item" href="/spp">Data Pembayaran Siswa</a>
                         <a class="collapse-item" href="/tipepembayaran">Data Tipe Pembayaran</a>
+                        <a class="collapse-item" href="/detailpembayaran">Data Detail Pembayaran</a>
                         @endif
                         @if(auth()->user()->role == 4 || auth()->user()->role == 5 || auth()->user()->role == 7)
                         <a class="collapse-item" href="/matapelajaran">Data Mata Pelajaran</a>
@@ -93,13 +101,14 @@
                 <a class="nav-link" href="#" data-toggle="collapse" data-target="#dataPembayaran" aria-expanded="true"
                     aria-controls="dataPembayaran">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Administrasi Bayar</span>
+                    <span>Transaksi Biaya Sekolah</span>
                 </a>
                 <div id="dataPembayaran" class="collapse" aria-labelledby="headingPages"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/accpembayaranwajib">Data Biaya Wajib</a>
-                        <a class="collapse-item" href="/accpembayarantambahan">Data Biaya Tambahan</a>
+                        <a class="collapse-item" href="/daftartagihan">Daftar Tagihan</a>
+                        <a class="collapse-item" href="/accpembayaran">Info Status</a>
+                        <!-- <a class="collapse-item" href="/accpembayarantambahan">Data Biaya Tambahan</a> -->
                     </div>
                 </div>
             </li>
@@ -108,9 +117,14 @@
             @if(auth()->user()->role == 2)
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="/pembayaran">
+                <a class="nav-link" href="/tagihanbiaya">
                     <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Pembayaran</span></a>
+                    <span>Tagihan Biaya Sekolah</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/historypembayaran">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>History Pembayaran</span></a>
             </li>
             @endif
 
@@ -158,13 +172,23 @@
                     <i class="fas fa-fw fa-folder-open"></i>
                     <span>Data Absen Staf</span></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/absensirfid">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>Absen RFID</span></a>
+            </li>
             @endif
             @if(auth()->user()->role == 3 || auth()->user()->role == 1 || auth()->user()->role == 4)
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="/laporanpembayaran">
                     <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan Pembayaran</span></a>
+                    <span>Laporan Pembayaran Kelas</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/laporanpembayaranangkatan">
+                    <i class="far fa-fw fa-chart-bar"></i>
+                    <span>Laporan Pembayaran Angkatan</span></a>
             </li>
             @endif
             @if(auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 4 ||
@@ -279,6 +303,14 @@
                     @if ($message = Session::get('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ Session::get('success') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+                    @if ($message = Session::get('failed'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ Session::get('failed') }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

@@ -29,13 +29,48 @@ class PembayaranController extends Controller
             ->join('angkatans', 'angkatans.id', '=', 'siswas.angkatan_id')
             ->join('kelas', 'kelas.id', '=', 'siswas.kelas_id')
             ->where('siswas.nis', auth()->user()->username)->first();
-        $pembayaran = DB::table('pembayarans')
+        $pembayaran = DB::table('tagihans')
             ->select('*', 'pembayarans.id as id_p')
-            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-            ->join('tipe_pembayarans', 'pembayarans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
-            ->where('siswas.nis', auth()->user()->username)->get();
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
+            ->leftJoin('pembayarans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->leftJoin('siswas', 'siswas.id', '=', 'pembayarans.siswa_id')
+            ->where('tagihans.kelas_id', $siswa->kelas_id)
+            ->where('siswas.nis', auth()->user()->username)
+            ->get();
         $tipe = TipePembayaran::all();
         return view('pembayaran.pembayaran', compact('pembayaran', 'siswa','tipe'));
+    }
+    public function tagihan()
+    {
+        $siswa = DB::table('siswas')
+            ->select('*', 'siswas.id as ids', 'angkatans.tarifspp as tarif')
+            ->join('angkatans', 'angkatans.id', '=', 'siswas.angkatan_id')
+            ->join('kelas', 'kelas.id', '=', 'siswas.kelas_id')
+            ->where('siswas.nis', auth()->user()->username)->first();
+        $tagihan = DB::table('tagihans')
+            ->select(
+                'tagihans.id as id',
+                'tagihans.bulan',
+                'tagihans.tahun',
+                'tipe_pembayarans.namatipe',
+                'tipe_pembayarans.id as tipe',
+                'tipe_pembayarans.biaya'
+                )
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
+            ->leftJoin(DB::raw('(select * from pembayarans where siswa_id = '.$siswa->ids.') as pembayarans'), 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->where('tagihans.kelas_id','=', $siswa->kelas_id)
+            ->whereNull('pembayarans.tagihan_id')
+            ->groupBy(
+                'tagihans.id',
+                'tagihans.bulan',
+                'tagihans.tahun',
+                'tipe_pembayarans.namatipe',
+                'tipe_pembayarans.id',
+                'tipe_pembayarans.biaya'
+            )
+            ->get();
+       
+        return view('pembayaran.tagihan', compact('tagihan', 'siswa'));
     }
 
     /**
@@ -67,10 +102,9 @@ class PembayaranController extends Controller
         $pembayaran = new Pembayaran;
         $pembayaran->bukti = $newName;
         $pembayaran->atm = $request->atm;
-        $pembayaran->bulan = $request->bulan;
+        $pembayaran->tagihan_id = $request->tagihan_id;
         $pembayaran->jumlah = $request->jumlah;
         $pembayaran->tgl_transfer = $request->tgl;
-        $pembayaran->tipe_pembayaran_id = $request->tipepembayaran;
         $pembayaran->siswa_id = $request->nis;
         $pembayaran->status = 0;
         $pembayaran->save();
@@ -82,6 +116,8 @@ class PembayaranController extends Controller
     {
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
+            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
             ->where('siswas.nis', auth()->user()->username)->get();
         // return view('pembayaran.cetak', compact('pembayaran'));

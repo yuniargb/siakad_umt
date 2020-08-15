@@ -20,6 +20,19 @@ class AccPembayaranController extends Controller
 
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
+            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
+            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
+        return view('pembayaranAdmin.accPembayaran', compact('pembayaran'));
+    }
+    public function detail()
+    {
+        // $pembayaran = Pembayaran::with('siswa')->first();
+
+        $pembayaran = DB::table('pembayarans')
+            ->select('*', 'pembayarans.id as id_p')
+            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')->get();
         return view('pembayaranAdmin.accPembayaran', compact('pembayaran'));
     }
@@ -43,21 +56,22 @@ class AccPembayaranController extends Controller
             ->where('tipe_pembayarans.id', '<>', 1)->get();
         return view('pembayaranAdmin.pembayaranTambahan', compact('pembayaran'));
     }
-    public function cetak($id)
+    public function cetak($id)  
     {
         // $pembayaran = Pembayaran::with('siswa')->first();
         $decrypt = Crypt::decrypt($id);
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
+            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-            ->join('tipe_pembayarans', 'pembayarans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
             ->where('pembayarans.id', $decrypt)->first();
         // return view('pembayaranAdmin.cetakPembayaran', compact('pembayaran'));
         
         $pdf = PDF::loadview('pembayaranAdmin.cetakPembayaran',compact('pembayaran'));
     	return $pdf->download('pembayaran');
     }
-    public function update($id, $tipe,$tipebyr)
+    public function update(Request $request,$id, $tipe,$tipebyr)
     {
         $decrypt = Crypt::decrypt($id);
         $bayar = Pembayaran::find($decrypt);
@@ -84,10 +98,6 @@ class AccPembayaranController extends Controller
         
         Session::flash('success', $mass);
         
-        if($tipebyr == 1)
-            return '/accpembayaranwajib';
-        else
-            return '/accpembayarantambahan';
-
+         return url()->previous();
     }
 }

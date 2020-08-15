@@ -26,8 +26,8 @@
                                             <th>Bukti</th>
                                             <th>Jumlah</th>
                                             <th>Bank</th>
+                                            <th>Tipe</th>
                                             <th>Status</th>
-                                            <!-- <th>Cetak</th> -->
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -45,6 +45,7 @@
                                                     data-target="#exampleModal"></td>
                                             <td>{{ $sw->jumlah }}</td>
                                             <td>{{ $sw->atm }}</td>
+                                            <td>{{ $sw->namatipe }}</td>
                                             @php
                                             if($sw->status == 0 )
                                             $pesan = '<span class="badge badge-danger">Tunggu</span>';
@@ -71,25 +72,25 @@
                                                     @if($sw->status == 0 )
 
                                                     <button type="button" class="btn btn-danger kon"
-                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3"
+                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3/1"
                                                         data-toggle="tooltip" value="tolak"
                                                         data-original-title="Tolak"><i class="fa fa-times"></i></button>
                                                     <button type="button" class="btn btn-primary kon"
-                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1"
+                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1/1"
                                                         data-toggle="tooltip" value="konfirmasi"
                                                         data-original-title="Konfirmasi"><i
                                                             class="fa fa-check"></i></button>
 
                                                     @elseif($sw->status == 3)
                                                     <button type="button" class="btn btn-primary kon"
-                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1"
+                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1/1"
                                                         data-toggle="tooltip" value="konfirmasi"
                                                         data-original-title="Konfirmasi"><i
                                                             class="fa fa-check"></i></button>
 
                                                     @else
                                                     <button type="button" class="btn btn-danger kon"
-                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3"
+                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3/1"
                                                         data-toggle="tooltip" value="tolak"
                                                         data-original-title="Tolak"><i class="fa fa-times"></i></button>
                                                     @endif

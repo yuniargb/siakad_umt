@@ -158,6 +158,24 @@ $(document).ready(function () {
             $('#email').val('');
             $('#angkatan').val('');
             $('#kelas').val('');
+
+
+            $('#nama_panggilan').val('');
+            $('#nama_ayah').val('');
+            $('#agama_ayah').val('');
+            $('#nama_ibu').val('');
+            $('#agama_ibu').val('');
+            $('#pekerjaan_ayah').val('');
+            $('#pekerjaan_ibu').val('');
+            $('#penghasilan_ayah').val('');
+            $('#penghasilan_ibu').val('');
+            $('#no_telp').val('');
+            $('#no_telp_ayah').val('');
+            $('#no_telp_ibu').val('');
+            $('#anak_ke').val('');
+            $('#alamat_wali').val('');
+            $('#no_kartu').val('');
+
             $('.siswa-form').attr('id', 'siswaForm')
             $('#siswaForm').attr('action', '/siswa')
             $('#siswaModalMethod').html('')
@@ -182,6 +200,22 @@ $(document).ready(function () {
                 $('#kelas').val(data.kelas_id);
                 $('#angkatan').val(data.angkatan_id);
                 $('#email').val(data.email);
+
+                $('#nama_panggilan').val(data.nama_panggilan);
+                $('#nama_ayah').val(data.nama_ayah);
+                $('#agama_ayah').val(data.agama_ayah);
+                $('#nama_ibu').val(data.nama_ibu);
+                $('#agama_ibu').val(data.agama_ibu);
+                $('#pekerjaan_ayah').val(data.pekerjaan_ayah);
+                $('#pekerjaan_ibu').val(data.pekerjaan_ibu);
+                $('#penghasilan_ayah').val(data.penghasilan_ayah);
+                $('#penghasilan_ibu').val(data.penghasilan_ibu);
+                $('#no_telp').val(data.no_telp);
+                $('#no_telp_ayah').val(data.no_telp_ayah);
+                $('#no_telp_ibu').val(data.no_telp_ibu);
+                $('#anak_ke').val(data.anak_ke);
+                $('#alamat_wali').val(data.alamat_wali);
+                $('#no_kartu').val(data.no_kartu);
             })
             $('.siswa-form').attr('id', 'siswaEditForm')
             $('#siswaEditForm').attr('action', '/siswa/' + id + '/update')
@@ -191,6 +225,12 @@ $(document).ready(function () {
         $('#exampleModalCenter').modal('show')
     })
 
+    // $('#rfid-page').children().off('click');
+    // $('#no_kartu_auto').focus();
+
+    // $('#rfid-page').click(function (e) {
+    //     e.preventDefault();
+    // });
 
     $('.btnGuruModal').on('click', function () {
         let url = $(this).data('url')
@@ -208,6 +248,7 @@ $(document).ready(function () {
             $('#alamat').val('')
             $('#agama').val('');
             $('#email').val('');
+            $('#no_kartu').val('');
             $('.guru-form').attr('id', 'guruForm')
             $('#guruForm').attr('action', '/guru')
             $('#guruModalMethod').html('')
@@ -225,6 +266,7 @@ $(document).ready(function () {
                 $('#nip').prop("readonly", true)
                 $('#nip').val(data.nip)
                 $('#nama').val(data.nama)
+                $('#no_kartu').val(data.no_kartu)
                 $('#tglLahir').val(data.tgl_lahir)
                 $('#tempatLahir').val(data.tempat_lahir)
                 $('#alamat').val(data.alamat)
@@ -248,6 +290,7 @@ $(document).ready(function () {
         if (action == 'add') {
             $('#nama').val('')
             $('#username').val('')
+            $('#no_kartu').val('')
             $('#email').val('')
             $('#adminForm').attr('action', '/admin')
             $('#password1').attr('required', true)
@@ -262,6 +305,7 @@ $(document).ready(function () {
                 $('#username').val(data.username)
                 $('#email').val(data.email)
                 $('#role').val(data.role)
+                $('#no_kartu').val(data.no_kartu)
             })
             $('#adminForm').attr('action', '/admin/' + id + '/update')
             $('#adminModalMethod').html($(this).data('method'))
@@ -309,6 +353,139 @@ $(document).ready(function () {
         }
         $('#exampleModalCenter').modal('show')
     })
+    $('.btnAbsenDetailModal').on('click', function () {
+        let url = $(this).data('url')
+        let kelas = $(this).data('kelas')
+        $('#kelasName').text(kelas)
+        $.get(url, function (data) {
+            console.log(data)
+            var html = '';
+            for (x in data) {
+                html += `
+                    <tr>
+                        <td>${data[x].nis}</td>
+                        <td>${data[x].nama}</td>
+                        <td>${data[x].tagihan_id == null ? '<p class="text-danger">Belum Bayar</p>' : 'Sudah Bayar'}</td>
+                    </tr>
+                `
+            }
+            $('#detailBodys').html(html)
+        })
+        $('#DetailModal').modal('show')
+    })
+    $('.btnDetailSiswa').on('click', function () {
+        let url = $(this).data('url')
+        $.get(url, function (data) {
+            data = JSON.parse(data)
+            var html = '';
+            $.each(data, function (key, value) {
+                if (
+                    key != "remember_token" &&
+                    key != "password" &&
+                    key != "email_verified_at" &&
+                    key != "name" &&
+                    key != "role" &&
+                    key != "updated_at" &&
+                    key != "created_at" &&
+                    key != "user_id" &&
+                    key != "kelas_id" &&
+                    key != "angkatan_id" &&
+                    key != "username" &&
+                    key != "id"
+                ) {
+
+                    if (key === "jk") {
+                        key = "jenis_kelamin"
+                        if (value == "l")
+                            value = "laki-laki"
+                        else
+                            value = "perempuan"
+                    } else {
+                        value = value
+                    }
+                    html += `
+                    <tr>
+                        <th>${key.replaceAll("_", " ").replaceAll("tgl", "tanggal").replaceAll("no", "nomor")}</th>
+                        <th>:</th>
+                        <td>${value}</td>
+                    </tr>
+                `
+                }
+            });
+            $('#detailSiswa').html(html)
+        })
+        $('#DetailModal').modal('show')
+    })
+    $('#no_kartu_auto').on('input', function (e) {
+        var val = $('#no_kartu_auto').val();
+        if (val.length >= 11) {
+            $(this).val("")
+        }
+        // $("#no_kartu_auto").on("keydown", false);
+        console.log(val);
+    })
+    $('.btnBayarSiswa').on('click', function () {
+        let url = $(this).data('url')
+        let nis = $(this).data('nis')
+        let nama = $(this).data('nama')
+
+        $('#nisBayar').text(nis)
+        $('#namaBayar').text(nama)
+        $.get(url, function (data) {
+
+            var html = '';
+            for (x in data) {
+                var status = '';
+                if (data[x].status == 0) {
+                    status = '<span class="badge badge-danger">Tunggu</span>';
+                } else if (data[x].status == 3) {
+                    status = '<span class="badge badge-danger">Di Tolak</span>';
+                } else {
+                    status = '<span class="badge badge-success">Konfirmasi</span>';
+                }
+                html += `
+                    <tr>
+                        <td>${data[x].namatipe}</td>
+                        <td>${data[x].bulan}</td>
+                        <td>${data[x].tahun}</td>
+                        <td>${data[x].tipe_pembayaran_id == 1 ? data[x].tarifspp : data[x].biaya}</td>
+                        <td>${data[x].jumlah}</td>
+                        <td>${status}</td>
+                    </tr>
+                `
+            }
+            $('#bayarSiswa').html(html)
+        })
+        $('#BayarModal').modal('show')
+    })
+    $('.btnTagihanModal').on('click', function () {
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let action = $(this).data('action')
+
+        if (action == 'add') {
+            $('.password-hide').show()
+            $('#bulan').val('')
+            $('#tahun').val('')
+            $('#kelas_id').val('')
+            $('#tipe_pembayaran_id').val('')
+            $('#tagihanForm').attr('action', '/daftartagihan')
+            $('#tagihanModalMethod').html('')
+            $('#tagihanModalTitle').html('Tambah Tagihan')
+        } else {
+            $.get(url, function (data) {
+                $('#bulan').val(data.bulan)
+                $('#tahun').val(data.tahun)
+                $('#kelas_id').val(data.kelas_id)
+                $('#tipe_pembayaran_id').val(data.tipe_pembayaran_id)
+            })
+            $('#tagihanForm').attr('action', '/daftartagihan/' + id + '/update')
+            $('#tagihanModalMethod').html($(this).data('method'))
+            $('#tagihanModalTitle').html('Edit Tagihan')
+            $('#pass-toggle').addClass("d-none");
+        }
+        $('#exampleModalCenter').modal('show')
+    })
 
     // crud tipe pembayaran
     $('.btnTipePembayaranModal').on('click', function () {
@@ -318,12 +495,14 @@ $(document).ready(function () {
 
         if (action == 'add') {
             $('#namatipe').val('')
+            $('#biaya').val('')
             $('#tipepembayaranForm').attr('action', '/tipepembayaran')
             $('#tipepembayaranModalMethod').html('')
             $('#tipepembayaranModalTitle').html('Tambah Tipe Pembayaran')
         } else {
             $.get(url, function (data) {
                 $('#namatipe').val(data.namatipe)
+                $('#biaya').val(data.biaya)
             })
             $('#tipepembayaranForm').attr('action', '/tipepembayaran/' + id + '/update')
             $('#tipepembayaranModalMethod').html($(this).data('method'))
@@ -552,6 +731,8 @@ $(document).ready(function () {
                 html += `
                     <tr>
                         <td>${data[x].tgl_absen}</td>
+                        <td>${data[x].jam_masuk}</td>
+                        <td>${data[x].jam_pulang}</td>
                         <td>${data[x].keterangan}</td>
                     </tr>
                 `
@@ -593,6 +774,8 @@ $(document).ready(function () {
     $(document).on('click', '.btnPembayaranModal', function () {
         let url = $(this).data('url')
         let id = $(this).data('id')
+        let tipe = $(this).data('tipe')
+        let jumlah = $(this).data('jumlah')
         let action = $(this).data('action')
 
         if (action == 'add') {
@@ -600,10 +783,11 @@ $(document).ready(function () {
             $('#jumlah').val('')
             $('#tgl').val('')
             $('#bukti').val('')
-            $('#tipepembayaran').val('')
+            $('#tagihan_id').val(id)
+            $('#jumlahd').val(jumlah)
             $('#pembayaranForm').attr('action', '/pembayaran')
             $('#pembayaranModalMethod').html('')
-            $('#pembayaranModalTitle').html('Tambah Pembayaran')
+            $('#pembayaranModalTitle').html('Tambah Pembayaran ' + tipe)
         } else {
             $.get(url, function (data) {
                 $('#nis').val('')

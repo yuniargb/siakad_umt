@@ -14,6 +14,7 @@ class TipePembayaranSeeder extends Seeder
         \App\TipePembayaran::create([
             'id'  => '1',
             'namatipe' => 'SPP',
+            'biaya' => 0,
         ]);
     }
 }

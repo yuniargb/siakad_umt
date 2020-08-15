@@ -1,6 +1,15 @@
 @extends('layout')
 @section('title', 'Data Guru')
 @section('content')
+@if (count($errors) > 0)
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="page-inner mt--5">
     <div class="col-md-12">
         <div class="card">
@@ -109,6 +118,11 @@
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input required type="text" class="form-control" name="nama" id="nama">
+                    </div>
+                    <div class="form-group">
+                        <label for="no_kartu">Nomor Kartu</label>
+                        <input required type="text" class="form-control" name="no_kartu" id="no_kartu">
+                        <small class="text-danger">{{ $errors->first('no_kartu') }}</small>
                     </div>
                     <div class="form-group">
                         <label for="tglLahir">Tanggal Lahir</label>

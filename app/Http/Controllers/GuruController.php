@@ -17,7 +17,7 @@ class GuruController extends Controller
 {
     public function index()
     {
-       
+        
         $guru = DB::table('gurus')
             ->select('gurus.*','users.email')
             ->join('users', 'gurus.nip', '=', 'users.username')
@@ -29,11 +29,13 @@ class GuruController extends Controller
     {
 
         $rules = [
-            'nip' => 'unique:gurus,nip'
+            'nip' => 'unique:gurus,nip',
+            'no_kartu' => 'unique:users,no_kartu'
         ];
         $message = [
-            'unique' => 'Nip Sudah Ada!',
+            'unique' => ':attribute Sudah Ada!'
         ];
+       
         $this->validate($request, $rules, $message);
 
         // insert into guru
@@ -55,6 +57,7 @@ class GuruController extends Controller
         $user->name = $request->nama;
         $user->role = 7;
         $user->username = $request->nip;
+        $user->no_kartu = $request->no_kartu;
         $user->email = $request->email;
         $user->email_verified_at = now();
         $user->password = Hash::make($pass);
@@ -93,6 +96,8 @@ class GuruController extends Controller
     }
     public function update(Request $request, $id)
     {
+        
+
         $decrypt = Crypt::decrypt($id);
         $guru = Guru::find($decrypt);
 
@@ -108,6 +113,7 @@ class GuruController extends Controller
 
         $user = User::where('username', $request->nip)->first();
         $user->email = $request->email;
+        $user->no_kartu = $request->no_kartu;
         $user->remember_token = Str::random(10);
         $user->update();
         Session::flash('success', 'Guru berhasil diubah');

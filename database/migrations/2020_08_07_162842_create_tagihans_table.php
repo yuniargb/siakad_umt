@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTipePembayaransTable extends Migration
+class CreateTagihansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateTipePembayaransTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipe_pembayarans', function (Blueprint $table) {
+        Schema::create('tagihans', function (Blueprint $table) {
             $table->bigIncrements('id');
-             $table->string('namatipe');
-             $table->integer('biaya')->length(10)->unsigned();
+            $table->string('bulan',50);
+            $table->string('tahun',50);
+            $table->unsignedBigInteger('kelas_id');
+            $table->unsignedBigInteger('tipe_pembayaran_id');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateTipePembayaransTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipe_pembayarans');
+        Schema::dropIfExists('tagihans');
     }
 }

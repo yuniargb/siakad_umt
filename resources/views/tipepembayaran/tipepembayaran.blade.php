@@ -29,6 +29,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Tipe</th>
+                                            <th>Biaya</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -37,6 +38,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $ang->namatipe }}</td>
+                                            <td>{{ $ang->biaya }}</td>
                                             <td>
                                                 @if( $ang->id != 1)
                                                 <div class="row">
@@ -88,6 +90,10 @@
                     <div class="form-group">
                         <label for="namatipe">Nama Tipe</label>
                         <input type="text" class="form-control" name="namatipe" id="namatipe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="biaya">Biaya</label>
+                        <input type="number" class="form-control" name="biaya" id="biaya" required>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>

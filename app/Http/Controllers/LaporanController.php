@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pembayaran;
 use App\Kelas;
 use App\Logo;
+use App\Angkatan;
 use App\MataPelajaran;
 use App\Exports\BulanExport;
 use Illuminate\Http\Request;
@@ -21,7 +22,9 @@ class LaporanController extends Controller
     {
         $kelas = Kelas::all();
         $diagram = DB::table('pembayarans')
-            ->select(DB::raw('sum(jumlah) as jumlah'), 'bulan')
+            ->select(DB::raw('sum(pembayarans.jumlah) as jumlah'), 'tagihans.bulan')
+            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
             ->groupBy('bulan','jumlah')
             ->get();
         $x = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
@@ -38,14 +41,61 @@ class LaporanController extends Controller
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-            ->join('tipe_pembayarans', 'pembayarans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
-            ->where('pembayarans.bulan', $request->bulan)
+            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
+            ->where('tagihans.bulan', $request->bulan)
             ->where('siswas.kelas_id', $request->kelas)->get();
         $bulan = $request->bulan;
+        $kelas = Kelas::find($request->kelas);
         $logo = Logo::find(1);
-        $pdf = PDF::loadview('laporan.cetakPembayaran', compact('pembayaran', 'bulan','logo'));
-    	return $pdf->download('laporan-pembayaran');
+        $pdf = PDF::loadview('laporan.cetakPembayaran', compact('pembayaran','kelas', 'bulan','logo'));
+    	return $pdf->download('laporan-pembayaran-kelas');
     }
+
+    public function pembayaranangkatan()
+    {
+        $angkatan = Angkatan::all();
+        $diagram = DB::table('pembayarans')
+            ->select(DB::raw('sum(pembayarans.jumlah) as jumlah'), 'angkatans.angkatan')
+            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
+            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
+            ->join('angkatans', 'siswas.angkatan_id', '=', 'angkatans.id')
+            ->groupBy('angkatans.angkatan','jumlah')
+            ->get();
+        $x = [];
+        $y = [];
+        foreach ($angkatan as $a){
+            array_push($x,$a->angkatan);
+            array_push($y,0);
+        }
+        foreach ($diagram as $d) {
+            $y[array_search($d->angkatan, $x)] = $d->jumlah;
+        }
+        return view('laporan.lapPembayaranAngkatan', compact('angkatan','x','y'));
+    }
+
+    public function cetakpembayaranangkatan(Request $request)
+    {
+
+        $pembayaran = DB::table('pembayarans')
+            ->select('*', 'pembayarans.id as id_p')
+            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
+            ->join('angkatans', 'siswas.angkatan_id', '=', 'angkatans.id')
+            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
+            ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
+            ->where('tagihans.bulan', $request->bulan)
+            ->where('angkatans.id', $request->angkatan_id)->get();
+        $angkatan = Angkatan::find($request->angkatan_id);
+        $bulan = $request->bulan;
+        $logo = Logo::find(1);
+ 
+        $pdf = PDF::loadview('laporan.cetakPembayaranAngkatan', compact('pembayaran', 'bulan','angkatan','logo'));
+    	return $pdf->download('laporan-pembayaran-angkatan');
+    }
+
+
    public function penilaian()
     {
         
@@ -195,7 +245,10 @@ class LaporanController extends Controller
                 'siswas.nis',
                 'siswas.nama',
                 'users.id',
-                'absensis.keterangan'
+                'absensis.keterangan',
+                'absensis.jam_masuk',
+                'absensis.jam_pulang'
+                
             )
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->join('siswas', 'users.username', '=', 'siswas.nis')
@@ -216,7 +269,9 @@ class LaporanController extends Controller
                 'gurus.nip',
                 'gurus.nama',
                 'users.id',
-                'absensis.keterangan'
+                'absensis.keterangan',
+                'absensis.jam_masuk',
+                'absensis.jam_pulang'
             )
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->join('gurus', 'users.username', '=', 'gurus.nip')
@@ -234,7 +289,9 @@ class LaporanController extends Controller
                 'users.username',
                 'users.name',
                 'users.id',
-                'absensis.keterangan'
+                'absensis.keterangan',
+                'absensis.jam_masuk',
+                'absensis.jam_pulang'
             )
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->where('role', '<>' ,2)

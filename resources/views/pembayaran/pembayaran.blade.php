@@ -7,15 +7,6 @@
             <div class="card-header">
                 <div class="card-head-row">
                     <div class="card-title">Daftar Pembayaran</div>
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-outline-primary btn-round btn-sm btnPembayaranModal"
-                            data-action="add">
-                            <span class="btn-label">
-                                <i class="fa fa-plus"></i>
-                            </span>
-                            Tambah Pembayaran
-                        </button>
-                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -110,93 +101,6 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pembayaranModalTitle">Tambah Pembayaran Baru</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/pembayaran" id="pembayaranForm" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div id="PembayaranModalMethod"></div>
-                    <div class="form-group">
-                        <label for="idsiswa">Nis</label>
-                        <input type="text" class="form-control" name="idsiswa" id="idsiswa" value="{{ $siswa->nis }}"
-                            readonly required>
-                        <input type="hidden" class="form-control" name="nis" id="nis" value="{{ $siswa->ids }}"
-                            readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="atm">ATM</label>
-                        <select class="form-control" name="atm" id="atm" required>
-                            <option value="Mandiri">Mandiri</option>
-                            <option value="BCA">BCA</option>
-                            <option value="BRI">BRI</option>
-                            <option value="BNI">BNI</option>
-                            <option value="BTN">BTN</option>
-                            <option value="CIMB NIAGA">CIMB NIAGA</option>
-                            <option value="PANIN">PANIN</option>
-                            <option value="OCBC NISP">OCBC NISP</option>
-                            <option value="MAYBANK INDONESIA">MAYBANK INDONESIA</option>
-                            <option value="DANAMON">DANAMON</option>
-                            <option value="Bank BJB">Bank BJB</option>
-                            <option value="Bank lainnya">Bank lainnya</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="jumlah">Jumlah Transfer</label>
-                        <input type="text" value="{{ $siswa->tarif }}" required class="form-control" name="jumlah"
-                            id="jumlahd">
-                    </div>
-                    <div class="form-group">
-                        <label for="nis">Bulan</label>
-                        <select class="form-control" name="bulan" id="bulan" required>
-                            <option value="Januari">Januari</option>
-                            <option value="Februari">Februari</option>
-                            <option value="Maret">Maret</option>
-                            <option value="April">April</option>
-                            <option value="Mei">Mei</option>
-                            <option value="Juni">Juni</option>
-                            <option value="Juli">Juli</option>
-                            <option value="Agustus">Agustus</option>
-                            <option value="September">September</option>
-                            <option value="Oktober">Oktober</option>
-                            <option value="November">November</option>
-                            <option value="Desmber">Desember</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="nis">Tanggal Transfer</label>
-                        <input type="date" class="form-control" name="tgl" id="tgl" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nis">Bukti Transfer</label>
-                        <input type="file" class="form-control" name="bukti" id="bukti" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="tipepembayaran">Tipe Pembayaran</label>
-                        <select class="form-control" name="tipepembayaran" id="tipepembayaran" required>
-                            @foreach($tipe as $sw)
-                            <option value="{{ $sw->id }}">{{ $sw->namatipe }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Tutup</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">

@@ -23,10 +23,10 @@
 </head>
 
 <body>
-    <h3 class="text-center">{{ $logo->namasekolah }}</h3>
-    <h3 class="text-center">{{ $logo->alamat }}</h3>
-    <h3 class="text-center">Laporan Absen Siswa</h3>
-    <h3 class="text-center">Kelas {{ $kelas->namaKelas }}</h3>
+    <h6 class="text-center">{{ $logo->namasekolah }}</h6>
+    <h6 class="text-center">{{ $logo->alamat }}</h6>
+    <h6 class="text-center">Laporan Absen Siswa</h6>
+    <h6 class="text-center">Kelas {{ $kelas->namaKelas }}</h6>
 
     <table border="1" class="table table-bordered table-condensed">
         <thead>
@@ -35,6 +35,8 @@
                 <th>Tanggal</th>
                 <th>Nis</th>
                 <th>Nama</th>
+                <th>Jam Masuk</th>
+                <th>Jam Pulang</th>
                 <th>Keterangan</th>
             </tr>
         </thead>
@@ -45,6 +47,8 @@
                 <td>{{ $sw->tgl_absen }}</td>
                 <td>{{ $sw->nis }}</td>
                 <td>{{ $sw->nama }}</td>
+                <td>{{ $sw->jam_masuk }}</td>
+                <td>{{ $sw->jam_pulang }}</td>
                 <td>{{ $sw->keterangan }}</td>
             </tr>
             @endforeach

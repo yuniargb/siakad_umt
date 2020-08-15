@@ -21,7 +21,9 @@ class AuthController extends Controller
             'username' => 'required|exists:users,username',
             'password' => 'required'
         ]);
-        if (Auth::attempt($request->only('username', 'password'))) {
+        $user = User::where('username',$request->username)->first();
+        // var_dump(Hash::check($request->password, $user->password));
+        if (Auth::attempt(array('username' => $request->username, 'password' => $request->password))) {
             if (auth()->user()->role == 2) {
                 return redirect('/');
             } else if (auth()->user()->role == 3) {

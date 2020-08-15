@@ -58,7 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'DashboardController@dashboard');
     Route::get('/user', 'DashboardController@user');
     // pembayaran
-    Route::get('/pembayaran', 'PembayaranController@index');
+    Route::get('/historypembayaran', 'PembayaranController@index');
+    Route::get('/tagihanbiaya', 'PembayaranController@tagihan');
     Route::get('/cetakpembayaran', 'PembayaranController@cetaksemua');
     Route::post('/pembayaran', 'PembayaranController@store');
 });
@@ -68,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/siswa', 'SiswaController@index');
     Route::post('/siswa', 'SiswaController@store');
     Route::get('/siswa/{id}/edit', 'SiswaController@edit');
+    Route::get('/siswa/{id}/bayar', 'SiswaController@getPembayaran');
     Route::put('/siswa/{id}/update', 'SiswaController@update');
     Route::get('/siswa/{id}/pass', 'SiswaController@pass');
     Route::get('/siswa/{id}/kelas', 'SiswaController@getSiswa');
@@ -118,17 +120,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/nilai/{id}/edit', 'NilaiController@edit');
     Route::put('/nilai/{id}/update', 'NilaiController@update');
 
+    // tagihan
+    Route::get('/daftartagihan', 'TagihanController@index');
+    Route::post('/daftartagihan', 'TagihanController@store');
+    Route::get('/detail_tagihan/{kelas_id}/{id}', 'TagihanController@detail');
+    Route::get('/tagihanemail/{kelas_id}/{id}', 'TagihanController@email');
+
+
     // pembayaran Admin
     Route::get('/accpembayaran', 'AccPembayaranController@index');
     Route::get('/accpembayarantambahan', 'AccPembayaranController@tambahan');
     Route::get('/accpembayaranwajib', 'AccPembayaranController@wajib');
     Route::get('/accpembayaran/{id}/{tipe}/{tipebyr}', 'AccPembayaranController@update');
+    Route::get('/detailpembayaran', 'AccPembayaranController@detail');
 
     // laporan bulan
     // Route::get('/laporanbulan', 'LaporanController@bulan');
     // Route::post('/cetaklaporanbulan', 'LaporanController@cetakbulan');
     Route::get('/laporanpembayaran', 'LaporanController@pembayaran');
     Route::post('/cetaklaporanpembayaran', 'LaporanController@cetakpembayaran');
+    Route::get('/laporanpembayaranangkatan', 'LaporanController@pembayaranangkatan');
+    Route::post('/cetaklaporanpembayaranangkatan', 'LaporanController@cetakpembayaranangkatan');
     Route::get('/laporanpenilaian', 'LaporanController@penilaian');
     Route::post('/cetaklaporanpenilaian', 'LaporanController@cetakpenilaian');
     Route::get('/laporanrds', 'LaporanController@rppdansilabus');
@@ -154,7 +166,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/absensiguru', 'AbsensiController@guru');
     Route::get('/absensistaf', 'AbsensiController@staf');
     Route::get('/absensisiswa', 'AbsensiController@siswa');
+    Route::get('/absensirfid', 'AbsensiController@rfid');
     Route::post('/tambahabsenm', 'AbsensiController@storeManual');
+    Route::post('/tambahabsenrfid', 'AbsensiController@storeRFID');
     Route::put('/absensi/update', 'AbsensiController@update');
     Route::get('/absendetail/{id}/guru', 'AbsensiController@detailGuru');
     Route::get('/absendetail/{id}/staf', 'AbsensiController@detailStaf');
@@ -174,4 +188,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/tipepembayaran', 'TipePembayaranController@store');
     Route::get('/tipepembayaran/{id}/edit', 'TipePembayaranController@edit');
     Route::put('/tipepembayaran/{id}/update', 'TipePembayaranController@update');
+    
 });

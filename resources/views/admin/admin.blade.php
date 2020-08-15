@@ -1,6 +1,15 @@
 @extends('layout')
 @section('title', 'Data Staf Sekolah')
 @section('content')
+@if (count($errors) > 0)
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <div class="page-inner mt--5">
     <div class="col-md-12">
         <div class="card">
@@ -30,6 +39,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Username</th>
+                                            <th>No Kartu</th>
                                             <th>Jabatan</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -40,6 +50,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $adm->name }}</td>
                                             <td class="text-primary">{{ $adm->username }}</td>
+                                            <td>{{ $adm->no_kartu }}</td>
                                             @php
                                             if($adm->role == 1){
                                             $role = 'Staf Pembayaran';
@@ -107,6 +118,10 @@
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" name="username" class="form-control" required id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="no_kartu">Nomor Kartu</label>
+                        <input type="number" name="no_kartu" class="form-control" required id="no_kartu">
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>

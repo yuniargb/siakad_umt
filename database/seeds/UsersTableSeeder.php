@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
             'role' => 4,
             'username' => 'superadmin',
             'email' => 'ygbachri@gmail.com',
+            'no_kartu' => '0002931660',
             'password'  => Hash::make('admin')
         ]);
     }

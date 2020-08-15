@@ -20,6 +20,7 @@ class TipePembayaranController extends Controller
     {
         $ang = new TipePembayaran;
         $ang->namatipe = $request->namatipe;
+        $ang->biaya = $request->biaya;
 
         $ang->save();
         Session::flash('success', 'Tipe Pembayaran berhasil ditambahkan');
@@ -38,6 +39,7 @@ class TipePembayaranController extends Controller
         $decrypt = Crypt::decrypt($id);
         $ang = TipePembayaran::find($decrypt);
          $ang->namatipe = $request->namatipe;
+         $ang->biaya = $request->biaya;
 
         $ang->update();
         Session::flash('success', 'Tipe Pembayaran berhasil diubah');
