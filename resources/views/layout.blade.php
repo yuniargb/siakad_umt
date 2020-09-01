@@ -199,11 +199,11 @@
                         <i class="far fa-fw fa-chart-bar"></i>
                         <span>Laporan Pembayaran Kelas</span></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="/laporanpembayaranangkatan">
                         <i class="far fa-fw fa-chart-bar"></i>
                         <span>Laporan Pembayaran Angkatan</span></a>
-                </li>
+                </li> -->
                 @endif
                 @if(auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 4 ||
                 auth()->user()->role == 7)
