@@ -146,7 +146,8 @@
                         <span>RPP & Silabus</span></a>
                 </li>
                 @endif
-                @if(auth()->user()->role == 4 || auth()->user()->role == 5 || auth()->user()->role == 7)
+                @if(auth()->user()->role == 4 || auth()->user()->role == 5 || auth()->user()->role == 7 ||
+                auth()->user()->role == 2)
                 <li class="nav-item">
                     <a class="nav-link" href="#" data-toggle="collapse" data-target="#dataNilai" aria-expanded="true"
                         aria-controls="dataNilai">

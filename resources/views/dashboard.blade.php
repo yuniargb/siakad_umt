@@ -3,7 +3,7 @@
 <div class="page-inner mt--5">
     <!-- Content Row -->
     @if(auth()->user()->role == 6)
-    <h6>Absen Siswa</h6>
+    <h6>Presensi Siswa</h6>
     <div class="row">
         <!-- Absen Siswa -->
         <div class="col-xl-2 col-md-6 mb-4">
@@ -107,7 +107,7 @@
 
 
     <!-- Absen Staf -->
-    <h6>Absen Staf</h6>
+    <h6>Presensi Staf</h6>
     <div class="row">
         <div class="col-xl-2 col-md-6 mb-4">
             <div class="card border-left-danger shadow h-100 py-2">
@@ -208,7 +208,7 @@
     </div>
 
     <!-- Absen Guru -->
-    <h6>Absen Guru</h6>
+    <h6>Presensi Guru</h6>
     <div class="row">
         <div class="col-xl-2 col-md-6 mb-4">
             <div class="card border-left-success shadow h-100 py-2">

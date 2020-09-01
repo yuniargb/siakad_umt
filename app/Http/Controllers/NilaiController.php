@@ -15,7 +15,8 @@ class NilaiController extends Controller
 {
     public function harian()
     {
-        if(auth()->user()->role == 7){
+        // dd(auth()->user());
+        if(auth()->user()->role == 7 || auth()->user()->role == 2){
             $mapel = DB::table('jadwals')
                 ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')
                 ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
@@ -36,7 +37,20 @@ class NilaiController extends Controller
                 ->groupBy('siswas.id','siswas.nis','siswas.nama')
                 ->get();
 
-            $nilai = DB::table('nilais')
+            
+            if(auth()->user()->role == 2){
+                $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->join('users', 'users.username', '=', 'siswas.nis')
+                ->where('nilais.tipe', 'harian')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+            }else{
+                $nilai = DB::table('nilais')
                 ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
                 ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
                 ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
@@ -46,6 +60,7 @@ class NilaiController extends Controller
                 ->where('nilais.tipe', 'harian')
                 ->where('users.id',auth()->user()->id)
                 ->get();
+            }
          
         }else{
             $mapel = DB::table('jadwals')
@@ -58,6 +73,7 @@ class NilaiController extends Controller
 
             $siswa = Siswa::all();
 
+            
             $nilai = DB::table('nilais')
                 ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
                 ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
@@ -73,7 +89,7 @@ class NilaiController extends Controller
     }
     public function ujian()
     {
-        if(auth()->user()->role == 7){
+        if(auth()->user()->role == 7 || auth()->user()->role == 2){
             $mapel = DB::table('jadwals')
                 ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')
                 ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
@@ -94,7 +110,20 @@ class NilaiController extends Controller
                 ->groupBy('siswas.id','siswas.nis','siswas.nama')
                 ->get();
 
-            $nilai = DB::table('nilais')
+            
+            if(auth()->user()->role == 2){
+                $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->join('users', 'users.username', '=', 'siswas.nis')
+                ->where('nilais.tipe', 'ujian')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+            }else{
+                $nilai = DB::table('nilais')
                 ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
                 ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
                 ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
@@ -104,7 +133,7 @@ class NilaiController extends Controller
                 ->where('nilais.tipe', 'ujian')
                 ->where('users.id',auth()->user()->id)
                 ->get();
-         
+            }
         }else{
             $mapel = DB::table('jadwals')
                 ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')
@@ -129,7 +158,7 @@ class NilaiController extends Controller
     }
     public function raport()
     {
-       if(auth()->user()->role == 7){
+       if(auth()->user()->role == 7 || auth()->user()->role == 2){
             $mapel = DB::table('jadwals')
                 ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')
                 ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
@@ -150,8 +179,19 @@ class NilaiController extends Controller
                 ->where('users.id',auth()->user()->id)
                 ->groupBy('siswas.id','siswas.nis','siswas.nama')
                 ->get();
-
-            $nilai = DB::table('nilais')
+            if(auth()->user()->role == 2){
+                $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->join('users', 'users.username', '=', 'siswas.nis')
+                ->where('nilais.tipe', 'raport')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+            }else{
+                $nilai = DB::table('nilais')
                 ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
                 ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
                 ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
@@ -161,7 +201,7 @@ class NilaiController extends Controller
                 ->where('nilais.tipe', 'raport')
                 ->where('users.id',auth()->user()->id)
                 ->get();
-         
+            }
         }else{
             $mapel = DB::table('jadwals')
                 ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')

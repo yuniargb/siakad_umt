@@ -8,6 +8,7 @@
             <div class="card-header">
                 <div class="card-head-row">
                     <div class="card-title">Daftar Nilai Harian</div>
+                    @if(auth()->user()->role != 2)
                     <div class="card-tools">
                         <button type="button" class="btn btn-outline-primary btn-round btn-sm btnNilaiModal"
                             data-action="add" data-type="harian">
@@ -17,6 +18,7 @@
                             Tambah Nilai Harian
                         </button>
                     </div>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -34,7 +36,9 @@
                                             <th>Semester</th>
                                             <th>Tahun Ajaran</th>
                                             <th>Nilai</th>
+                                            @if(auth()->user()->role != 2)
                                             <th>Aksi</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -46,6 +50,7 @@
                                             <td>{{ $sw->semester }}</td>
                                             <td>{{ $sw->tahun_ajaran }}</td>
                                             <td>{{ $sw->nilai }}</td>
+                                            @if(auth()->user()->role != 2)
                                             <td>
                                                 <div class="row">
                                                     <button type="button" class="btn btn-primary btnNilaiModal"
@@ -65,6 +70,7 @@
                                                     </form>
                                                 </div>
                                             </td>
+                                            @endif
                                         </tr>
                                         @endforeach
                                     </tbody>
