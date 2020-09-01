@@ -114,6 +114,7 @@ class GuruController extends Controller
         $user = User::where('username', $request->nip)->first();
         $user->email = $request->email;
         $user->no_kartu = $request->no_kartu;
+        $user->name = $request->nama;
         $user->remember_token = Str::random(10);
         $user->update();
         Session::flash('success', 'Guru berhasil diubah');

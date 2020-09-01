@@ -52,6 +52,9 @@
                                         Login
                                     </button>
                                     <hr>
+                                    <a href="/presensi" class="btn btn-secondary btn-user btn-block">
+                                        Presensi
+                                    </a>
                                 </form>
                             </div>
                         </div>

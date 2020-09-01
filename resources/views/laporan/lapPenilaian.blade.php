@@ -48,14 +48,55 @@
                                 </div>
                                 <div class="modal-footer col-md-12">
                                     <!-- <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button> -->
-                                    <button type="submit" class="btn btn-primary">Download</button>
+                                    <button name="submit" type="submit" class="btn btn-success"
+                                        value="read">Tampil</button>
+                                    <button name="submit" type="submit" class="btn btn-info" value="csv">Download
+                                        CSV</button>
+                                    <button name="submit" type="submit" class="btn btn-primary" value="pdf">Download
+                                        PDF</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
+
+
+        @if(!empty($penilaian))
+        <div class="card mb-4 mt-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Table Penilaian</h6>
+            </div>
+            <div class="card-body">
+                <table border="1" class="table table-bordered table-condensed table basic-datatables">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Siswa</th>
+                            <th>Kelas</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Nilai</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($penilaian as $sw)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $sw->nama }}</td>
+                            <td>{{ $sw->namaKelas }}</td>
+                            <td>{{ $sw->namamapel }}</td>
+                            <td>{{ $sw->nilai }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        </div>
+        @endif
 
         <!-- Bar Chart -->
         <div class="card mb-4 mt-4">

@@ -44,7 +44,20 @@ class AbsensiController extends Controller
     {
         return view('absensi.absenRFID');
     }
-    
+    public function user(){
+        
+        $absensi = DB::table('absensis')
+            ->select(
+                'absensis.jam_masuk',
+                'absensis.jam_pulang',
+                'absensis.keterangan',
+                'absensis.tgl_absen'
+            )
+            ->join('users', 'absensis.user_id', '=', 'users.id')
+            ->where('users.id','=', auth()->user()->id)
+            ->get();
+        return view('absensi.absenUser', compact('absensi'));
+    }
     public function detailSiswa($id){
         $decrypt = Crypt::decrypt($id);
         $absensi = DB::table('absensis')
@@ -170,17 +183,17 @@ class AbsensiController extends Controller
 
             foreach($data as $d){
                 $user = User::where('id','=',$d['user_id'])->first();
-                $massg = 'Absen anda telah ditambahkan';
+                $massg = 'Presensi anda telah ditambahkan';
                 Mail::send('email.pembayaranNotif', ['nama' => $user->name, 'pesan' => $massg], function ($message) use ($user)
                 {
-                    $message->subject('Absensi '.$user->name);
+                    $message->subject('Presensi '.$user->name);
                     $message->from('donotreply@ashiup.com', 'SMP MUHAMADIYAH 4 KOTA TANGERANG');
                     $message->to($user->email);
                 });
             }
             
         }
-        Session::flash('success', 'Absen berhasil ditambahkan');
+        Session::flash('success', 'Presensi berhasil ditambahkan');
         return Redirect::back();
     }
     public function storeRFID(Request $request)
@@ -202,7 +215,7 @@ class AbsensiController extends Controller
             if( $cek != null ){
                 $cek->jam_pulang =  date('H:i:s');
                 $cek->update();
-                $massg = 'Absen pulang telah ditambahkan';
+                $massg = 'Presensi pulang telah ditambahkan';
                 Session::flash('success', 'Absen pulang ' . $user->name . ' berhasil ditambahkan');
             }else{
                 $absen->tgl_absen =  date('Y-m-d');
@@ -211,15 +224,15 @@ class AbsensiController extends Controller
                 $absen->tipe = $user->role;
                 $absen->user_id = $user->id;
                 $absen->save();
-                $massg = 'Absen masuk telah ditambahkan';
+                $massg = 'Presensi masuk telah ditambahkan';
                 Session::flash('success', 'Absen masuk ' . $user->name . ' berhasil ditambahkan');
             }
-            Mail::send('email.pembayaranNotif', ['nama' => $user->name, 'pesan' => $massg], function ($message) use ($user)
-                {
-                    $message->subject('Absensi '.$user->name);
-                    $message->from('donotreply@ashiup.com', 'SMP MUHAMADIYAH 4 KOTA TANGERANG');
-                    $message->to($user->email);
-                });
+            // Mail::send('email.pembayaranNotif', ['nama' => $user->name, 'pesan' => $massg], function ($message) use ($user)
+            //     {
+            //         $message->subject('Absensi '.$user->name);
+            //         $message->from('donotreply@ashiup.com', 'SMP MUHAMADIYAH 4 KOTA TANGERANG');
+            //         $message->to($user->email);
+            //     });
         }else{
            
             Session::flash('failed', 'Opps, kartu anda tidak terdaftar');
@@ -241,7 +254,7 @@ class AbsensiController extends Controller
             $cek->keterangan = $request->keterangan[$i];
             $cek->update();
         }
-        Session::flash('success', 'Absen berhasil diubah');
+        Session::flash('success', 'Presensi berhasil diubah');
         return Redirect::back();
     }
 

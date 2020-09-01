@@ -34,317 +34,342 @@
 
     </style>
 </head>
+@if(trim($__env->yieldContent('sidebar')) == null)
 
 <body id="page-top">
+    @else
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+    <body id="page-top" class="bg-info">
+        @endif
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <!-- <div class="sidebar-brand-icon">
+            @if(trim($__env->yieldContent('sidebar')) == null)
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                    <!-- <div class="sidebar-brand-icon">
                     <img src="/images/Logo1.png" alt="..." class="avatar-img rounded-circle" width="50">
                 </div> -->
-                <div class="sidebar-brand-text mx-3">{{ $data->namasekolah }}</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Menu
-            </div>
-            <li class="nav-item">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-            @if(auth()->user()->role != 2 && auth()->user()->role != 3 )
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-                    aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Master</span>
+                    <div class="sidebar-brand-text mx-3">{{ $data->namasekolah }}</div>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        @if(auth()->user()->role != 7)
-                        <a class="collapse-item" href="/siswa">Data Siswa</a>
-                        <a class="collapse-item" href="/kelas">Data Kelas</a>
-                        @endif
-                        @if(auth()->user()->role != 7)
-                        <a class="collapse-item" href="/guru">Data Guru</a>
-                        @endif
-                        @if(auth()->user()->role == 4 || auth()->user()->role == 1 )
-                        <a class="collapse-item" href="/spp">Data Angkatan Siswa</a>
-                        <a class="collapse-item" href="/tipepembayaran">Data Tipe Pembayaran</a>
-                        @endif
-                        @if(auth()->user()->role == 4 || auth()->user()->role == 5 || auth()->user()->role == 7)
-                        <a class="collapse-item" href="/matapelajaran">Data Mata Pelajaran</a>
-                        @endif
-                        @if(auth()->user()->role == 4)
-                        <a class="collapse-item" href="/admin">Data Staf Sekolah</a>
-                        <a class="collapse-item" href="/logo">Data Sekolah & Logo</a>
-                        @endif
-                    </div>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Menu
                 </div>
-            </li>
-            @endif
-            @if(auth()->user()->role == 4 || auth()->user()->role == 1)
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#dataPembayaran" aria-expanded="true"
-                    aria-controls="dataPembayaran">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Transaksi Biaya Sekolah</span>
-                </a>
-                <div id="dataPembayaran" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/daftartagihan">Daftar Tagihan</a>
-                        <a class="collapse-item" href="/accpembayaran">Info Status</a>
-                        <!-- <a class="collapse-item" href="/accpembayarantambahan">Data Biaya Tambahan</a> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
+                @if(auth()->user()->role != 2 && auth()->user()->role != 3 )
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages"
+                        aria-expanded="true" aria-controls="collapsePages">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Master</span>
+                    </a>
+                    <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            @if(auth()->user()->role != 7)
+                            <a class="collapse-item" href="/siswa">Data Siswa</a>
+                            <a class="collapse-item" href="/kelas">Data Kelas</a>
+                            @endif
+                            @if(auth()->user()->role != 7)
+                            <a class="collapse-item" href="/guru">Data Guru</a>
+                            @endif
+                            @if(auth()->user()->role == 4 || auth()->user()->role == 1 )
+                            <a class="collapse-item" href="/spp">Data Angkatan Siswa</a>
+                            <a class="collapse-item" href="/tipepembayaran">Data Tipe Pembayaran</a>
+                            @endif
+                            @if(auth()->user()->role == 4 || auth()->user()->role == 5 || auth()->user()->role == 7)
+                            <a class="collapse-item" href="/matapelajaran">Data Mata Pelajaran</a>
+                            @endif
+                            @if(auth()->user()->role == 4)
+                            <a class="collapse-item" href="/admin">Data Staf Sekolah</a>
+                            <a class="collapse-item" href="/logo">Data Sekolah & Logo</a>
+                            @endif
+                        </div>
                     </div>
-                </div>
-            </li>
-            @endif
-
-            @if(auth()->user()->role == 2)
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="/tagihanbiaya">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Tagihan Biaya Sekolah</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/historypembayaran">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>History Pembayaran</span></a>
-            </li>
-            @endif
-
-            @if(auth()->user()->role == 4 || auth()->user()->role == 5)
-            <li class="nav-item">
-                <a class="nav-link" href="/jadwal">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Data Jadwal</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/rppdansilabus">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>RPP & Silabus</span></a>
-            </li>
-            @endif
-            @if(auth()->user()->role == 4 || auth()->user()->role == 5 || auth()->user()->role == 7)
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#dataNilai" aria-expanded="true"
-                    aria-controls="dataNilai">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Data Nilai Siswa</span>
-                </a>
-                <div id="dataNilai" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/nilaiharian">Data Nilai Harian</a>
-                        <a class="collapse-item" href="/nilaiujian">Data Nilai Ujian</a>
-                        <a class="collapse-item" href="/nilairaport">Data Nilai Raport</a>
+                </li>
+                @endif
+                @if(auth()->user()->role == 4 || auth()->user()->role == 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="collapse" data-target="#dataPembayaran"
+                        aria-expanded="true" aria-controls="dataPembayaran">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Transaksi Biaya Sekolah</span>
+                    </a>
+                    <div id="dataPembayaran" class="collapse" aria-labelledby="headingPages"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="/daftartagihan">Daftar Tagihan</a>
+                            <a class="collapse-item" href="/accpembayaran">Info Status</a>
+                            <!-- <a class="collapse-item" href="/accpembayarantambahan">Data Biaya Tambahan</a> -->
+                        </div>
                     </div>
+                </li>
+                @endif
+
+                @if(auth()->user()->role == 2)
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/tagihanbiaya">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Tagihan Biaya Sekolah</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/historypembayaran">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>History Pembayaran</span></a>
+                </li>
+                @endif
+
+                @if(auth()->user()->role == 4 || auth()->user()->role == 5)
+                <li class="nav-item">
+                    <a class="nav-link" href="/jadwal">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Data Jadwal</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rppdansilabus">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>RPP & Silabus</span></a>
+                </li>
+                @endif
+                @if(auth()->user()->role == 4 || auth()->user()->role == 5 || auth()->user()->role == 7)
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="collapse" data-target="#dataNilai" aria-expanded="true"
+                        aria-controls="dataNilai">
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Data Nilai Siswa</span>
+                    </a>
+                    <div id="dataNilai" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item" href="/nilaiharian">Data Nilai Harian</a>
+                            <a class="collapse-item" href="/nilaiujian">Data Nilai Ujian</a>
+                            <a class="collapse-item" href="/nilairaport">Data Nilai Raport</a>
+                        </div>
+                    </div>
+                </li>
+                @endif
+                @if(auth()->user()->role == 4 || auth()->user()->role == 6 || auth()->user()->role == 7)
+                <li class="nav-item">
+                    <a class="nav-link" href="/absensisiswa">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Data Presensi Siswa</span></a>
+                </li>
+                @endif
+                @if(auth()->user()->role == 4 || auth()->user()->role == 6)
+                <li class="nav-item">
+                    <a class="nav-link" href="/absensiguru">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Data Presensi Guru</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/absensistaf">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Data Presensi Staf</span></a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="/absensirfid">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Absen RFID</span></a>
+                </li> -->
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="/presensime">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Data Kehadiran Pribadi</span></a>
+                </li>
+                @if(auth()->user()->role == 3 || auth()->user()->role == 1 || auth()->user()->role == 4)
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanpembayaran">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan Pembayaran Kelas</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanpembayaranangkatan">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan Pembayaran Angkatan</span></a>
+                </li>
+                @endif
+                @if(auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 4 ||
+                auth()->user()->role == 7)
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanpenilaian">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan Nilai</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanrds">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan RPP & Silabus</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanjadwal">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan Jadwal</span></a>
+                </li>
+                @endif
+                @if(auth()->user()->role == 3 || auth()->user()->role == 6 || auth()->user()->role == 4 ||
+                auth()->user()->role == 7)
+                <!-- Nav Item - Charts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanabsensiswa">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan Presensi Siswa</span></a>
+                </li>
+                @endif
+                @if(auth()->user()->role == 3 || auth()->user()->role == 6 || auth()->user()->role == 4)
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanabsenguru">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan Presensi Guru</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanabsenstaf">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan Presensi Staf</span></a>
+                </li>
+                @endif
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
-            </li>
-            @endif
-            @if(auth()->user()->role == 4 || auth()->user()->role == 6)
-            <li class="nav-item">
-                <a class="nav-link" href="/absensisiswa">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Data Absen Siswa</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/absensiguru">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Data Absen Guru</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/absensistaf">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Data Absen Staf</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/absensirfid">
-                    <i class="fas fa-fw fa-folder-open"></i>
-                    <span>Absen RFID</span></a>
-            </li>
-            @endif
-            @if(auth()->user()->role == 3 || auth()->user()->role == 1 || auth()->user()->role == 4)
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="/laporanpembayaran">
-                    <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan Pembayaran Kelas</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/laporanpembayaranangkatan">
-                    <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan Pembayaran Angkatan</span></a>
-            </li>
-            @endif
-            @if(auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 4 ||
-            auth()->user()->role == 7)
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="/laporanpenilaian">
-                    <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan Nilai</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/laporanrds">
-                    <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan RPP & Silabus</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/laporanjadwal">
-                    <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan Jadwal</span></a>
-            </li>
-            @endif
-            @if(auth()->user()->role == 3 || auth()->user()->role == 6 || auth()->user()->role == 4)
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="/laporanabsensiswa">
-                    <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan Absen Siswa</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/laporanabsenguru">
-                    <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan Absen Guru</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/laporanabsenstaf">
-                    <i class="far fa-fw fa-chart-bar"></i>
-                    <span>Laporan Absen Staf</span></a>
-            </li>
-            @endif
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            </ul>
+            <!-- End of Sidebar -->
 
-        </ul>
-        <!-- End of Sidebar -->
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
 
-            <!-- Main Content -->
-            <div id="content">
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                            @php
+                            if(auth()->user()->role == 1){
+                            $role = 'Staf Pembayaran';
+                            }elseif(auth()->user()->role == 2){
+                            $role = 'Siswa';
+                            }elseif(auth()->user()->role == 3){
+                            $role = 'Kepala Sekolah';
+                            }elseif(auth()->user()->role == 5){
+                            $role = 'Staf Pembelajaran';
+                            }elseif(auth()->user()->role == 6){
+                            $role = 'Staf Absensi';
+                            }elseif(auth()->user()->role == 7){
+                            $role = 'Guru';
+                            }else{
+                            $role = 'Administrasi';
+                            }
+                            @endphp
 
-                        @php
-                        if(auth()->user()->role == 1){
-                        $role = 'Staf Pembayaran';
-                        }elseif(auth()->user()->role == 2){
-                        $role = 'Siswa';
-                        }elseif(auth()->user()->role == 3){
-                        $role = 'Kepala Sekolah';
-                        }elseif(auth()->user()->role == 5){
-                        $role = 'Staf Pembelajaran';
-                        }elseif(auth()->user()->role == 6){
-                        $role = 'Staf Absensi';
-                        }else{
-                        $role = 'Administrasi';
-                        }
-                        @endphp
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span>Login Sebagai : {{ $role }}</span>
-                                <div class="topbar-divider d-none d-sm-block"></div>
-                                <span
-                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
-                                <img class="img-profile rounded-circle" src="/images/{{ $data->logo }}">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="/user">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span>Login Sebagai : {{ $role }}</span>
+                                    <div class="topbar-divider d-none d-sm-block"></div>
+                                    <span
+                                        class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>
+                                    <img class="img-profile rounded-circle" src="/images/{{ $data->logo }}">
                                 </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item btn-logout" href="/logout">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="/user">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item btn-logout" href="/logout">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
 
-                    </ul>
+                        </ul>
 
-                </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
-                    @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ Session::get('success') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                    </nav>
                     @endif
-                    @if ($message = Session::get('failed'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ Session::get('failed') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <!-- End of Topbar -->
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        <!-- Page Heading -->
+                        @if(trim($__env->yieldContent('sidebar')) == null)
+                        <h1 class="h3 mb-4 text-gray-800">@yield('title')</h1>
+                        @endif
+                        @if(trim($__env->yieldContent('sidebar')) == null)
+                        @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ Session::get('success') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        @if ($message = Session::get('failed'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ Session::get('failed') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        @endif
+                        @yield('content')
                     </div>
-                    @endif
-                    @yield('content')
+                    <!-- /.container-fluid -->
+
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+                @if(trim($__env->yieldContent('sidebar')) == null)
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Your Website 2020</span>
+                        </div>
+                    </div>
+                </footer>
+                @endif
+                <!-- End of Footer -->
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <!-- Logout Modal-->
+        <!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -362,70 +387,70 @@
             </div>
         </div>
     </div> -->
-    <!-- Bootstrap core JavaScript-->
-    <script src="/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="/assets/vendor/jquery/jquery.min.js"></script>
+        <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Sweet Alert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <!-- Data Tables -->
-    <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Sweet Alert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        <!-- Data Tables -->
+        <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Chart -->
-    <script src="/assets/vendor/chart.js/Chart.min.js"></script>
-    <!-- Select 2 -->
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+        <!-- Chart -->
+        <script src="/assets/vendor/chart.js/Chart.min.js"></script>
+        <!-- Select 2 -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="/assets/js/chart.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="/assets/js/chart.js"></script>
 
-    <!-- Text Editor -->
-    <script src="https://cdn.tiny.cloud/1/wcb9pe2k9npdjl15ggu0oad1k88dnph0q8qit0pfc1q5bkix/tinymce/5/tinymce.min.js"
-        referrerpolicy="origin"></script>
+        <!-- Text Editor -->
+        <script src="https://cdn.tiny.cloud/1/wcb9pe2k9npdjl15ggu0oad1k88dnph0q8qit0pfc1q5bkix/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="/assets/js/sb-admin-2.min.js"></script>
-    <script src="/assets/js/script.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="/assets/js/sb-admin-2.min.js"></script>
+        <script src="/assets/js/script.js"></script>
 
 
-    <script>
-        tinymce.init({
-            selector: 'textarea.editor',
-            plugins: "table | lists",
-            table_toolbar: "tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol ",
-            toolbar: "numlist bullist align",
-        });
+        <script>
+            tinymce.init({
+                selector: 'textarea.editor',
+                plugins: "table | lists",
+                table_toolbar: "tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol ",
+                toolbar: "numlist bullist align",
+            });
 
-    </script>
-    <script>
-        $(document).ready(function () {
-            $('.btn-passs').on('click', function (e) {
-                console.log('ok')
-                let url = $(this).attr('href')
-                console.log(url)
-                let text = $(this).data('original-title')
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Kamu yakin ingin merubah kata sandi',
-                    text: "kata sandi secara default akan dirubah ke tanggal lahir siswa!",
-                    type: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: text
-                }).then((result) => {
-                    if (result.value) {
-                        document.location.href = url;
-                    }
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('.btn-passs').on('click', function (e) {
+                    console.log('ok')
+                    let url = $(this).attr('href')
+                    console.log(url)
+                    let text = $(this).data('original-title')
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Kamu yakin ingin merubah kata sandi',
+                        text: "kata sandi secara default akan dirubah ke tanggal lahir siswa!",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: text
+                    }).then((result) => {
+                        if (result.value) {
+                            document.location.href = url;
+                        }
+                    });
                 });
             });
-        });
 
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>

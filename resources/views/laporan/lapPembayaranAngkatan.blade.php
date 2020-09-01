@@ -43,8 +43,12 @@
                                     </select>
                                 </div>
                                 <div class="modal-footer col-md-12">
-                                    <!-- <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button> -->
-                                    <button type="submit" class="btn btn-primary">Download</button>
+                                    <button name="submit" type="submit" class="btn btn-success"
+                                        value="read">Tampil</button>
+                                    <button name="submit" type="submit" class="btn btn-info" value="csv">Download
+                                        CSV</button>
+                                    <button name="submit" type="submit" class="btn btn-primary" value="pdf">Download
+                                        PDF</button>
                                 </div>
                             </form>
                         </div>
@@ -52,7 +56,60 @@
                 </div>
             </div>
         </div>
+        @if(!empty($pembayaran))
+        <div class="card mb-4 mt-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Table Pembayaran Angkatan</h6>
+            </div>
+            <div class="card-body">
+                <table border="1" class="table table-bordered table-condensed table basic-datatables">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NIS</th>
+                            <th>Siswa</th>
+                            <th>Kelas</th>
+                            <th>Tanggal Transfer</th>
+                            <th>Pembayaran Bulan</th>
+                            <th>Tipe</th>
+                            <th>Jumlah Transfer</th>
+                            <th>Bank Transfer</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($pembayaran as $sw)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $sw->nis }}</td>
+                            <td>{{ $sw->nama }}</td>
+                            <td>{{ $sw->namaKelas }}</td>
+                            <td>{{ $sw->tgl_transfer }}</td>
+                            <td>{{ $sw->bulan }}</td>
+                            <td>{{ $sw->namatipe }}</td>
+                            <td>{{ $sw->jumlah }}</td>
+                            <td>{{ $sw->atm }}</td>
+                            @php
+                            if($sw->status == 0 )
+                            $pesan = '<span class="badge badge-danger">Menunggu Konfirmasi</span>';
 
+                            elseif($sw->status == 3)
+
+                            $pesan = '<span class="badge badge-danger">Pembayaran Di Tolak</span>';
+
+                            else
+
+                            $pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';
+                            @endphp
+                            <td>{!! $pesan !!}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <hr>
+            </div>
+        </div>
+        @endif
         <!-- Bar Chart -->
         <div class="card mb-4 mt-4">
             <div class="card-header py-3">

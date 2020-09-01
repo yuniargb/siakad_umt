@@ -40,14 +40,14 @@
                                             <td>{{ $ang->namatipe }}</td>
                                             <td>{{ $ang->biaya }}</td>
                                             <td>
-                                                @if( $ang->id != 1)
                                                 <div class="row">
                                                     <button type="button" class="btn btn-primary btnTipePembayaranModal"
-                                                        data-url="/tipepembayaran/{{ Crypt::encrypt($ang->id) }}/ubah"
+                                                        data-url="/tipepembayaran/{{ Crypt::encrypt($ang->id) }}/edit"
                                                         data-id="{{ Crypt::encrypt($ang->id) }}" data-toggle="tooltip"
                                                         data-original-title="Ubah" data-action="ubah"
                                                         data-method='@method("put")'><i class="fa fa-edit"></i>
                                                     </button>
+                                                    @if( $ang->id != 1)
                                                     <form action="/api/tipepembayaran/{{ Crypt::encrypt($ang->id) }}"
                                                         method="post" class="d-inline btn-del">
                                                         @csrf
@@ -56,8 +56,8 @@
                                                             data-toggle="tooltip" data-original-title="Hapus"><i
                                                                 class="fa fa-times"></i></button>
                                                     </form>
+                                                    @endif
                                                 </div>
-                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach

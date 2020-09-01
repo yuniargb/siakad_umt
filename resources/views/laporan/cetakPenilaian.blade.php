@@ -33,6 +33,7 @@
             <tr>
                 <th>No</th>
                 <th>Siswa</th>
+                <th>Kelas</th>
                 <th>Mata Pelajaran</th>
                 <th>Nilai</th>
             </tr>
@@ -42,6 +43,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $sw->nama }}</td>
+                <td>{{ $sw->namaKelas }}</td>
                 <td>{{ $sw->namamapel }}</td>
                 <td>{{ $sw->nilai }}</td>
             </tr>

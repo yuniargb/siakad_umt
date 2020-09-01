@@ -177,6 +177,7 @@ class SiswaController extends Controller
         $user = User::where('username', $request->nis)->first();
         $user->email = $request->email;
         $user->no_kartu = $request->no_kartu;
+        $user->name = $request->nama;
         $user->remember_token = Str::random(10);
         $user->update();
         Session::flash('success', 'Siswa berhasil diubah');

@@ -25,7 +25,7 @@
 <body>
     <h6 class="text-center">{{ $logo->namasekolah }}</h6>
     <h6 class="text-center">{{ $logo->alamat }}</h6>
-    <h6 class="text-center">Laporan Absen Staf</h6>
+    <h6 class="text-center">Laporan Presensi Staf</h6>
 
     <table border="1" class="table table-bordered table-condensed">
         <thead>

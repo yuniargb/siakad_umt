@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Data Absen Siswa')
+@section('title', 'Data Presensi Siswa')
 @section('content')
 
 <div class="page-inner mt--5">
@@ -7,16 +7,18 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-head-row">
-                    <div class="card-title">Daftar Absen Siswa</div>
+                    <div class="card-title">Daftar Presensi Siswa</div>
+                    @if(auth()->user()->role != 7)
                     <div class="card-tools">
                         <button type="button" class="btn btn-outline-primary btn-round btn-sm" data-toggle="modal"
                             data-target="#btnAbsenTambahModal">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Tambah Absen Siswa
+                            Tambah Presensi Siswa
                         </button>
                     </div>
+                    @endif
                 </div>
             </div>
             <div class="card-body">
@@ -36,7 +38,9 @@
                                             <th>Izin</th>
                                             <th>Alfa</th>
                                             <th>Dispensasi</th>
+
                                             <th>Aksi</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,13 +54,16 @@
                                             <td>{{ $sw->izin }}</td>
                                             <td>{{ $sw->alfa }}</td>
                                             <td>{{ $sw->dispensasi }}</td>
+
                                             <td>
                                                 <div class="row">
+                                                    @if(auth()->user()->role != 7)
                                                     <button type="button" class="btn btn-primary btnAbsenEditModal"
                                                         data-url="/absendetail/{{ Crypt::encrypt($sw->id) }}/siswa"
                                                         data-id="{{ $sw->nis }}" data-nama="{{ $sw->nama }}"><i
                                                             class="fa fa-edit"></i>
                                                     </button>
+                                                    @endif
                                                     <button type="button"
                                                         class="btn btn-warning ml-3 btnAbsenDetailModal"
                                                         data-url="/absendetail/{{ Crypt::encrypt($sw->id) }}/siswa"
@@ -65,6 +72,7 @@
                                                     </button>
                                                 </div>
                                             </td>
+
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -84,7 +92,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jadwalModalTitle">Tambah Absensi Siswa</h5>
+                <h5 class="modal-title" id="jadwalModalTitle">Tambah Presensi Siswa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -137,7 +145,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jadwalModalTitle">Edit Absensi Siswa</h5>
+                <h5 class="modal-title" id="jadwalModalTitle">Edit Presensi Siswa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -174,7 +182,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jadwalModalTitle">Detail Absensi Siswa</h5>
+                <h5 class="modal-title" id="jadwalModalTitle">Detail Presensi Siswa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -3,10 +3,10 @@
 }
 
 #circle {
-    position: rela;
+    /* position: rela; */
     left: 0;
     right: 0;
-    margin: 60px auto;
+    margin: 0px auto;
     width: 320px;
 }
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Laporan Absen Siswa</title>
+    <title>Laporan Presensi Siswa</title>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="/assets/img/icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -25,7 +25,7 @@
 <body>
     <h6 class="text-center">{{ $logo->namasekolah }}</h6>
     <h6 class="text-center">{{ $logo->alamat }}</h6>
-    <h6 class="text-center">Laporan Absen Siswa</h6>
+    <h6 class="text-center">Laporan Presensi Siswa</h6>
     <h6 class="text-center">Kelas {{ $kelas->namaKelas }}</h6>
 
     <table border="1" class="table table-bordered table-condensed">

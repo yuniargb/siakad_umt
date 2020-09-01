@@ -20,7 +20,8 @@ class CreateNilaisTable extends Migration
             $table->string('tahun_ajaran', 50);
             $table->string('tipe', 50);
             $table->unsignedBigInteger('siswa_id');
-            $table->unsignedBigInteger('mata_pelajaran_id');
+            $table->unsignedBigInteger('jadwal_id');
+            // $table->unsignedBigInteger('mata_pelajaran_id');
             $table->timestamps();
         });
     }

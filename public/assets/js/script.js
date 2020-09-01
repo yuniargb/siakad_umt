@@ -543,7 +543,7 @@ $(document).ready(function () {
             $.get(url, function (data) {
                 $('#siswa_id').val(data.siswa_id)
                 $('#type').val(data.tipe)
-                $('#mata_pelajaran_id').val(data.mata_pelajaran_id)
+                $('#mata_pelajaran_id').val(data.jadwal_id)
                 $('#nilai').val(data.nilai)
                 $('#tahun_ajaran').val(data.tahun_ajaran)
                 $('#semester').val(data.semester)

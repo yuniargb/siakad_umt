@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Data Absen Staf')
+@section('title', 'Data Presensi Staf')
 @section('content')
 
 <div class="page-inner mt--5">
@@ -7,14 +7,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-head-row">
-                    <div class="card-title">Daftar Absen Staf</div>
+                    <div class="card-title">Daftar Presensi Staf</div>
                     <div class="card-tools">
                         <button type="button" class="btn btn-outline-primary btn-round btn-sm" data-toggle="modal"
                             data-target="#btnAbsenTambahModal">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Tambah Absen Staf
+                            Tambah Presensi Staf
                         </button>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jadwalModalTitle">Tambah Absensi staf</h5>
+                <h5 class="modal-title" id="jadwalModalTitle">Tambah Presensi staf</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -140,7 +140,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jadwalModalTitle">Edit Absensi Staf</h5>
+                <h5 class="modal-title" id="jadwalModalTitle">Edit Presensi Staf</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -177,7 +177,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jadwalModalTitle">Detail Absensi Staf</h5>
+                <h5 class="modal-title" id="jadwalModalTitle">Detail Presensi Staf</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

@@ -95,10 +95,11 @@
                     <div id="nilaiModalMethod"></div>
                     <div class="form-group">
                         <label for="mata_pelajaran_id">Mata Pelajaran</label>
-                        <select class="form-control" name="mata_pelajaran_id" id="mata_pelajaran_id" required>
-
+                        <select class="select2 form-control w-100" name="mata_pelajaran_id" id="mata_pelajaran_id"
+                            required>
                             @foreach($mapel as $sw)
-                            <option value="{{ $sw->id }}">{{ $sw->namamapel }}</option>
+                            <option value="{{ $sw->id }}">{{ $sw->namamapel }} [ {{ $sw->nama }} ][ {{$sw->namaKelas}} ]
+                            </option>
                             @endforeach
                         </select>
                     </div>

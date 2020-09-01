@@ -13,7 +13,49 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $logo = Logo::find(1);
-        return view('dashboard',compact('logo'));
+        $absenSiswa = null;
+        $absenGuru = null;
+        $absenStaf = null;
+        if(auth()->user()->role == 6){
+           $absenSiswa  = DB::table('absensis')
+            ->select(
+                DB::raw('nvl(sum(keterangan = "hadir"),0) as hadir'),
+                DB::raw('nvl(sum(keterangan = "sakit"),0) as sakit'),
+                DB::raw('nvl(sum(keterangan = "izin"),0) as izin'),
+                DB::raw('nvl(sum(keterangan = "alfa"),0) as alfa'),
+                DB::raw('nvl(sum(keterangan = "dispensasi"),0) as dispensasi'),
+                DB::raw('count(keterangan) as total')
+            )
+            ->join('users', 'absensis.user_id', '=', 'users.id')
+            ->join('siswas', 'users.username', '=', 'siswas.nis')
+            ->first();
+           $absenGuru  = DB::table('absensis')
+            ->select(
+                DB::raw('nvl(sum(keterangan = "hadir"),0) as hadir'),
+                DB::raw('nvl(sum(keterangan = "sakit"),0) as sakit'),
+                DB::raw('nvl(sum(keterangan = "izin"),0) as izin'),
+                DB::raw('nvl(sum(keterangan = "alfa"),0) as alfa'),
+                DB::raw('nvl(sum(keterangan = "dispensasi"),0) as dispensasi'),
+                DB::raw('count(keterangan) as total')
+            )
+            ->join('users', 'absensis.user_id', '=', 'users.id')
+            ->join('gurus', 'users.username', '=', 'gurus.nip')
+            ->first();
+           $absenStaf  = DB::table('absensis')
+            ->select(
+                DB::raw('nvl(sum(keterangan = "hadir"),0) as hadir'),
+                DB::raw('nvl(sum(keterangan = "sakit"),0) as sakit'),
+                DB::raw('nvl(sum(keterangan = "izin"),0) as izin'),
+                DB::raw('nvl(sum(keterangan = "alfa"),0) as alfa'),
+                DB::raw('nvl(sum(keterangan = "dispensasi"),0) as dispensasi'),
+                DB::raw('count(keterangan) as total')
+            )
+            ->join('users', 'absensis.user_id', '=', 'users.id')
+            ->where('role', '<>' ,2)
+            ->where('role','<>',7)
+            ->first();
+        }
+         return view('dashboard',compact('logo','absenSiswa','absenStaf','absenGuru'));
     }
 
     public function user()
@@ -33,8 +75,6 @@ class DashboardController extends Controller
         } else {
             $user = User::find($id);
         }
-
-
         return view('user.user', compact('user'));
     }
 }

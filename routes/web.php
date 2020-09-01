@@ -52,6 +52,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login', 'AuthController@login')->name('login');
 Route::post('/loginpost', 'AuthController@loginpost');
 Route::get('/logout', 'AuthController@logout');
+Route::get('/presensi', 'AbsensiController@rfid');
+
 
 Route::get('/cetakpembayaran/{id}', 'AccPembayaranController@cetak');
 Route::group(['middleware' => 'auth'], function () {
@@ -163,6 +165,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('/admin/{id}/update', 'AdminController@update');
     
     // absensi
+    Route::get('/presensime', 'AbsensiController@user');
     Route::get('/absensiguru', 'AbsensiController@guru');
     Route::get('/absensistaf', 'AbsensiController@staf');
     Route::get('/absensisiswa', 'AbsensiController@siswa');

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Data Absen Guru')
+@section('title', 'Data Presensi Guru')
 @section('content')
 
 <div class="page-inner mt--5">
@@ -7,14 +7,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-head-row">
-                    <div class="card-title">Daftar Absen Guru</div>
+                    <div class="card-title">Daftar Presensi Guru</div>
                     <div class="card-tools">
                         <button type="button" class="btn btn-outline-primary btn-round btn-sm" data-toggle="modal"
                             data-target="#btnAbsenTambahModal">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Tambah Absen Guru
+                            Tambah Presensi Guru
                         </button>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jadwalModalTitle">Tambah Absensi Guru</h5>
+                <h5 class="modal-title" id="jadwalModalTitle">Tambah Presensi Guru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -177,7 +177,7 @@
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="jadwalModalTitle">Detail Absensi Guru</h5>
+                <h5 class="modal-title" id="jadwalModalTitle">Detail Presensi Guru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
