@@ -83,8 +83,6 @@
                             @if(auth()->user()->role != 7)
                             <a class="collapse-item" href="/siswa">Data Siswa</a>
                             <a class="collapse-item" href="/kelas">Data Kelas</a>
-                            @endif
-                            @if(auth()->user()->role != 7)
                             <a class="collapse-item" href="/guru">Data Guru</a>
                             @endif
                             @if(auth()->user()->role == 4 || auth()->user()->role == 1 )
@@ -187,11 +185,13 @@
                         <span>Absen RFID</span></a>
                 </li> -->
                 @endif
+                @if(auth()->user()->role != 1)
                 <li class="nav-item">
                     <a class="nav-link" href="/presensime">
                         <i class="fas fa-fw fa-folder-open"></i>
                         <span>Data Kehadiran Pribadi</span></a>
                 </li>
+                @endif
                 @if(auth()->user()->role == 3 || auth()->user()->role == 1 || auth()->user()->role == 4)
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
@@ -421,9 +421,9 @@
         <script>
             tinymce.init({
                 selector: 'textarea.editor',
-                plugins: "table | lists",
-                table_toolbar: "tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol ",
-                toolbar: "numlist bullist align",
+                plugins: "table | lists | image",
+                table_toolbar: "tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol | insert",
+                toolbar: "numlist bullist align image",
             });
 
         </script>
