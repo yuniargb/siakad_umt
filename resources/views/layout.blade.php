@@ -197,7 +197,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/laporanpembayaran">
                         <i class="far fa-fw fa-chart-bar"></i>
-                        <span>Laporan Pembayaran Kelas</span></a>
+                        <span>Laporan Pembayaran</span></a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="/laporanpembayaranangkatan">
