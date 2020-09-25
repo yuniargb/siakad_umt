@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -21,7 +22,11 @@ class AuthController extends Controller
             'username' => 'required|exists:users,username',
             'password' => 'required'
         ]);
-        $user = User::where('username',$request->username)->first();
+        $user = DB::table('users')
+            ->select('*', 'users.id as id')
+            ->leftJoin('gurus', 'users.username', '=', 'gurus.nip')
+            ->leftJoin('kelas', 'gurus.id', '=', 'kelas.guru_id')
+            ->where('users.username',$request->username)->first();
         // var_dump(Hash::check($request->password, $user->password));
         if (Auth::attempt(array('username' => $request->username, 'password' => $request->password))) {
             if (auth()->user()->role == 2) {

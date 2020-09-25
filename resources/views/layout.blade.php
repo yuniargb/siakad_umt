@@ -93,7 +93,7 @@
                             <a class="collapse-item" href="/matapelajaran">Data Mata Pelajaran</a>
                             @endif
                             @if(auth()->user()->role == 4)
-                            <a class="collapse-item" href="/admin">Data Staf Sekolah</a>
+                            <a class="collapse-item" href="/admin">Data User</a>
                             <a class="collapse-item" href="/logo">Data Sekolah & Logo</a>
                             @endif
                         </div>
@@ -152,11 +152,14 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Data Nilai Siswa</span>
                     </a>
+                    @php dd(auth()->user()); @endphp 
                     <div id="dataNilai" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="/nilaiharian">Data Nilai Harian</a>
                             <a class="collapse-item" href="/nilaiujian">Data Nilai Ujian</a>
+                            @if(auth()->user()->guru_id == null)
                             <a class="collapse-item" href="/nilairaport">Data Nilai Raport</a>
+                            @endif
                         </div>
                     </div>
                 </li>

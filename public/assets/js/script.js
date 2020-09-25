@@ -298,7 +298,7 @@ $(document).ready(function () {
             $('#showpassedit').hide()
             $('#adminModalMethod').html('')
             $('#username').prop("readonly", false)
-            $('#adminModalTitle').html('Tambah Staf')
+            $('#adminModalTitle').html('Tambah User')
         } else {
             $.get(url, function (data) {
                 $('#nama').val(data.name)
@@ -611,12 +611,14 @@ $(document).ready(function () {
 
         if (action == 'add') {
             $('#kelas').val('')
+            $('#guru_id').val('')
             $('#kelasForm').attr('action', '/kelas')
             $('#kelasModalMethod').html('')
             $('#kelasModalTitle').html('Tambah Kelas')
         } else {
             $.get(url, function (data) {
                 $('#kelas').val(data.namaKelas)
+                $('#guru_id').val(data.guru_id)
             })
             $('#kelasForm').attr('action', '/kelas/' + id + '/update')
             $('#kelasModalMethod').html($(this).data('method'))
