@@ -153,11 +153,7 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Data Nilai Siswa</span>
                     </a>
-<<<<<<< HEAD
-                    
-=======
 
->>>>>>> 3211c96fb43d91b3113a3d49ab85451661977611
                     <div id="dataNilai" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="/nilaiharian">Data Nilai Harian</a>

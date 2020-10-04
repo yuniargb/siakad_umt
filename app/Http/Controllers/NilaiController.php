@@ -427,7 +427,7 @@ class NilaiController extends Controller
                 ->where('users.id',auth()->user()->id)
                 ->where('siswas.kelas_id',$waliKelas->id)
                 ->whereIn('tipe',array('harian','uts','uas'))
-                ->groupBy('siswas.id','siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran','nilais.id','jadwals.id')
+                ->groupBy('siswas.id','siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran','jadwals.id')
                 ->get();
             }
         }else{
