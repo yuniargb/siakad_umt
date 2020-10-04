@@ -22,6 +22,14 @@
                                 </div>
                                 <form method="post" action="/loginpost" class="user">
                                     @csrf
+                                    @if ($message = Session::get('failed'))
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ Session::get('failed') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    @endif
                                     <div class="form-group">
                                         <input type="text"
                                             class="form-control form-control-user @error('username') is-invalid @enderror"
@@ -51,10 +59,12 @@
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Login
                                     </button>
+                                    @if($logo->presensi == 1)
                                     <hr>
                                     <a href="/presensi" class="btn btn-secondary btn-user btn-block">
                                         Presensi
                                     </a>
+                                    @endif
                                 </form>
                             </div>
                         </div>

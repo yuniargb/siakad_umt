@@ -39,10 +39,9 @@
                                             <td>{{ $sw->nama }}</td>
                                             <td>{{ $sw->tgl_transfer }}</td>
                                             <td>{{ $sw->bulan }}</td>
-                                            <td><img data-image="/images/paket/{{ $sw->bukti }}"
-                                                    src="/images/paket/{{ $sw->bukti }}" class="img-fluid detail-bukti"
-                                                    alt="{{ $sw->bukti }}" data-toggle="modal"
-                                                    data-target="#exampleModal"></td>
+                                            <td><button class="btn btn-primary"
+                                                    data-image="/images/paket/{{ $sw->bukti }}" data-toggle="modal"
+                                                    data-target="#exampleModal">Tampil</button></td>
                                             <td>{{ $sw->jumlah }}</td>
                                             <td>{{ $sw->atm }}</td>
                                             <td>{{ $sw->namatipe }}</td>

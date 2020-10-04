@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
 
     <meta charset="utf-8">
@@ -152,14 +153,16 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Data Nilai Siswa</span>
                     </a>
-                    @php dd(auth()->user()); @endphp 
+
                     <div id="dataNilai" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="/nilaiharian">Data Nilai Harian</a>
-                            <a class="collapse-item" href="/nilaiujian">Data Nilai Ujian</a>
-                            @if(auth()->user()->guru_id == null)
+                            <a class="collapse-item" href="/nilaiuts">Data Nilai UTS</a>
+                            <a class="collapse-item" href="/nilaiuas">Data Nilai UAS</a>
+                            @if(!empty($walikelas->namaKelas) || auth()->user()->role == 4)
                             <a class="collapse-item" href="/nilairaport">Data Nilai Raport</a>
                             @endif
+
                         </div>
                     </div>
                 </li>
@@ -181,6 +184,11 @@
                     <a class="nav-link" href="/absensistaf">
                         <i class="fas fa-fw fa-folder-open"></i>
                         <span>Data Presensi Staf</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/settingrfid">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Setting RFID</span></a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="/absensirfid">
@@ -292,7 +300,8 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span>Login Sebagai : {{ $role }}</span>
+                                    <span>Login Sebagai : {{ $role }}
+                                        {{ !empty($walikelas) ? '| Wali Kelas : '.$walikelas->namaKelas : '' }}</span>
                                     <div class="topbar-divider d-none d-sm-block"></div>
                                     <span
                                         class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->name }}</span>

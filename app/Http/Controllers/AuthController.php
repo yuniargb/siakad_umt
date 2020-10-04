@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Logo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
     public function login()
     {
-        return view('auth.login');
+        $logo = Logo::first();
+
+        return view('auth.login', compact('logo'));
     }
 
     public function loginpost(Request $request)
@@ -36,8 +40,10 @@ class AuthController extends Controller
             } else {
                 return redirect('/');
             }
+        }else{
+            Session::flash('failed', 'password salah');
+            return redirect('/login')->withInput($request->only(['username','password']));
         }
-        return redirect('/login')->withInput($request->only('username'));
     }
 
     public function logout()
