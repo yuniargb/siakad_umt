@@ -25,7 +25,10 @@
                                         $akhir = $tahun + 20;
                                         @endphp
                                         @for($i=$tahun; $akhir >= $i;$i++) @php $next=$tahun + 1 @endphp <option
-                                            value="{{ $tahun .'/'. $next }}">{{ $tahun .'/'. $next }}</option>
+                                            value="{{ $tahun .'/'. $next }}"
+                                            {{ $req == null ? '' : $req->tahun_ajaran == $tahun .'/'. $next ? "selected" : "" }}>
+                                            {{ $tahun .'/'. $next }}
+                                        </option>
                                         @php $tahun-- @endphp
                                         @endfor
 
@@ -34,16 +37,29 @@
                                 <div class="form-group">
                                     <label for="semester">Semester</label>
                                     <select class="form-control" name="semester" id="semester" required>
-                                        <option value="Ganjil">Ganjil</option>
-                                        <option value="Genap">Genap</option>
+                                        <option value="Ganjil"
+                                            {{ $req == null ? '' : $req->semester == "Ganjil" ? "selected" : "" }}>
+                                            Ganjil</option>
+                                        <option value="Genap"
+                                            {{ $req == null ? '' : $req->semester == "Genap" ? "selected" : "" }}>Genap
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="tipe">Tipe</label>
                                     <select class="form-control" name="tipe" id="tipe" required>
-                                        <option value="harian">Harian</option>
-                                        <option value="ujian">Ujian</option>
-                                        <option value="raport">Raport</option>
+                                        <option value="harian"
+                                            {{ $req == null ? '' : $req->tipe == "harian" ? "selected" : "" }}>Harian
+                                        </option>
+                                        <option value="uts"
+                                            {{ $req == null ? '' : $req->tipe == "uts" ? "selected" : "" }}>UTS
+                                        </option>
+                                        <option value="uas"
+                                            {{ $req == null ? '' : $req->tipe == "uas" ? "selected" : "" }}>UAS
+                                        </option>
+                                        <option value="raport"
+                                            {{ $req == null ? '' : $req->tipe == "raport" ? "selected" : "" }}>Raport
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="modal-footer col-md-12">

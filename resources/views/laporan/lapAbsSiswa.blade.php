@@ -21,18 +21,22 @@
                                     <label for="nis">Kelas</label>
                                     <select class="form-control" name="kelas_id" id="kelas_id">
                                         @foreach($kelas as $k)
-                                        <option value="{{ $k->id }}">{{ $k->namaKelas }}</option>
+                                        <option value="{{ $k->id }}"
+                                            {{ $req == null ? '' : $req->kelas_id == $k->id ? "selected" : "" }}>
+                                            {{ $k->namaKelas }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="nis">Dari Tanggal</label>
-                                        <input type="date" class="form-control" name="from" id="from">
+                                        <input type="date" class="form-control" name="from" id="from"
+                                            value="{{ $req == null ? '' : $req->from != '' ? $req->from : '' }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="nis">Sampai Tanggal</label>
-                                        <input type="date" class="form-control" name="to" id="to">
+                                        <input type="date" class="form-control" name="to" id="to"
+                                            value="{{ $req == null ? '' : $req->to != '' ? $req->to : '' }}">
                                     </div>
                                 </div>
                                 <div class="modal-footer col-md-12">

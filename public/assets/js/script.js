@@ -525,6 +525,14 @@ $(document).ready(function () {
             var act = "/nilaiujian"
             var titles = "Nilai Ujian"
         }
+        else if (type == "uts") {
+            var act = "/nilaiuts"
+            var titles = "Nilai UTS"
+        }
+        else if (type == "uas") {
+            var act = "/nilaiuas"
+            var titles = "Nilai UAS"
+        }
         else {
             var act = "/nilairaport"
             var titles = "Nilai Raport"
@@ -701,9 +709,9 @@ $(document).ready(function () {
             for (x in data) {
                 html += `
                      <tr>
-                        <td>${ x}</td>
-                        <td><input type="hidden" name="id[]" value="${ data[x].id}">${data[x].nis}</td>
-                        <td>${ data[x].nama}</td>
+                        <td>${x}</td>
+                        <td><input type="hidden" name="id[]" value="${data[x].id}">${data[x].nis}</td>
+                        <td>${data[x].nama}</td>
                         <td>
                             <select class="form-control" name="keterangan[]" id="keterangan[]" required>
                                 <option value="Hadir" selected>Hadir</option>
