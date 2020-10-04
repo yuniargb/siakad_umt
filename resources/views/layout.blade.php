@@ -152,7 +152,7 @@
                         <i class="fas fa-fw fa-folder"></i>
                         <span>Data Nilai Siswa</span>
                     </a>
-                    @php dd(auth()->user()); @endphp 
+                    
                     <div id="dataNilai" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="/nilaiharian">Data Nilai Harian</a>
