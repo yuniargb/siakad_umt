@@ -20,11 +20,13 @@
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="nis">Dari Tanggal</label>
-                                        <input type="date" class="form-control" name="from" id="from">
+                                        <input type="date" class="form-control" name="from" id="from"
+                                            value="{{ $req == null ? '' : $req->from != '' ? $req->from : '' }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="nis">Sampai Tanggal</label>
-                                        <input type="date" class="form-control" name="to" id="to">
+                                        <input type="date" class="form-control" name="to" id="to"
+                                            value="{{ $req == null ? '' : $req->to != '' ? $req->to : '' }}">
                                     </div>
                                 </div>
                                 <div class="modal-footer col-md-12">

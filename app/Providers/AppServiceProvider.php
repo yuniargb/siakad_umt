@@ -26,10 +26,16 @@ class AppServiceProvider extends ServiceProvider
         \Illuminate\Support\Facades\Schema::defaultStringLength(191);
         View::composer('layout', function( $view )
         {
-             $data = $user = DB::table('logos')->first();
+             $data  = DB::table('logos')->first();
+             $waliKelas = DB::table('gurus')
+                        ->select('kelas.*')
+                        ->join('kelas', 'gurus.id', '=', 'kelas.guru_id')
+                        ->where('gurus.nip',auth()->user()->username)
+                        ->first();
 
             //pass the data to the view
             $view->with( 'data', $data );
+            $view->with( 'walikelas', $waliKelas );
         } );
     }
 }

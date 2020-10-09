@@ -147,7 +147,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/absensiguru', 'AbsensiController@guru');
         Route::get('/absensistaf', 'AbsensiController@staf');
         Route::get('/absensirfid', 'AbsensiController@rfid');
-       
+        Route::get('/settingrfid', 'LogoController@setrfid');
+       Route::put('/settingrfid/update', 'LogoController@setrfidupdate');
         Route::get('/absendetail/{id}/guru', 'AbsensiController@detailGuru');
         Route::get('/absendetail/{id}/staf', 'AbsensiController@detailStaf');
     });
@@ -197,6 +198,8 @@ Route::group(['middleware' => 'checkRole:4|5|7|2'], function () {
     Route::get('/nilaiharian', 'NilaiController@harian');
     Route::get('/nilairaport', 'NilaiController@raport');
     Route::get('/nilaiujian', 'NilaiController@ujian');
+    Route::get('/nilaiuts', 'NilaiController@uts');
+    Route::get('/nilaiuas', 'NilaiController@uas');
     Route::post('/nilai', 'NilaiController@store');
     Route::get('/nilai/{id}/edit', 'NilaiController@edit');
     Route::put('/nilai/{id}/update', 'NilaiController@update');

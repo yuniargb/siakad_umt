@@ -19,7 +19,7 @@ use Response;
 
 class LaporanController extends Controller
 {
-    public function pembayaran($pembayaran = null)
+    public function pembayaran($pembayaran = null,$req = null)
     {
         $kelas = Kelas::all();
         $diagram = DB::table('pembayarans')
@@ -33,7 +33,8 @@ class LaporanController extends Controller
         foreach ($diagram as $d) {
             $y[array_search($d->bulan, $x)] = $d->jumlah;
         }
-        return view('laporan.lapPembayaran', compact('kelas','x','y','pembayaran'));
+        
+        return view('laporan.lapPembayaran', compact('kelas','x','y','pembayaran','req'));
     }
 
     public function cetakpembayaran(Request $request)
@@ -42,14 +43,33 @@ class LaporanController extends Controller
         $pembayaran = DB::table('pembayarans')
             ->select('*', 'pembayarans.id as id_p')
             ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-            ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
+            ->join(DB::raw('( SELECT *, 
+                              CASE bulan
+                              WHEN "Januari" THEN 1
+                              WHEN "Februari" THEN 2
+                              WHEN "Maret" THEN 3
+                              WHEN "April" THEN 4
+                              WHEN "Mei" THEN 5
+                              WHEN "Juni" THEN 6
+                              WHEN "Juli" THEN 7
+                              WHEN "Agustus" THEN 8
+                              WHEN "September" THEN 9
+                              WHEN "Oktober" THEN 10
+                              WHEN "November" THEN 11
+                              WHEN "Desember" THEN 12
+                              END
+                              AS bulan_num,
+                              CAST(tahun AS UNSIGNED) 
+                              FROM tagihans ) as tagihans'), 'tagihans.id', '=', 'pembayarans.tagihan_id')
             ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
-            ->where('tagihans.bulan', $request->bulan)
+            ->whereBetween('tagihans.bulan_num', [$request->bulanFrom,$request->bulanTo])
+            ->whereBetween('tagihans.tahun', [$request->tahunFrom,$request->tahunTo])
             ->where('siswas.kelas_id', $request->kelas)->get();
         
         
         if($request->submit == 'read'){
-            return $this->pembayaran($pembayaran);
+            
+            return $this->pembayaran($pembayaran,$request);
         }
         if($request->submit == 'csv'){
             $headers = array(
@@ -82,7 +102,7 @@ class LaporanController extends Controller
             return Response::stream($callback, 200, $headers);
         }
         if($request->submit == 'pdf'){
-            $bulan = $request->bulan;
+            $bulan = '('.$request->bulanFrom .'/'.$request->tahunFrom .' - '.$request->bulanTo .'/'.$request->tahunTo.')';
             $kelas = Kelas::find($request->kelas);
             $logo = Logo::find(1);
             $pdf = PDF::loadview('laporan.cetakPembayaran', compact('pembayaran','kelas', 'bulan','logo'));
@@ -175,7 +195,7 @@ class LaporanController extends Controller
     }
 
 
-   public function penilaian($penilaian = null)
+   public function penilaian($penilaian = null,$req = null)
     {
         
         $diagram = DB::table('nilais')
@@ -187,31 +207,98 @@ class LaporanController extends Controller
             ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
             ->groupBy('nilais.tipe')
             ->get();
-        $x = ['harian','ujian','raport'];
+        $x = ['harian','uts','uas'];
         $y = [0,0,0];
         foreach ($diagram as $d) {
             $y[array_search($d->tipe, $x)] = $d->jumlah;
         }
-        return view('laporan.lapPenilaian', compact('x','y','penilaian'));
+        return view('laporan.lapPenilaian', compact('x','y','penilaian','req'));
     }
 
     public function cetakpenilaian(Request $request)
     {
+        $tipe =  $request->tipe;
         $penilaian = DB::table('nilais')
-            ->select('*','nilais.id as id')
-           ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+            ->when( $request->tipe != 'raport', function ($query) {
+                return $query->select('siswas.nama','mata_pelajarans.namamapel','kelas.namaKelas','nilais.semester','nilais.tahun_ajaran','nilais.nilai');
+            })
+            ->when( $request->tipe == 'raport', function ($query) {
+                return $query->select('siswas.nama','mata_pelajarans.namamapel','kelas.namaKelas','nilais.semester','nilais.tahun_ajaran',
+                DB::raw('
+                        ROUND(
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "harian"
+                                ),
+                                0
+                            ) * (10/100) +
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "uts"
+                                ),
+                                0
+                            ) * (30/100) +
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "uas"
+                                ),
+                                0
+                            ) * (60/100),
+                            2
+                        ) AS nilai'));
+            })
+            
+            ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
             ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
             ->join('users', 'users.username', '=', 'gurus.nip')
             ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
             ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
             ->join('kelas', 'kelas.id', '=', 'siswas.kelas_id')
-            ->where('nilais.tipe', $request->tipe)
+            ->when(auth()->user()->role == 2 || auth()->user()->role == 7 &&  $request->tipe != 'raport', function ($query) {
+                return $query->where('users.id',  auth()->user()->id);
+            })
+            ->when(auth()->user()->role == 2 &&  $request->tipe == 'raport', function ($query) {
+                return $query->where('users.id',  auth()->user()->id);
+            })
+            ->when(auth()->user()->role == 7 &&  $request->tipe == 'raport', function ($query) {
+                $waliKelas = DB::table('gurus')
+                        ->select('kelas.*')
+                        ->join('kelas', 'gurus.id', '=', 'kelas.guru_id')
+                        ->where('gurus.nip',auth()->user()->username)
+                        ->first();
+                return $query->where('siswas.kelas_id',   $waliKelas->id);
+            })
+            ->when( $request->tipe != 'raport', function ($query)  use ($request){
+                $query->where('nilais.tipe', $request->tipe);
+                return $query->where('nilais.tipe', $request->tipe);
+            })
             ->where('nilais.semester', $request->semester)
             ->where('nilais.tahun_ajaran', $request->tahun_ajaran)
+            ->when( $request->tipe == 'raport', function ($query)  use ($request){
+                return $query->groupBy('siswas.id','siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran','jadwals.id','kelas.namaKelas');
+            })
             ->orderBy('mata_pelajarans.id')
             ->get();
         if($request->submit == 'read'){
-            return $this->penilaian($penilaian);
+            return $this->penilaian($penilaian,$request);
         }
         if($request->submit == 'csv'){
             $headers = array(
@@ -296,7 +383,7 @@ class LaporanController extends Controller
         $pdf = PDF::loadview('laporan.cetakJadwal', compact('jadwal', 'logo','kelas','tahun_ajaran'));
     	return $pdf->download('laporan-Jadwal');
     }
-    public function absenSiswa($absensi=null)
+    public function absenSiswa($absensi=null,$req = null)
     {
         $kelas = Kelas::all();
         $diagram = DB::table('absensis')
@@ -313,9 +400,9 @@ class LaporanController extends Controller
         foreach ($diagram as $d) {
             $y[array_search($d->keterangan, $x)] = $d->jumlah;
         }
-        return view('laporan.lapAbsSiswa', compact('kelas','x','y','absensi'));
+        return view('laporan.lapAbsSiswa', compact('kelas','x','y','absensi','req'));
     }
-    public function absenGuru($absensi=null)
+    public function absenGuru($absensi=null,$req = null)
     {
          $diagram = DB::table('absensis')
              ->select(
@@ -330,9 +417,9 @@ class LaporanController extends Controller
         foreach ($diagram as $d) {
             $y[array_search($d->keterangan, $x)] = $d->jumlah;
         }
-        return view('laporan.lapAbsGuru',compact('x','y','absensi'));
+        return view('laporan.lapAbsGuru',compact('x','y','absensi','req'));
     }
-    public function absenStaf($absensi=null)
+    public function absenStaf($absensi=null,$req = null)
     {
         $diagram = DB::table('absensis')
              ->select(
@@ -348,7 +435,7 @@ class LaporanController extends Controller
         foreach ($diagram as $d) {
             $y[array_search($d->keterangan, $x)] = $d->jumlah;
         }
-        return view('laporan.lapAbsStaf',compact('x','y','absensi'));
+        return view('laporan.lapAbsStaf',compact('x','y','absensi','req'));
     }
 
     public function cetakAbsSiswa(Request $request)
@@ -371,7 +458,7 @@ class LaporanController extends Controller
             ->whereBetween ('absensis.tgl_absen',[$request->from,$request->to])
             ->orderBy('siswas.nis','asc')->get(); 
         if($request->submit == 'read'){
-            return $this->absenSiswa($absensi);
+            return $this->absenSiswa($absensi,$request);
         }
         if($request->submit == 'csv'){
             $headers = array(
@@ -423,7 +510,7 @@ class LaporanController extends Controller
         
         
         if($request->submit == 'read'){
-            return $this->absenGuru($absensi);
+            return $this->absenGuru($absensi,$request);
         }
         if($request->submit == 'csv'){
             $headers = array(
@@ -477,7 +564,7 @@ class LaporanController extends Controller
         
         
         if($request->submit == 'read'){
-            return $this->absenStaf($absensi);
+            return $this->absenStaf($absensi,$request);
         }
         if($request->submit == 'csv'){
             $headers = array(

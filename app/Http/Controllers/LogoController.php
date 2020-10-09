@@ -22,6 +22,13 @@ class LogoController extends Controller
 
         return view('logo.logo', compact('logo'));
     }
+    public function setrfid()
+    {
+        $logo = Logo::first();
+
+
+        return view('logo.settingrfid', compact('logo'));
+    }
 
     public function update(Request $request, Logo $logo)
     {
@@ -41,6 +48,17 @@ class LogoController extends Controller
 
         $logo->update();
         Session::flash('success', 'Logo / Biodata berhasil diubah');
+        return Redirect::back();
+    }
+    public function setrfidupdate(Request $request, Logo $logo)
+    {
+        $logo = Logo::find(1);
+       
+        
+        $logo->presensi = $request->presensi;
+
+        $logo->update();
+        Session::flash('success', 'Setting rfid berhasil diubah');
         return Redirect::back();
     }
 }

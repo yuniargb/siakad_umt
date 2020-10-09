@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Kelas;
+use App\Guru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class KelasController extends Controller
 {
    
     public function index()
     {
-        $kelas = Kelas::all();
-        return view('kelas.kelas', compact('kelas'));
+        // $kelas = Kelas::all();
+        $kelas = DB::table('kelas')
+            ->select('*', 'kelas.id as id')
+            ->join('gurus', 'gurus.id', '=', 'kelas.guru_id')
+            ->get();
+        $guru = Guru::all();
+        return view('kelas.kelas', compact('kelas','guru'));
     }
 
     public function create()
@@ -26,6 +33,7 @@ class KelasController extends Controller
     {
         $kelas = new Kelas;
         $kelas->namakelas = $request->kelas;
+        $kelas->guru_id = $request->guru_id;
 
         $kelas->save();
         Session::flash('success', 'Kelas berhasil ditambahkan');
@@ -52,6 +60,7 @@ class KelasController extends Controller
         $kelas = Kelas::find($decrypt);
 
         $kelas->namakelas = $request->kelas;
+        $kelas->guru_id = $request->guru_id;
 
         $kelas->update();
         Session::flash('success', 'Kelas berhasil diubah');

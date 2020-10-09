@@ -17,6 +17,7 @@ class CreateLogosTable extends Migration
             $table->bigIncrements('id');
             $table->string('namasekolah');
             $table->string('logo');
+            $table->boolean('presensi');
             $table->string('alamat');
             $table->longText('biodata');
             $table->timestamps();

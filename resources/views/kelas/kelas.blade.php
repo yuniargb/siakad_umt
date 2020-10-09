@@ -30,6 +30,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Kelas</th>
+                                            <th>Wali Kelas</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -38,6 +39,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $sw->namaKelas }}</td>
+                                            <td>{{ $sw->nama }}</td>
                                             <td>
                                                 <div class="row">
                                                     <button type="button" class="btn btn-primary btnKelasModal"
@@ -87,6 +89,15 @@
                     <div class="form-group">
                         <label for="nis">Kelas</label>
                         <input required type="text" class="form-control" name="kelas" id="kelas">
+                    </div>
+                    <div class="form-group">
+                        <label for="guru_id">Wali Kelas</label>
+                        <select class="select2 form-control w-100" name="guru_id" id="mata_pelajaran_id"
+                            required>
+                            @foreach($guru as $sw)
+                            <option value="{{ $sw->id }}">{{ $sw->nama }} </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Simpan</button>

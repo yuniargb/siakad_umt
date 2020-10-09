@@ -298,7 +298,11 @@ $(document).ready(function () {
             $('#showpassedit').hide()
             $('#adminModalMethod').html('')
             $('#username').prop("readonly", false)
+<<<<<<< HEAD
             $('#adminModalTitle').html('Tambah user')
+=======
+            $('#adminModalTitle').html('Tambah User')
+>>>>>>> 23af50071349d76bdd009e33b54d57ab21aa5028
         } else {
             $.get(url, function (data) {
                 $('#nama').val(data.name)
@@ -525,6 +529,14 @@ $(document).ready(function () {
             var act = "/nilaiujian"
             var titles = "Nilai Ujian"
         }
+        else if (type == "uts") {
+            var act = "/nilaiuts"
+            var titles = "Nilai UTS"
+        }
+        else if (type == "uas") {
+            var act = "/nilaiuas"
+            var titles = "Nilai UAS"
+        }
         else {
             var act = "/nilairaport"
             var titles = "Nilai Raport"
@@ -611,12 +623,14 @@ $(document).ready(function () {
 
         if (action == 'add') {
             $('#kelas').val('')
+            $('#guru_id').val('')
             $('#kelasForm').attr('action', '/kelas')
             $('#kelasModalMethod').html('')
             $('#kelasModalTitle').html('Tambah Kelas')
         } else {
             $.get(url, function (data) {
                 $('#kelas').val(data.namaKelas)
+                $('#guru_id').val(data.guru_id)
             })
             $('#kelasForm').attr('action', '/kelas/' + id + '/update')
             $('#kelasModalMethod').html($(this).data('method'))
@@ -699,9 +713,9 @@ $(document).ready(function () {
             for (x in data) {
                 html += `
                      <tr>
-                        <td>${ x}</td>
-                        <td><input type="hidden" name="id[]" value="${ data[x].id}">${data[x].nis}</td>
-                        <td>${ data[x].nama}</td>
+                        <td>${x}</td>
+                        <td><input type="hidden" name="id[]" value="${data[x].id}">${data[x].nis}</td>
+                        <td>${data[x].nama}</td>
                         <td>
                             <select class="form-control" name="keterangan[]" id="keterangan[]" required>
                                 <option value="Hadir" selected>Hadir</option>

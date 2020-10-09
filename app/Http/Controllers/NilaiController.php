@@ -156,6 +156,144 @@ class NilaiController extends Controller
         
         return view('nilai.nilaiujian', compact('nilai', 'siswa','mapel'));
     }
+    public function uts()
+    {
+        if(auth()->user()->role == 7 || auth()->user()->role == 2){
+            $mapel = DB::table('jadwals')
+                ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')
+                ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'jadwals.mata_pelajaran_id', '=', 'mata_pelajarans.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+
+            $siswa = DB::table('jadwals')
+                ->select('siswas.id','siswas.nis','siswas.nama')
+                ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
+                ->join('siswas', 'siswas.kelas_id', '=', 'kelas.id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'jadwals.mata_pelajaran_id', '=', 'mata_pelajarans.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->where('users.id',auth()->user()->id)
+                ->groupBy('siswas.id','siswas.nis','siswas.nama')
+                ->get();
+
+            
+            if(auth()->user()->role == 2){
+                $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->join('users', 'users.username', '=', 'siswas.nis')
+                ->where('nilais.tipe', 'uts')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+            }else{
+                $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->where('nilais.tipe', 'uts')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+            }
+        }else{
+            $mapel = DB::table('jadwals')
+                ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')
+                ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'jadwals.mata_pelajaran_id', '=', 'mata_pelajarans.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->get();
+            $siswa = Siswa::all();
+            $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->where('nilais.tipe', 'uts')
+                ->get();
+        }
+        
+        return view('nilai.nilaiuts', compact('nilai', 'siswa','mapel'));
+    }
+    public function uas()
+    {
+        if(auth()->user()->role == 7 || auth()->user()->role == 2){
+            $mapel = DB::table('jadwals')
+                ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')
+                ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'jadwals.mata_pelajaran_id', '=', 'mata_pelajarans.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+
+            $siswa = DB::table('jadwals')
+                ->select('siswas.id','siswas.nis','siswas.nama')
+                ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
+                ->join('siswas', 'siswas.kelas_id', '=', 'kelas.id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'jadwals.mata_pelajaran_id', '=', 'mata_pelajarans.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->where('users.id',auth()->user()->id)
+                ->groupBy('siswas.id','siswas.nis','siswas.nama')
+                ->get();
+
+            
+            if(auth()->user()->role == 2){
+                $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->join('users', 'users.username', '=', 'siswas.nis')
+                ->where('nilais.tipe', 'uas')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+            }else{
+                $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->where('nilais.tipe', 'uas')
+                ->where('users.id',auth()->user()->id)
+                ->get();
+            }
+        }else{
+            $mapel = DB::table('jadwals')
+                ->select('jadwals.id','mata_pelajarans.namamapel','gurus.nama','kelas.namaKelas')
+                ->join('kelas', 'jadwals.kelas_id', '=', 'kelas.id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('mata_pelajarans', 'jadwals.mata_pelajaran_id', '=', 'mata_pelajarans.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->get();
+            $siswa = Siswa::all();
+            $nilai = DB::table('nilais')
+                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('users', 'users.username', '=', 'gurus.nip')
+                ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
+                ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
+                ->where('nilais.tipe', 'uas')
+                ->get();
+        }
+        
+        return view('nilai.nilaiuas', compact('nilai', 'siswa','mapel'));
+    }
     public function raport()
     {
        if(auth()->user()->role == 7 || auth()->user()->role == 2){
@@ -181,25 +319,115 @@ class NilaiController extends Controller
                 ->get();
             if(auth()->user()->role == 2){
                 $nilai = DB::table('nilais')
-                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->select('siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran',
+                DB::raw('
+                        ROUND(
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "harian"
+                                ),
+                                0
+                            ) * (10/100) +
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "uts"
+                                ),
+                                0
+                            ) * (30/100) +
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "uas"
+                                ),
+                                0
+                            ) * (60/100),
+                            2
+                        ) AS nilai'))
                 ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
                 ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
+                ->join('kelas', 'kelas.guru_id', '=', 'gurus.id')
                 ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
                 ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
                 ->join('users', 'users.username', '=', 'siswas.nis')
-                ->where('nilais.tipe', 'raport')
                 ->where('users.id',auth()->user()->id)
+                ->whereIn('tipe',array('harian','uts','uas'))
+                ->groupBy('siswas.id','siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran','nilais.id','jadwals.id')
                 ->get();
             }else{
+                $waliKelas = DB::table('gurus')
+                        ->select('kelas.*','gurus.id as idg')
+                        ->join('kelas', 'gurus.id', '=', 'kelas.guru_id')
+                        ->where('gurus.nip',auth()->user()->username)
+                        ->first();
+                        
                 $nilai = DB::table('nilais')
-                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                 ->select('siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran',
+                DB::raw('
+                        ROUND(
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "harian"
+                                ),
+                                0
+                            ) * (10/100) +
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "uts"
+                                ),
+                                0
+                            ) * (30/100) +
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "uas"
+                                ),
+                                0
+                            ) * (60/100),
+                            2
+                        ) AS nilai'))
                 ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
                 ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
                 ->join('users', 'users.username', '=', 'gurus.nip')
                 ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
                 ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
-                ->where('nilais.tipe', 'raport')
                 ->where('users.id',auth()->user()->id)
+                ->where('siswas.kelas_id',$waliKelas->id)
+                ->whereIn('tipe',array('harian','uts','uas'))
+                ->groupBy('siswas.id','siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran','jadwals.id')
                 ->get();
             }
         }else{
@@ -212,13 +440,54 @@ class NilaiController extends Controller
                 ->get();
             $siswa = Siswa::all();
             $nilai = DB::table('nilais')
-                ->select('*', 'nilais.id as id','nilais.semester','nilais.tahun_ajaran')
+                ->select('siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran',
+                DB::raw('
+                        ROUND(
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "harian"
+                                ),
+                                0
+                            ) * (10/100) +
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "uts"
+                                ),
+                                0
+                            ) * (30/100) +
+                            NVL(
+                                (
+                                    SELECT (nilai) 
+                                    FROM nilais n 
+                                    WHERE n.siswa_id=siswas.id 
+                                    AND n.jadwal_id=jadwals.id 
+                                    AND n.semester=nilais.semester 
+                                    AND n.tahun_ajaran=nilais.tahun_ajaran 
+                                    AND n.tipe = "uas"
+                                ),
+                                0
+                            ) * (60/100)
+                            , 2
+                        ) AS nilai'))
                 ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
                 ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
                 ->join('users', 'users.username', '=', 'gurus.nip')
                 ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
                 ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
-                ->where('nilais.tipe', 'raport')
+                ->whereIn('tipe',array('harian','uts','uas'))
+                ->groupBy('siswas.id','siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran','jadwals.id')
                 ->get();
         } 
 
