@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Data Staf Sekolah')
+@section('title', 'Data User')
 @section('content')
 @if (count($errors) > 0)
 <div class="alert alert-danger">
@@ -15,14 +15,14 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-head-row">
-                    <div class="card-title">Daftar Staf Sekolah</div>
+                    <div class="card-title">Daftar User</div>
                     <div class="card-tools">
                         <button type="button" class="btn btn-outline-primary btn-round btn-sm btnAdminModal"
                             data-action="add">
                             <span class="btn-label">
                                 <i class="fa fa-plus"></i>
                             </span>
-                            Tambah Staf
+                            Tambah User
                         </button>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="adminModalTitle">Tambah Staf Baru</h5>
+                <h5 class="modal-title" id="adminModalTitle">Tambah User Baru</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

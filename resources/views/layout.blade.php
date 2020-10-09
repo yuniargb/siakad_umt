@@ -93,7 +93,7 @@
                             <a class="collapse-item" href="/matapelajaran">Data Mata Pelajaran</a>
                             @endif
                             @if(auth()->user()->role == 4)
-                            <a class="collapse-item" href="/admin">Data Staf Sekolah</a>
+                            <a class="collapse-item" href="/admin">Data User</a>
                             <a class="collapse-item" href="/logo">Data Sekolah & Logo</a>
                             @endif
                         </div>
@@ -197,7 +197,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/laporanpembayaran">
                         <i class="far fa-fw fa-chart-bar"></i>
-                        <span>Laporan Pembayaran</span></a>
+                        <span>Laporan Biaya Sekolah</span></a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="/laporanpembayaranangkatan">
