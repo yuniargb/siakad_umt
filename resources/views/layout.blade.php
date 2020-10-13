@@ -292,7 +292,7 @@
                             }elseif(auth()->user()->role == 7){
                             $role = 'Guru';
                             }else{
-                            $role = 'Administrasi';
+                            $role = 'Administrator';
                             }
                             @endphp
 

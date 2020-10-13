@@ -61,7 +61,7 @@
                                             }elseif($adm->role == 6){
                                             $role = 'Staf Absensi';
                                             }else{
-                                            $role = 'Administrasi';
+                                            $role = 'Administrator';
                                             }
                                             @endphp
                                             <td>{{ $role }}</td>
@@ -142,7 +142,7 @@
                         <label for="role">Level</label>
                         <select name="role" id="role" class="form-control" required>
                             <option value="">--PILIH Level--</option>
-                            <option value="4">Administrasi</option>
+                            <option value="4">Administrator</option>
                             <option value="3">Kepala Sekolah</option>
                             <option value="1">Staf Pembayaran</option>
                             <option value="5">Staf Pembelajaran</option>
