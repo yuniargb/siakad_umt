@@ -22,43 +22,43 @@
                                     <label for="nis">Bulan Dari</label>
                                     <select class="form-control" name="bulanFrom" id="bulanFrom">
                                         <option value="1"
-                                            {{ $req == null ? '' : $req->bulanFrom == 1 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanFrom == 1 ? "selected" : "" }}>
                                             Januari</option>
                                         <option value="2"
-                                            {{ $req == null ? '' : $req->bulanFrom == 2 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanFrom == 2 ? "selected" : "" }}>
                                             Februari</option>
                                         <option value="3"
-                                            {{ $req == null ? '' : $req->bulanFrom == 3 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanFrom == 3 ? "selected" : "" }}>
                                             Maret
                                         </option>
                                         <option value="4"
-                                            {{ $req == null ? '' : $req->bulanFrom == 4 ? "selected" : "" }}>April
+                                            {{ $req == null ? "" : $req->bulanFrom == 4 ? "selected" : "" }}>April
                                         </option>
                                         <option value="5"
-                                            {{ $req == null ? '' : $req->bulanFrom == 5 ? "selected" : "" }}>Mei
+                                            {{ $req == null ? "" : $req->bulanFrom == 5 ? "selected" : "" }}>Mei
                                         </option>
                                         <option value="6"
-                                            {{ $req == null ? '' : $req->bulanFrom == 6 ? "selected" : "" }}>Juni
+                                            {{ $req == null ? "" : $req->bulanFrom == 6 ? "selected" : "" }}>Juni
                                         </option>
                                         <option value="7"
-                                            {{ $req == null ? '' : $req->bulanFrom == 7 ? "selected" : "" }}>Juli
+                                            {{ $req == null ? "" : $req->bulanFrom == 7 ? "selected" : "" }}>Juli
                                         </option>
                                         <option value="8"
-                                            {{ $req == null ? '' : $req->bulanFrom == 8 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanFrom == 8 ? "selected" : "" }}>
                                             Agustus
                                         </option>
                                         <option value="9"
-                                            {{ $req == null ? '' : $req->bulanFrom == 9 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanFrom == 9 ? "selected" : "" }}>
                                             September</option>
                                         <option value="10"
-                                            {{ $req == null ? '' : $req->bulanFrom == 10 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanFrom == 10 ? "selected" : "" }}>
                                             Oktober
                                         </option>
                                         <option value="11"
-                                            {{ $req == null ? '' : $req->bulanFrom == 11 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanFrom == 11 ? "selected" : "" }}>
                                             November</option>
                                         <option value="12"
-                                            {{ $req == null ? '' : $req->bulanFrom == 12 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanFrom == 12 ? "selected" : "" }}>
                                             Desember
                                         </option>
                                     </select>
@@ -71,7 +71,7 @@
                                         $akhir = $tahun + 20;
                                         @endphp
                                         @for($i=$tahun; $akhir >= $i;$i++)<option value="{{ $tahun }}"
-                                            {{ $req == null ? '' : $req->tahunFrom == $tahun ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->tahunFrom == $tahun ? "selected" : "" }}>
                                             {{ $tahun }}
                                         </option>
                                         @php $tahun-- @endphp
@@ -83,43 +83,43 @@
                                     <label for="nis">Bulan Dari</label>
                                     <select class="form-control" name="bulanTo" id="bulanTo">
                                         <option value="1"
-                                            {{ $req == null ? '' : $req->bulanTo == 1 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanTo == 1 ? "selected" : "" }}>
                                             Januari</option>
                                         <option value="2"
-                                            {{ $req == null ? '' : $req->bulanTo == 2 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanTo == 2 ? "selected" : "" }}>
                                             Februari</option>
                                         <option value="3"
-                                            {{ $req == null ? '' : $req->bulanTo == 3 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanTo == 3 ? "selected" : "" }}>
                                             Maret
                                         </option>
                                         <option value="4"
-                                            {{ $req == null ? '' : $req->bulanTo == 4 ? "selected" : "" }}>April
+                                            {{ $req == null ? "" : $req->bulanTo == 4 ? "selected" : "" }}>April
                                         </option>
                                         <option value="5"
-                                            {{ $req == null ? '' : $req->bulanTo == 5 ? "selected" : "" }}>Mei
+                                            {{ $req == null ? "" : $req->bulanTo == 5 ? "selected" : "" }}>Mei
                                         </option>
                                         <option value="6"
-                                            {{ $req == null ? '' : $req->bulanTo == 6 ? "selected" : "" }}>Juni
+                                            {{ $req == null ? "" : $req->bulanTo == 6 ? "selected" : "" }}>Juni
                                         </option>
                                         <option value="7"
-                                            {{ $req == null ? '' : $req->bulanTo == 7 ? "selected" : "" }}>Juli
+                                            {{ $req == null ? "" : $req->bulanTo == 7 ? "selected" : "" }}>Juli
                                         </option>
                                         <option value="8"
-                                            {{ $req == null ? '' : $req->bulanTo == 8 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanTo == 8 ? "selected" : "" }}>
                                             Agustus
                                         </option>
                                         <option value="9"
-                                            {{ $req == null ? '' : $req->bulanTo == 9 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanTo == 9 ? "selected" : "" }}>
                                             September</option>
                                         <option value="10"
-                                            {{ $req == null ? '' : $req->bulanTo == 10 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanTo == 10 ? "selected" : "" }}>
                                             Oktober
                                         </option>
                                         <option value="11"
-                                            {{ $req == null ? '' : $req->bulanTo == 11 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanTo == 11 ? "selected" : "" }}>
                                             November</option>
                                         <option value="12"
-                                            {{ $req == null ? '' : $req->bulanTo == 12 ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->bulanTo == 12 ? "selected" : "" }}>
                                             Desember
                                         </option>
                                     </select>
@@ -132,7 +132,7 @@
                                         $akhir = $tahun + 20;
                                         @endphp
                                         @for($i=$tahun; $akhir >= $i;$i++)<option value="{{ $tahun }}"
-                                            {{ $req == null ? '' : $req->tahunTo == $tahun ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->tahunTo == $tahun ? "selected" : "" }}>
                                             {{ $tahun }}
                                         </option>
                                         @php $tahun-- @endphp
@@ -145,7 +145,7 @@
                                     <select class="form-control" name="kelas" id="bulan">
                                         @foreach($kelas as $k)
                                         <option value="{{ $k->id }}"
-                                            {{ $req == null ? '' : $req->kelas == $k->id ? "selected" : "" }}>
+                                            {{ $req == null ? "" : $req->kelas == $k->id ? "selected" : "" }}>
                                             {{ $k->namaKelas }}</option>
                                         @endforeach
                                     </select>

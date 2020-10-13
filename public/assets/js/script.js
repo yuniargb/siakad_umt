@@ -298,11 +298,7 @@ $(document).ready(function () {
             $('#showpassedit').hide()
             $('#adminModalMethod').html('')
             $('#username').prop("readonly", false)
-<<<<<<< HEAD
-            $('#adminModalTitle').html('Tambah user')
-=======
-            $('#adminModalTitle').html('Tambah User')
->>>>>>> 23af50071349d76bdd009e33b54d57ab21aa5028
+              $('#adminModalTitle').html('Tambah user')
         } else {
             $.get(url, function (data) {
                 $('#nama').val(data.name)
