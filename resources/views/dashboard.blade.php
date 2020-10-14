@@ -333,7 +333,7 @@
                             }elseif(auth()->user()->role == 7){
                             $role = 'Guru';
                             }else{
-                            $role = 'Administrasi';
+                            $role = 'Administrator';
                             }
                             @endphp
                             <h5>Anda login sebagai <b class="text-primary">{{ $role }}</b>

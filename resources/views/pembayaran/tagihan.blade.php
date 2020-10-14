@@ -82,17 +82,17 @@
                         <label for="atm">ATM</label>
                         <select class="form-control" name="atm" id="atm" required>
                             <option value="Mandiri">Mandiri</option>
-                            <option value="BCA">BCA</option>
-                            <option value="BRI">BRI</option>
-                            <option value="BNI">BNI</option>
-                            <option value="BTN">BTN</option>
-                            <option value="CIMB NIAGA">CIMB NIAGA</option>
-                            <option value="PANIN">PANIN</option>
-                            <option value="OCBC NISP">OCBC NISP</option>
-                            <option value="MAYBANK INDONESIA">MAYBANK INDONESIA</option>
-                            <option value="DANAMON">DANAMON</option>
-                            <option value="Bank BJB">Bank BJB</option>
-                            <option value="Bank lainnya">Bank lainnya</option>
+                            <option value="BCA">BCA (6565189160)</option>
+                            <option value="BRI">BRI (9090189120)</option>
+                            <option value="BNI">BNI (1234345123)</option>
+                            <option value="BTN">BTN (1122312345)</option>
+                            <option value="CIMB NIAGA">CIMB NIAGA (6565189160)</option>
+                            <option value="PANIN">PANIN (1234345123)</option>
+                            <option value="OCBC NISP">OCBC NISP (1234345124)</option>
+                            <option value="MAYBANK INDONESIA">MAYBANK INDONESIA (1244235123)</option>
+                            <option value="DANAMON">DANAMON (1234345223)</option>
+                            <option value="Bank BJB">Bank BJB (1234345333)</option>
+                            <option value="Bank lainnya">Bank lainnya (888888123)</option>
                         </select>
                     </div>
                     <div class="form-group">
