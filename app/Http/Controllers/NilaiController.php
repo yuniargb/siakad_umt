@@ -496,15 +496,34 @@ class NilaiController extends Controller
 
     public function store(Request $request)
     {
-        $nilai = new Nilai;
-        $nilai->nilai = $request->nilai;
-        $nilai->semester = $request->semester;
-        $nilai->tahun_ajaran = $request->tahun_ajaran;
-        $nilai->siswa_id = $request->siswa_id;
-        $nilai->tipe = $request->type;
-        $nilai->jadwal_id = $request->mata_pelajaran_id;
-
-        $nilai->save();
+        $cek = Nilai::where('semester',$request->semester)
+        ->where('tahun_ajaran',$request->tahun_ajaran)
+        ->where('siswa_id',$request->siswa_id)
+        ->where('tipe',$request->type)
+        ->where('jadwal_id',$request->mata_pelajaran_id)
+        ->first()
+        ;
+        // dd($cek);
+        if($cek == null){
+            $nilai = new Nilai;
+            $nilai->nilai = $request->nilai;
+            $nilai->semester = $request->semester;
+            $nilai->tahun_ajaran = $request->tahun_ajaran;
+            $nilai->siswa_id = $request->siswa_id;
+            $nilai->tipe = $request->type;
+            $nilai->jadwal_id = $request->mata_pelajaran_id;
+            $nilai->save();
+            Session::flash('success', 'Nilai berhasil ditambahkan');
+        }else{
+            $cek->nilai = $request->nilai;
+            $cek->semester = $request->semester;
+            $cek->tahun_ajaran = $request->tahun_ajaran;
+            $cek->siswa_id = $request->siswa_id;
+            $cek->tipe = $request->type;
+            $cek->jadwal_id = $request->mata_pelajaran_id;
+            $cek->update();
+            Session::flash('success', 'Nilai sudah ada, nilai lama diperbaharui');
+        }
 
         $siswa = DB::table('siswas')
             ->select('*')
@@ -519,7 +538,7 @@ class NilaiController extends Controller
             $message->from('donotreply@ashiup.com', 'SMP MUHAMADIYAH 4 KOTA TANGERANG');
             $message->to($siswa->email);
         });
-        Session::flash('success', 'Nilai berhasil ditambahkan');
+        
         return Redirect::back();
     }
 
@@ -539,18 +558,37 @@ class NilaiController extends Controller
 
     public function update(Request $request, $id)
     {
-        $decrypt = Crypt::decrypt($id);
-        $nilai = Nilai::find($decrypt);
-
-        $nilai->nilai = $request->nilai;
-        $nilai->semester = $request->semester;
-        $nilai->tahun_ajaran = $request->tahun_ajaran;
-        $nilai->siswa_id = $request->siswa_id;
-        $nilai->jadwal_id = $request->mata_pelajaran_id;
-
-        $nilai->update();
-        Session::flash('success', 'Nilai berhasil diubah');
-        return Redirect::back();
+        $cek = Nilai::where('semester',$request->semester)
+        ->where('tahun_ajaran',$request->tahun_ajaran)
+        ->where('siswa_id',$request->siswa_id)
+        ->where('tipe',$request->type)
+        ->where('jadwal_id',$request->mata_pelajaran_id)
+        ->first()
+        ;
+        // dd($cek);
+        if($cek == null){
+            $nilai = new Nilai;
+            $nilai->nilai = $request->nilai;
+            $nilai->semester = $request->semester;
+            $nilai->tahun_ajaran = $request->tahun_ajaran;
+            $nilai->siswa_id = $request->siswa_id;
+            $nilai->tipe = $request->type;
+            $nilai->jadwal_id = $request->mata_pelajaran_id;
+            $nilai->save();
+            Session::flash('success', 'Nilai gagal diubah, system menambahkan nilai otomatis');
+            return Redirect::back();
+        }else{
+            $cek->nilai = $request->nilai;
+            $cek->semester = $request->semester;
+            $cek->tahun_ajaran = $request->tahun_ajaran;
+            $cek->siswa_id = $request->siswa_id;
+            $cek->tipe = $request->type;
+            $cek->jadwal_id = $request->mata_pelajaran_id;
+            $cek->update();
+            Session::flash('success', 'Nilai berhasil diubah');
+            return Redirect::back();
+        }
+        
     }
 
     public function destroy($id)

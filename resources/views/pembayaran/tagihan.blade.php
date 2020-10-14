@@ -96,6 +96,10 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="no_rek">Nomor Rekening</label>
+                        <input type="text" required class="form-control" name="no_rek" id="no_rek">
+                    </div>
+                    <div class="form-group">
                         <label for="jumlah">Jumlah Transfer</label>
                         <input type="text" required class="form-control" name="jumlah" id="jumlahd">
                     </div>

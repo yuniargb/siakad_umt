@@ -23,6 +23,7 @@
                                             <th>Siswa</th>
                                             <th>Tanggal </th>
                                             <th>Bulan</th>
+                                            <th>No Rek</th>
                                             <th>Bukti</th>
                                             <th>Jumlah</th>
                                             <th>Bank</th>
@@ -39,6 +40,7 @@
                                             <td>{{ $sw->nama }}</td>
                                             <td>{{ $sw->tgl_transfer }}</td>
                                             <td>{{ $sw->bulan }}</td>
+                                            <td>{{ $sw->no_rek }}</td>
                                             <td><button class="btn btn-primary detail-bukti"
                                                     data-image="/images/paket/{{ $sw->bukti }}" data-toggle="modal"
                                                     data-target="#exampleModal">Tampil</button></td>

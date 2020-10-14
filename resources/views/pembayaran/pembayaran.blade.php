@@ -34,6 +34,7 @@
                                             <th>Siswa</th>
                                             <th>Tanggal</th>
                                             <th>Bulan</th>
+                                            <th>No Rek</th>
                                             <th>Tipe</th>
                                             <th>Bukti</th>
                                             <th>Jumlah </th>
@@ -50,6 +51,7 @@
                                             <td>{{ $sw->nama }}</td>
                                             <td>{{ $sw->tgl_transfer }}</td>
                                             <td>{{ $sw->bulan }}</td>
+                                            <td>{{ $sw->no_rek }}</td>
                                             <td>{{ $sw->namatipe }}</td>
 
                                             <td><button class="btn btn-primary detail-bukti"

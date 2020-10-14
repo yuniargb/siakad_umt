@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::delete('/siswa/{id}', 'SiswaController@destroy');
+Route::delete('/guru/{id}', 'GuruController@destroy');
 Route::delete('/spp/{id}', 'AngkatanController@destroy');
 Route::delete('/kelas/{id}', 'KelasController@destroy');
 Route::delete('/pembayaran/{id}', 'PembayaranController@destroy');

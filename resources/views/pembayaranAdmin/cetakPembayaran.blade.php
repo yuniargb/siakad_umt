@@ -64,6 +64,17 @@
                 </tr>
                 <tr>
                     <td>
+                        Nomor Rekening
+                    </td>
+                    <td>
+                        :
+                    </td>
+                    <td>
+                        {{ $pembayaran->no_rek }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         Jumlah
                     </td>
                     <td>
