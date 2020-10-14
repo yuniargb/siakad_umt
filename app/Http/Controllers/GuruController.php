@@ -126,6 +126,9 @@ class GuruController extends Controller
         $guru = Guru::find($decrypt);
         $guru->delete();
 
+        $user = User::where('username', $guru->nip)->first();
+        $user->delete();
+
         Session::flash('success', 'Guru berhasil dihapus');
         return '/guru';
     }

@@ -81,7 +81,7 @@
                     <div class="form-group">
                         <label for="atm">ATM</label>
                         <select class="form-control" name="atm" id="atm" required>
-                            <option value="Mandiri">Mandiri</option>
+                            <option value="Mandiri">Mandiri (954129210)</option>
                             <option value="BCA">BCA (6565189160)</option>
                             <option value="BRI">BRI (9090189120)</option>
                             <option value="BNI">BNI (1234345123)</option>
