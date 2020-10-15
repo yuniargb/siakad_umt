@@ -17,6 +17,7 @@ class CreatePembayaransTable extends Migration
             $table->bigIncrements('id');
             $table->string('bukti');
             $table->string('atm');
+            $table->string('no_rek');
             $table->bigInteger('siswa_id');
             $table->bigInteger('jumlah');
             $table->date('tgl_transfer');

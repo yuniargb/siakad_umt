@@ -81,7 +81,11 @@
                     <div class="form-group">
                         <label for="atm">ATM</label>
                         <select class="form-control" name="atm" id="atm" required>
+<<<<<<< HEAD
                             <option value="Mandiri">Mandiri (6565184636)</option>
+=======
+                            <option value="Mandiri">Mandiri (954129210)</option>
+>>>>>>> b42eb1b8ca58d6ba58ba7ac49fc71ddb55701452
                             <option value="BCA">BCA (6565189160)</option>
                             <option value="BRI">BRI (9090189120)</option>
                             <option value="BNI">BNI (1234345123)</option>
@@ -94,6 +98,10 @@
                             <option value="Bank BJB">Bank BJB (1234345333)</option>
                             <option value="Bank lainnya">Bank lainnya </option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="no_rek">Nomor Rekening</label>
+                        <input type="text" required class="form-control" name="no_rek" id="no_rek">
                     </div>
                     <div class="form-group">
                         <label for="jumlah">Jumlah Transfer</label>

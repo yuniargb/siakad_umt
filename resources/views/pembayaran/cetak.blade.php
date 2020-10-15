@@ -47,6 +47,7 @@
                     <th>Siswa</th>
                     <th>Tanggal Transfer</th>
                     <th>Pembayaran Bulan</th>
+                    <th>No Rek</th>
                     <!-- <th>Bukti</th> -->
                     <th>Jumlah Transfer</th>
                     <th>Bank Transfer</th>
@@ -61,6 +62,7 @@
                     <td>{{ $sw->nama }}</td>
                     <td>{{ $sw->tgl_transfer }}</td>
                     <td>{{ $sw->bulan }}</td>
+                    <td>{{ $sw->no_rek }}</td>
                     <!-- <td>{{ $sw->bukti }}</td> -->
                     <td>{{ $sw->jumlah }}</td>
                     <td>{{ $sw->atm }}</td>

@@ -50,6 +50,13 @@
                                                     href="/tagihanemail/{{ Crypt::encrypt($sw->kelas_id) }}/{{ Crypt::encrypt($sw->id) }}"><i
                                                         class="fas fa-paper-plane"></i></i>
                                                 </a>
+                                                <form action="/api/tagihan/{{ Crypt::encrypt($sw->id) }}"
+                                                        method="post" class="d-inline btn-del">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        data-toggle="tooltip" data-original-title="Hapus"><i class="fas fa-trash"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @endforeach

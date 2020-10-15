@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::delete('/siswa/{id}', 'SiswaController@destroy');
+Route::delete('/guru/{id}', 'GuruController@destroy');
 Route::delete('/spp/{id}', 'AngkatanController@destroy');
 Route::delete('/kelas/{id}', 'KelasController@destroy');
 Route::delete('/pembayaran/{id}', 'PembayaranController@destroy');
@@ -27,3 +28,5 @@ Route::delete('/matapelajaran/{id}', 'MataPelajaranController@destroy');
 Route::delete('/jadwal/{id}', 'JadwalController@destroy');
 Route::delete('/rppdansilabus/{id}', 'SilabusDanRppController@destroy');
 Route::delete('/nilai/{id}', 'NilaiController@destroy');
+Route::delete('/accpembayaran/{id}', 'AccPembayaranController@destroy');
+Route::delete('/tagihan/{id}', 'TagihanController@destroy');

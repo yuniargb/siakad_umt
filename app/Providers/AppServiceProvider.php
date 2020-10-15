@@ -27,11 +27,13 @@ class AppServiceProvider extends ServiceProvider
         View::composer('layout', function( $view )
         {
              $data  = DB::table('logos')->first();
-             $waliKelas = DB::table('gurus')
-                        ->select('kelas.*')
-                        ->join('kelas', 'gurus.id', '=', 'kelas.guru_id')
-                        ->where('gurus.nip',auth()->user()->username)
-                        ->first();
+             $waliKelas = null;
+             if(!empty(auth()->user()->username))
+                $waliKelas = DB::table('gurus')
+                            ->select('kelas.*')
+                            ->join('kelas', 'gurus.id', '=', 'kelas.guru_id')
+                            ->where('gurus.nip',auth()->user()->username)
+                            ->first();
 
             //pass the data to the view
             $view->with( 'data', $data );

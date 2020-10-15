@@ -103,6 +103,7 @@ class PembayaranController extends Controller
         $pembayaran->bukti = $newName;
         $pembayaran->atm = $request->atm;
         $pembayaran->tagihan_id = $request->tagihan_id;
+        $pembayaran->no_rek = $request->no_rek;
         $pembayaran->jumlah = $request->jumlah;
         $pembayaran->tgl_transfer = $request->tgl;
         $pembayaran->siswa_id = $request->nis;

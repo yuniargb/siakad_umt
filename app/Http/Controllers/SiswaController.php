@@ -189,6 +189,8 @@ class SiswaController extends Controller
         $siswa = Siswa::find($decrypt);
         $siswa->delete();
 
+        $user = User::where('username', $siswa->nis)->first();
+        $user->delete();
         Session::flash('success', 'Siswa berhasil dihapus');
         return '/siswa';
     }
