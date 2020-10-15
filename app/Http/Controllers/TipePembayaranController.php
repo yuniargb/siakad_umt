@@ -52,7 +52,7 @@ class TipePembayaranController extends Controller
         $ang = TipePembayaran::find($decrypt);
         $ang->delete();
 
-        Session::flash('success', 'SPP berhasil dihapus');
+        Session::flash('success', 'Tipe Pembayaran berhasil dihapus');
         return '/tipepembayaran';
     }
 }

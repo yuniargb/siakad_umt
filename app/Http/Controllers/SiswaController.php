@@ -123,7 +123,7 @@ class SiswaController extends Controller
 
         $user->update();
         
-        Session::flash('success', 'Kata sandi berhasil diatur ulang  ---'.$decrypt.'------------------- ' . $pass . '----------' .  $siswa->nis);
+        Session::flash('success', 'Kata sandi berhasil diatur ulang');
         return Redirect::back();
 
         // return $siswa;
