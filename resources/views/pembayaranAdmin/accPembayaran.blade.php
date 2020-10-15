@@ -95,6 +95,16 @@
                                                         data-toggle="tooltip" value="tolak"
                                                         data-original-title="Tolak"><i class="fa fa-times"></i></button>
                                                     @endif
+
+                                                   
+                                                    <form action="/api/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}"
+                                                        method="post" class="d-inline btn-del">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger"
+                                                            data-toggle="tooltip" data-original-title="Hapus"><i class="fas fa-trash"></i></button>
+                                                    </form>
+                                                   
                                                 </div>
                                             </td>
                                         </tr>

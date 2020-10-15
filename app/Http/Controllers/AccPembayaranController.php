@@ -100,4 +100,14 @@ class AccPembayaranController extends Controller
         
          return url()->previous();
     }
+
+    public function destroy($id)
+    {
+        $decrypt = Crypt::decrypt($id);
+        $pem = Pembayaran::find($decrypt);
+        $pem->delete();
+
+        Session::flash('success', 'Pembayaran berhasil dihapus');
+         return url()->previous();
+    }
 }

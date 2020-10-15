@@ -102,4 +102,14 @@ class TagihanController extends Controller
         Session::flash('success', 'Tagihan berhasil ditambahkan');
         return Redirect::back();
     }
+
+    public function destroy($id)
+    {
+        $decrypt = Crypt::decrypt($id);
+        $pem = Tagihan::find($decrypt);
+        $pem->delete();
+
+        Session::flash('success', 'Pembayaran berhasil dihapus');
+         return url()->previous();
+    }
 }
