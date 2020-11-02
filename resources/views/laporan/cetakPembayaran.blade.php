@@ -54,12 +54,15 @@
                 <td>{{ $sw->jumlah }}</td>
                 <td>{{ $sw->atm }}</td>
                 @php
-                if($sw->status == 0 )
-                $pesan = '<span class="badge badge-danger">Menunggu Konfirmasi</span>';
-
-                elseif($sw->status == 3)
-
+                if($sw->status == 3 )
                 $pesan = '<span class="badge badge-danger">Pembayaran Di Tolak</span>';
+
+                elseif($sw->no_rek == null)
+                $pesan = '<span class="badge badge-danger">Belum Bayar</span>'; 
+
+                elseif($sw->status == 0)
+                $pesan = '<span class="badge badge-warning">Menunggu Konfirmasi</span>';
+
 
                 else
 

@@ -57,7 +57,7 @@
                                             <td><button class="btn btn-primary detail-bukti"
                                                     data-image="/images/paket/{{ $sw->bukti }}" data-toggle="modal"
                                                     data-target="#exampleModal">Tampil</button></td>
-                                            <td>{{ $sw->jumlah }}</td>
+                                            <td>@currency( $sw->jumlah )</td>
                                             <td>{{ $sw->atm }}</td>
                                             @php
                                             if($sw->status == 0 )

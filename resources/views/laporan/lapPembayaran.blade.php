@@ -150,6 +150,24 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                 <div class="form-group col-md-12">
+                                    <label for="siswa_id">Siswa</label>
+                                    <select class="select2 form-control w-100" name="siswa_id" id="siswa_id" >
+                                        <option value="">Pilih Siswa</option>
+                                        @foreach($siswa as $sw)
+                                        <option value="{{ $sw->id }}">{{ $sw->nama }} ( {{ $sw->nis }} )</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="tipe_pembayaran_id">Tipe Pembayaran</label>
+                                    <select class="form-control" name="tipe_pembayaran_id" id="tipe_pembayaran_id" >
+                                        <option value="">Pilih Siswa</option>
+                                        @foreach($tipe as $sw)
+                                        <option value="{{ $sw->id }}">{{ $sw->namatipe }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="modal-footer col-md-12">
 
                                     <button name="submit" type="submit" class="btn btn-success"
@@ -196,16 +214,17 @@
                             <td>{{ $sw->bulan }}</td>
                             <td>{{ $sw->no_rek }}</td>
                             <td>{{ $sw->namatipe }}</td>
-                            <td>{{ $sw->jumlah }}</td>
+                            <td>@currency( $sw->jumlah )</td>
                             <td>{{ $sw->atm }}</td>
                             @php
-                            if($sw->status == 0 )
-                            $pesan = '<span class="badge badge-danger">Menunggu Konfirmasi</span>';
-
-                            elseif($sw->status == 3)
-
+                            if($sw->status == 3 )
                             $pesan = '<span class="badge badge-danger">Pembayaran Di Tolak</span>';
 
+                            elseif($sw->no_rek == null)
+                            $pesan = '<span class="badge badge-danger">Belum Bayar</span>'; 
+
+                            elseif($sw->status == 0)
+                            $pesan = '<span class="badge badge-warning">Menunggu Konfirmasi</span>';
                             else
 
                             $pesan = '<span class="badge badge-success">Sudah Di Konfirmasi</span>';

@@ -22,21 +22,21 @@
                                 <div class="form-group">
                                     <label for="namasekolah">Nama Sekolah</label>
                                     <input type="text" value="{{ $logo->namasekolah }}" class="form-control"
-                                        name="namasekolah" id="namasekolah">
+                                        name="namasekolah" id="namasekolah" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
                                     <input type="text" value="{{ $logo->alamat }}" class="form-control" name="alamat"
-                                        id="alamat">
+                                        id="alamat" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="logo">Logo</label>
-                                    <input type="file" class="form-control" name="logo" id="logo">
+                                    <input type="file" class="form-control" name="logo" id="logo" >
                                 </div>
                                 <div class="form-group">
                                     <label for="biodata">Biodata</label>
                                     <textarea name="biodata" id="biodata" class="form-control editor" cols="30"
-                                        rows="10">{{ $logo->biodata }}</textarea>
+                                        rows="20" required="">{{ $logo->biodata }}</textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Simpan</button>
