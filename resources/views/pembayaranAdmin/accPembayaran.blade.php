@@ -71,29 +71,48 @@
                                                             class="fa fa-print"></i></a>
 
                                                     @if($sw->status == 0 )
-
-                                                    <button type="button" class="btn btn-danger kon"
-                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3/1"
-                                                        data-toggle="tooltip" value="tolak"
-                                                        data-original-title="Tolak"><i class="fa fa-times"></i></button>
-                                                    <button type="button" class="btn btn-primary kon"
-                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1/1"
-                                                        data-toggle="tooltip" value="konfirmasi"
-                                                        data-original-title="Konfirmasi"><i
-                                                            class="fa fa-check"></i></button>
-
+                                                    <form action="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3/1"
+                                                        method="post" class="d-inline kon" data-toggle="tooltip" data-jenis="tolak"
+                                                        data-original-title="Tolak">
+                                                        @csrf
+                                                        @method('put')
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form action="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1/1"
+                                                        method="post" class="d-inline kon" data-toggle="tooltip" data-jenis="konfirmasi"
+                                                        data-original-title="Konfirmasi">
+                                                        @csrf
+                                                        @method('put')
+                                                        
+                                                        <button type="submit" class="btn btn-primary">
+                                                            <i
+                                                            class="fa fa-check"></i>
+                                                        </button>
+                                                    </form>
                                                     @elseif($sw->status == 3)
-                                                    <button type="button" class="btn btn-primary kon"
-                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1/1"
-                                                        data-toggle="tooltip" value="konfirmasi"
-                                                        data-original-title="Konfirmasi"><i
-                                                            class="fa fa-check"></i></button>
+                                                    <form action="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/1/1"
+                                                        method="post" class="d-inline kon" data-toggle="tooltip" data-jenis="konfirmasi"
+                                                        data-original-title="Konfirmasi">
+                                                        @csrf
+                                                        @method('put')
+                                                        <button type="submit" class="btn btn-primary">
+                                                            <i
+                                                            class="fa fa-check"></i>
+                                                        </button>
+                                                    </form>
 
                                                     @else
-                                                    <button type="button" class="btn btn-danger kon"
-                                                        data-url="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3/1"
-                                                        data-toggle="tooltip" value="tolak"
-                                                        data-original-title="Tolak"><i class="fa fa-times"></i></button>
+                                                    <form action="/accpembayaran/{{ Crypt::encrypt($sw->id_p) }}/3/1"
+                                                        method="post" class="d-inline kon" data-toggle="tooltip" data-jenis="tolak"
+                                                        data-original-title="Tolak">
+                                                        @csrf
+                                                        @method('put')
+                                                        <button type="submit" class="btn btn-danger">
+                                                            <i class="fa fa-times"></i>
+                                                        </button>
+                                                    </form>
                                                     @endif
 
                                                    

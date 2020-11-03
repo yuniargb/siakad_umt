@@ -22,6 +22,7 @@ class CreatePembayaransTable extends Migration
             $table->bigInteger('jumlah');
             $table->date('tgl_transfer');
             $table->boolean('status')->default(null);
+            $table->string('pesan',100)->nullable()->default(null);
             $table->unsignedBigInteger('tagihan_id');
             $table->timestamps();
         });

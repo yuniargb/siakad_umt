@@ -94,23 +94,40 @@ $(document).ready(function () {
         }
     })
     // swal confirm
-    $('.kon').on('click', function (e) {
-        let url = $(this).data('url')
+    $('.kon').on('submit', function (e) {
+        let url = $(this).attr('action')
+        let valss = $(this).data('jenis')
         let text = $(this).data('original-title')
+        var title = 'Kamu yakin ingin merubah data ini?'
+        var data = $(this).serializeArray();
+
+        if (valss == 'tolak') {
+            title = 'Kamu yakin ingin merubah data ini?, <br/> <br/> silahkan isi pesan revisi'
+        }
+
+
         e.preventDefault();
         Swal.fire({
-            title: 'Kamu yakin ingin merubah data ini?',
+            title: title,
+            input: valss == 'tolak' ? 'text' : false,
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
             type: 'warning',
             showCancelButton: true,
+            showLoaderOnConfirm: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: text
         }).then((result) => {
             if (result.value) {
+                if (valss == 'tolak')
+                    data.push({ name: "pesan", value: result.value });
+                // console.log(data)
                 $.ajax({
-                    type: 'get',
+                    type: 'put',
                     url: url,
-                    data: $(this).serialize(),
+                    data: data,
                     success: function (data) {
                         document.location.href = data;
                     }
@@ -801,13 +818,15 @@ $(document).ready(function () {
             $('#pembayaranModalTitle').html('Tambah Pembayaran ' + tipe)
         } else {
             $.get(url, function (data) {
-                $('#nis').val('')
-                $('#atm').val('')
-                $('#jumlah').val('')
-                $('#tgl').val('')
+
+                $('#nis').val(data.siswa_id)
+                $('#atm').val(data.atm)
+                $('#jumlah').val(data.jumlah)
+                $('#tgl').val(data.tgl_transfer)
                 $('#bukti').val('')
-                $('#no_rek').val('')
-                $('#tipepembayaran').val('')
+                $('#no_rek').val(data.no_rek)
+                $('#tagihan_id').val(id)
+                $('#jumlahd').val(data.jumlah)
             })
             $('#pembayaranForm').attr('action', '/pembayaran/' + id + '/update')
             $('#pembayaranModalMethod').html($(this).data('method'))

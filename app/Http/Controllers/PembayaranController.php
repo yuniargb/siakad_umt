@@ -73,6 +73,14 @@ class PembayaranController extends Controller
         return view('pembayaran.tagihan', compact('tagihan', 'siswa'));
     }
 
+
+    public function edit($id)
+    {
+        $decrypt = Crypt::decrypt($id);
+        $ang = Pembayaran::find($decrypt);
+        return $ang;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -110,6 +118,35 @@ class PembayaranController extends Controller
         $pembayaran->status = 0;
         $pembayaran->save();
         Session::flash('success', 'Pembayaran berhasil ditambahkan');
+        return Redirect::back();
+    }
+    public function update(Request $request, $id)
+    {
+        $decrypt = Crypt::decrypt($id);
+        $pembayaran = Pembayaran::find($decrypt);
+        $resorce = $request->file('bukti');
+        if($resorce){
+            $name   = $resorce->getClientOriginalExtension();
+            $newName = rand(100000, 1001238912) . "." . $name;
+            \Image::make($resorce)->resize(300, 200);
+            $resorce->move(\base_path() . "/public/images/paket", $newName);
+        }else{
+            $newName = $pembayaran->bukti;
+        }
+
+        
+        $pembayaran->bukti = $newName;
+        $pembayaran->atm = $request->atm;
+        $pembayaran->no_rek = $request->no_rek;
+        $pembayaran->jumlah = $request->jumlah;
+        $pembayaran->tgl_transfer = $request->tgl;
+        $pembayaran->pesan = '';
+        $pembayaran->siswa_id = $request->nis;
+        $pembayaran->status = 0;
+        $pembayaran->save();
+
+
+        Session::flash('success', 'Pembayaran berhasil diubah');
         return Redirect::back();
     }
 

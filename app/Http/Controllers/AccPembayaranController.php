@@ -75,9 +75,13 @@ class AccPembayaranController extends Controller
     {
         $decrypt = Crypt::decrypt($id);
         $bayar = Pembayaran::find($decrypt);
-
+        
         $bayar->status = $tipe;
 
+        if($tipe != 1)
+            $bayar->pesan = $request->pesan;
+        else
+            $bayar->pesan = '';
         $bayar->update();
 
         $siswa = DB::table('siswas')

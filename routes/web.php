@@ -111,7 +111,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/accpembayaran', 'AccPembayaranController@index');
         Route::get('/accpembayarantambahan', 'AccPembayaranController@tambahan');
         Route::get('/accpembayaranwajib', 'AccPembayaranController@wajib');
-        Route::get('/accpembayaran/{id}/{tipe}/{tipebyr}', 'AccPembayaranController@update');
+        Route::put('/accpembayaran/{id}/{tipe}/{tipebyr}', 'AccPembayaranController@update');
         Route::get('/detailpembayaran', 'AccPembayaranController@detail');
     });
 
@@ -209,7 +209,9 @@ Route::group(['middleware' => ['auth','checkRole:2']], function () {
     Route::get('/historypembayaran', 'PembayaranController@index');
     Route::get('/tagihanbiaya', 'PembayaranController@tagihan');
     Route::get('/cetakpembayaran', 'PembayaranController@cetaksemua');
+    Route::get('/pembayaran/{id}/edit', 'PembayaranController@edit');
     Route::post('/pembayaran', 'PembayaranController@store');
+    Route::post('/pembayaran/{id}/update', 'PembayaranController@update');
 });
 
 
