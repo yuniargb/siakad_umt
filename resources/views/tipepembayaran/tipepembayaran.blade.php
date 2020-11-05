@@ -38,7 +38,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $ang->namatipe }}</td>
-                                            <td>{{ $ang->biaya }}</td>
+                                            <td>@currency($ang->biaya)</td>
                                             <td>
                                                 <div class="row">
                                                     <button type="button" class="btn btn-primary btnTipePembayaranModal"

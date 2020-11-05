@@ -30,6 +30,14 @@
                                         </button>
                                     </div>
                                     @endif
+                                    @if ($message = Session::get('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ Session::get('success') }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    @endif
                                     <div class="form-group">
                                         <input type="text"
                                             class="form-control form-control-user @error('username') is-invalid @enderror"
@@ -66,6 +74,9 @@
                                     </a>
                                     @endif
                                 </form>
+                                <div class="text-center">
+                                    <a class="small" href="/forgot-password">Forgot Password?</a>
+                                </div>
                             </div>
                         </div>
                     </div>

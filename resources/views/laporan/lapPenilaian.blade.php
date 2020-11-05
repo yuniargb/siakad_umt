@@ -62,6 +62,15 @@
                                         </option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="siswa_id">Siswa</label>
+                                    <select class="select2 form-control" name="siswa_id" id="siswa_id" >
+                                        <option value="">Pilih Siswa</option>
+                                        @foreach($siswa as $sw)
+                                        <option value="{{ $sw->id }}" {{ $req == null ? '' : ($sw->id == $req->siswa_id ? "selected" : "") }}>{{ $sw->nama }} ( {{ $sw->nis }} )</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="modal-footer col-md-12">
                                     <!-- <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button> -->
                                     <button name="submit" type="submit" class="btn btn-success"

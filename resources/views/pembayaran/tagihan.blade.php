@@ -81,18 +81,19 @@
                     <div class="form-group">
                         <label for="atm">ATM</label>
                         <select class="form-control" name="atm" id="atm" required>
-                            <option value="Mandiri">Mandiri (954129210)</option>
-                            <option value="BCA">BCA (6565189160)</option>
-                            <option value="BRI">BRI (9090189120)</option>
-                            <option value="BNI">BNI (1234345123)</option>
-                            <option value="BTN">BTN (1122312345)</option>
-                            <option value="CIMB NIAGA">CIMB NIAGA (6565189160)</option>
-                            <option value="PANIN">PANIN (1234345123)</option>
-                            <option value="OCBC NISP">OCBC NISP (1234345124)</option>
-                            <option value="MAYBANK INDONESIA">MAYBANK INDONESIA (1244235123)</option>
-                            <option value="DANAMON">DANAMON (1234345223)</option>
+
+                            <option value="Mandiri">Mandiri (008)</option>
+                            <option value="BCA">BCA (014)</option>
+                            <option value="BRI">BRI (002)</option>
+                            <option value="BNI">BNI (009)</option>
+                            <option value="BTN">BTN (200)</option>
+                            <option value="CIMB NIAGA">CIMB NIAGA (022)</option>
+                            <option value="PANIN">PANIN (019)</option>
+                            <option value="OCBC NISP">OCBC NISP (028)</option>
+                            <option value="MAYBANK INDONESIA">MAYBANK INDONESIA (016)</option>
+                            <option value="DANAMON">DANAMON (011)</option>
                             <option value="Bank BJB">Bank BJB (1234345333)</option>
-                            <option value="Bank lainnya">Bank lainnya (888888123)</option>
+                            <option value="Bank lainnya">Bank lainnya </option>
                         </select>
                     </div>
                     <div class="form-group">

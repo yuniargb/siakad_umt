@@ -159,15 +159,14 @@
                             <a class="collapse-item" href="/nilaiharian">Data Nilai Harian</a>
                             <a class="collapse-item" href="/nilaiuts">Data Nilai UTS</a>
                             <a class="collapse-item" href="/nilaiuas">Data Nilai UAS</a>
-                            @if(!empty($walikelas->namaKelas) || auth()->user()->role == 4)
                             <a class="collapse-item" href="/nilairaport">Data Nilai Raport</a>
-                            @endif
+                         
 
                         </div>
                     </div>
                 </li>
                 @endif
-                @if(auth()->user()->role == 4 || auth()->user()->role == 6 || auth()->user()->role == 7)
+                @if(auth()->user()->role == 7)
                 <li class="nav-item">
                     <a class="nav-link" href="/absensisiswa">
                         <i class="fas fa-fw fa-folder-open"></i>
@@ -176,6 +175,11 @@
                 @endif
                 @if(auth()->user()->role == 4 || auth()->user()->role == 6)
                 <li class="nav-item">
+                    <a class="nav-link" href="/presensiall">
+                        <i class="fas fa-fw fa-folder-open"></i>
+                        <span>Data Presensi</span></a>
+                </li>
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="/absensiguru">
                         <i class="fas fa-fw fa-folder-open"></i>
                         <span>Data Presensi Guru</span></a>
@@ -184,7 +188,7 @@
                     <a class="nav-link" href="/absensistaf">
                         <i class="fas fa-fw fa-folder-open"></i>
                         <span>Data Presensi Staf</span></a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" href="/settingrfid">
                         <i class="fas fa-fw fa-folder-open"></i>
@@ -208,12 +212,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/laporanpembayaran">
                         <i class="far fa-fw fa-chart-bar"></i>
-                        <span>Laporan Pembayaran Kelas</span></a>
+                        <span>Laporan Biaya Sekolah</span></a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="/laporanpembayaranangkatan">
                         <i class="far fa-fw fa-chart-bar"></i>
-                        <span>Laporan Pembayaran Angkatan</span></a>
+                        <span>Laporan Biaya Persiswa</span></a>
                 </li> -->
                 @endif
                 @if(auth()->user()->role == 3 || auth()->user()->role == 5 || auth()->user()->role == 4 ||
@@ -235,8 +239,7 @@
                         <span>Laporan Jadwal</span></a>
                 </li>
                 @endif
-                @if(auth()->user()->role == 3 || auth()->user()->role == 6 || auth()->user()->role == 4 ||
-                auth()->user()->role == 7)
+                @if(auth()->user()->role == 7)
                 <!-- Nav Item - Charts -->
                 <li class="nav-item">
                     <a class="nav-link" href="/laporanabsensiswa">
@@ -245,7 +248,7 @@
                 </li>
                 @endif
                 @if(auth()->user()->role == 3 || auth()->user()->role == 6 || auth()->user()->role == 4)
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" href="/laporanabsenguru">
                         <i class="far fa-fw fa-chart-bar"></i>
                         <span>Laporan Presensi Guru</span></a>
@@ -254,6 +257,12 @@
                     <a class="nav-link" href="/laporanabsenstaf">
                         <i class="far fa-fw fa-chart-bar"></i>
                         <span>Laporan Presensi Staf</span></a>
+                </li> -->
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/laporanpresensi">
+                        <i class="far fa-fw fa-chart-bar"></i>
+                        <span>Laporan Presensi</span></a>
                 </li>
                 @endif
                 <!-- Divider -->

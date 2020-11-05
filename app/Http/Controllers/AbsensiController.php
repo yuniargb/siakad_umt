@@ -25,6 +25,7 @@ class AbsensiController extends Controller
             ->select(
                 'siswas.nis',
                 'siswas.nama',
+                DB::raw('gurus.nama as walikelas'),
                 'kelas.namaKelas',
                 'users.id',
                 DB::raw('sum(absensis.keterangan = "hadir") as hadir'),
@@ -36,13 +37,18 @@ class AbsensiController extends Controller
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->join('siswas', 'users.username', '=', 'siswas.nis')
             ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
-            ->groupBy('siswas.nis','siswas.nama','users.id','kelas.namaKelas')->get();
+            ->join('gurus', 'kelas.guru_id', '=', 'gurus.id')
+            ->groupBy('siswas.nis','siswas.nama','users.id','kelas.namaKelas','gurus.nama')->get();
         return view('absensi.absenSiswa', compact('absensi','kelas'));
     }
     
     public function rfid()
     {
         return view('absensi.absenRFID');
+    }
+    public function presensiall()
+    {
+        return view('absensi.presensiDashboard');
     }
     public function user(){
         
@@ -73,6 +79,7 @@ class AbsensiController extends Controller
             )
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->join('siswas', 'users.username', '=', 'siswas.nis')
+
             ->where('users.id','=',$decrypt)
             ->get();
         return $absensi;

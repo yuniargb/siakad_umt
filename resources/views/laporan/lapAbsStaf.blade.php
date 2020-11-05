@@ -29,6 +29,15 @@
                                             value="{{ $req == null ? '' : $req->to != '' ? $req->to : '' }}">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="id">Staff</label>
+                                    <select class="select2 form-control" name="id" id="id" >
+                                        <option value="">Pilih Staff</option>
+                                        @foreach($staf as $sw)
+                                        <option value="{{ $sw->id }}" {{ $req == null ? '' : ($sw->id == $req->id ? "selected" : "") }}>{{ $sw->name }} ( {{ $sw->username }} )</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="modal-footer col-md-12">
                                     <div class="modal-footer col-md-12">
                                         <button name="submit" type="submit" class="btn btn-success"

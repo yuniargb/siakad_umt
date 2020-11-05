@@ -29,7 +29,6 @@
                                             <th>Tahun</th>
                                             <th>Kelas </th>
                                             <th>Tagihan</th>
-                                            <th>Belum Bayar</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -40,7 +39,6 @@
                                             <td>{{ $sw->tahun }}</td>
                                             <td>{{ $sw->namaKelas }}</td>
                                             <td>{{ $sw->namatipe }}</td>
-                                            <td>{{ $sw->belum }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-warning ml-3 btnAbsenDetailModal"
                                                     data-url="/detail_tagihan/{{ Crypt::encrypt($sw->kelas_id) }}/{{ Crypt::encrypt($sw->id) }}"
@@ -154,9 +152,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body overflow-auto">
                 <h5>KELAS : <span id="kelasName"></span></h5>
-                <table class="table">
+                <table class="table basic-datatables">
                     <thead>
                         <tr>
                             <th>NIS</th>

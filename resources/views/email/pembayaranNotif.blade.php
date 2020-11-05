@@ -375,7 +375,7 @@
                                                                         <td>
                                                                             <div class="container">
                                                                                 <center>
-                                                                                    <p>{{ $pesan }}</p>
+                                                                                    <p>{!! $pesan !!}</p>
                                                                                 </center>
                                                                                 <hr>
                                                                                 <center>

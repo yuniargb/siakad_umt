@@ -315,7 +315,7 @@ $(document).ready(function () {
             $('#showpassedit').hide()
             $('#adminModalMethod').html('')
             $('#username').prop("readonly", false)
-            $('#adminModalTitle').html('Tambah User')
+              $('#adminModalTitle').html('Tambah user')
         } else {
             $.get(url, function (data) {
                 $('#nama').val(data.name)
@@ -330,7 +330,7 @@ $(document).ready(function () {
             $('#password1').attr('required', false)
             $('#password').attr('required', false)
             $('#username').prop("readonly", true)
-            $('#adminModalTitle').html('Edit Staf')
+            $('#adminModalTitle').html('Edit user')
         }
         $('#exampleModalCenter').modal('show')
     })

@@ -27,6 +27,15 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="siswa_id">Siswa</label>
+                                    <select class="select2 form-control" name="siswa_id" id="siswa_id" >
+                                        <option value="">Pilih Siswa</option>
+                                        @foreach($siswa as $sw)
+                                        <option value="{{ $sw->id }}" {{ $req == null ? '' : ($sw->id == $req->siswa_id ? "selected" : "") }}>{{ $sw->nama }} ( {{ $sw->nis }} )</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="nis">Dari Tanggal</label>

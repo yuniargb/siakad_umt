@@ -15,6 +15,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login', 'AuthController@login')->name('login');
+Route::get('/forgot-password', 'AuthController@forgot')->name('password');
+Route::post('/store-forgot', 'AuthController@forgotPasswordPost')->name('forgotStore');
+Route::get('/reset-password/{id}', 'AuthController@reset')->name('reset');
+Route::post('/store-reset', 'AuthController@resetPassword')->name('resetPassword');
 Route::post('/loginpost', 'AuthController@loginpost');
 Route::get('/presensi', 'AbsensiController@rfid');
 Route::post('/tambahabsenrfid', 'AbsensiController@storeRFID');
@@ -144,6 +148,7 @@ Route::group(['middleware' => 'auth'], function () {
     // hanya boleh admin & staf absen 
     Route::group(['middleware' => 'checkRole:4|6'], function () {
         // absensi
+        Route::get('/presensiall', 'AbsensiController@presensiall');
         Route::get('/absensiguru', 'AbsensiController@guru');
         Route::get('/absensistaf', 'AbsensiController@staf');
         Route::get('/absensirfid', 'AbsensiController@rfid');
@@ -184,7 +189,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     // hanya boleh kepala sekolah & staf absen & admin 
     Route::group(['middleware' => 'checkRole:3|6|4'], function () {
+        
         Route::get('/laporanabsenguru', 'LaporanController@absenGuru');
+        Route::get('/laporanpresensi', 'LaporanController@presensi');
         Route::post('/cetaklaporanabsenguru', 'LaporanController@cetakAbsGuru');
         Route::get('/laporanabsenstaf', 'LaporanController@absenStaf');
         Route::post('/cetaklaporanabsenstaf', 'LaporanController@cetakAbsStaf');

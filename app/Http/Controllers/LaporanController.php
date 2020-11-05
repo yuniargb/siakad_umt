@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Pembayaran;
+use App\Siswa;
+use App\Guru;
+use App\User;
 use App\Kelas;
 use App\Logo;
+use App\TipePembayaran;
 use App\Angkatan;
 use App\MataPelajaran;
 use App\Exports\BulanExport;
@@ -33,17 +37,17 @@ class LaporanController extends Controller
         foreach ($diagram as $d) {
             $y[array_search($d->bulan, $x)] = $d->jumlah;
         }
+
+        $siswa = Siswa::all();
+        $tipe = TipePembayaran::all();
         
-        return view('laporan.lapPembayaran', compact('kelas','x','y','pembayaran','req'));
+        return view('laporan.lapPembayaran', compact('kelas','x','y','pembayaran','req','siswa','tipe'));
     }
 
     public function cetakpembayaran(Request $request)
     {
 
-        $pembayaran = DB::table('pembayarans')
-            ->select('*', 'pembayarans.id as id_p')
-            ->join('siswas', 'pembayarans.siswa_id', '=', 'siswas.id')
-            ->join(DB::raw('( SELECT *, 
+        $pembayaran = DB::table(DB::raw('( SELECT *, 
                               CASE bulan
                               WHEN "Januari" THEN 1
                               WHEN "Februari" THEN 2
@@ -60,11 +64,40 @@ class LaporanController extends Controller
                               END
                               AS bulan_num,
                               CAST(tahun AS UNSIGNED) 
-                              FROM tagihans ) as tagihans'), 'tagihans.id', '=', 'pembayarans.tagihan_id')
+                              FROM tagihans 
+                              WHERE (
+                                CASE bulan
+                                  WHEN "Januari" THEN 1
+                                  WHEN "Februari" THEN 2
+                                  WHEN "Maret" THEN 3
+                                  WHEN "April" THEN 4
+                                  WHEN "Mei" THEN 5
+                                  WHEN "Juni" THEN 6
+                                  WHEN "Juli" THEN 7
+                                  WHEN "Agustus" THEN 8
+                                  WHEN "September" THEN 9
+                                  WHEN "Oktober" THEN 10
+                                  WHEN "November" THEN 11
+                                  WHEN "Desember" THEN 12
+                                END
+                              ) BETWEEN '. $request->bulanFrom .' AND '. $request->bulanTo .'
+                             AND CAST(tahun AS UNSIGNED) BETWEEN '. $request->tahunFrom .' AND '. $request->tahunTo .') as tagihans'))
+            ->select('*', 'pembayarans.id as id_p')
+            ->join('kelas', 'tagihans.kelas_id', '=', 'kelas.id')
+            ->join('siswas', 'kelas.id', '=', 'siswas.kelas_id')
             ->join('tipe_pembayarans', 'tagihans.tipe_pembayaran_id', '=', 'tipe_pembayarans.id')
-            ->whereBetween('tagihans.bulan_num', [$request->bulanFrom,$request->bulanTo])
-            ->whereBetween('tagihans.tahun', [$request->tahunFrom,$request->tahunTo])
-            ->where('siswas.kelas_id', $request->kelas)->get();
+            ->leftJoin('pembayarans', function($join)
+                         {
+                             $join->on('siswas.id', '=', 'pembayarans.siswa_id');
+                             $join->on('tagihans.id', '=', 'pembayarans.tagihan_id');
+                         })
+            ->where('siswas.kelas_id', $request->kelas)
+            ->when($request->siswa_id != '', function ($query) use ($request) {
+                return $query->where('siswas.id',  $request->siswa_id);
+            })->when($request->tipe_pembayaran_id != '', function ($query) use ($request) {
+                return $query->where('tipe_pembayarans.id',  $request->tipe_pembayaran_id);
+            })
+            ->get();
         
         
         if($request->submit == 'read'){
@@ -93,6 +126,8 @@ class LaporanController extends Controller
                         $pesan = 'Menunggu Konfirmasi';
                     elseif($sw->status == 3)
                         $pesan = 'Pembayaran Di Tolak';
+                    elseif($sw->no_rek == null)
+                        $pesan = 'Belum Bayar';
                     else
                         $pesan = 'Sudah Di Konfirmasi';
                     fputcsv($file, array($sw->nis,$sw->nama,$sw->tgl_transfer,$sw->bulan,$sw->namatipe,$sw->jumlah,$sw->atm,$pesan));
@@ -110,9 +145,10 @@ class LaporanController extends Controller
         }
     }
 
-    public function pembayaranangkatan()
+    public function pembayaranangkatan($pembayaran = null,$req = null)
     {
         $angkatan = Angkatan::all();
+        $kelas = Kelas::all();
         $diagram = DB::table('pembayarans')
             ->select(DB::raw('sum(pembayarans.jumlah) as jumlah'), 'angkatans.angkatan')
             ->join('tagihans', 'tagihans.id', '=', 'pembayarans.tagihan_id')
@@ -130,7 +166,10 @@ class LaporanController extends Controller
         foreach ($diagram as $d) {
             $y[array_search($d->angkatan, $x)] = $d->jumlah;
         }
-        return view('laporan.lapPembayaranAngkatan', compact('angkatan','x','y'));
+
+        $siswa = Siswa::all();
+        $tipe = TipePembayaran::all();
+        return view('laporan.lapPembayaranAngkatan', compact('tipe','angkatan','x','y','pembayaran','req','kelas','siswa'));
         
     }
 
@@ -212,7 +251,8 @@ class LaporanController extends Controller
         foreach ($diagram as $d) {
             $y[array_search($d->tipe, $x)] = $d->jumlah;
         }
-        return view('laporan.lapPenilaian', compact('x','y','penilaian','req'));
+        $siswa = Siswa::all();
+        return view('laporan.lapPenilaian', compact('x','y','penilaian','req','siswa'));
     }
 
     public function cetakpenilaian(Request $request)
@@ -289,6 +329,9 @@ class LaporanController extends Controller
             ->when( $request->tipe != 'raport', function ($query)  use ($request){
                 $query->where('nilais.tipe', $request->tipe);
                 return $query->where('nilais.tipe', $request->tipe);
+            })
+            ->when( $request->siswa_id != null, function ($query)  use ($request){
+                return $query->where('nilais.siswa_id', $request->siswa_id);
             })
             ->where('nilais.semester', $request->semester)
             ->where('nilais.tahun_ajaran', $request->tahun_ajaran)
@@ -394,13 +437,23 @@ class LaporanController extends Controller
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->join('siswas', 'users.username', '=', 'siswas.nis')
             ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
+            ->when($req != '', function ($query) use ($req) {
+                $query->when($req->siswa_id != '', function ($query1) use ($req) {
+                    return $query1->where('siswas.id',  $req->siswa_id);
+                });
+                $query->when($req->kelas_id != '', function ($query2) use ($req) {
+                    return $query2->where('kelas.id',  $req->kelas_id);
+                });
+                
+            })
             ->groupBy('absensis.keterangan')->get();
         $x = ['Hadir','Sakit','Izin','Alfa','Dispensasi'];
         $y = [0,0,0,0,0];
         foreach ($diagram as $d) {
             $y[array_search($d->keterangan, $x)] = $d->jumlah;
         }
-        return view('laporan.lapAbsSiswa', compact('kelas','x','y','absensi','req'));
+        $siswa = Siswa::all();
+        return view('laporan.lapAbsSiswa', compact('kelas','x','y','absensi','req','siswa'));
     }
     public function absenGuru($absensi=null,$req = null)
     {
@@ -411,13 +464,19 @@ class LaporanController extends Controller
             )
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->join('gurus', 'users.username', '=', 'gurus.nip')
+            ->when($req != '', function ($query) use ($req) {
+                $query->when($req->guru_id != '', function ($query1) use ($req) {
+                    return $query1->where('gurus.id',  $req->guru_id);
+                });
+            })
             ->groupBy('absensis.keterangan')->get();
         $x = ['Hadir','Sakit','Izin','Alfa','Dispensasi'];
         $y = [0,0,0,0,0];
         foreach ($diagram as $d) {
             $y[array_search($d->keterangan, $x)] = $d->jumlah;
         }
-        return view('laporan.lapAbsGuru',compact('x','y','absensi','req'));
+        $guru = Guru::all();
+        return view('laporan.lapAbsGuru',compact('x','y','absensi','req','guru'));
     }
     public function absenStaf($absensi=null,$req = null)
     {
@@ -429,15 +488,25 @@ class LaporanController extends Controller
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->where('role', '<>' ,2)
             ->where('role','<>',7)
+            ->when($req != '', function ($query) use ($req) {
+                $query->when($req->id != '', function ($query1) use ($req) {
+                    return $query1->where('users.id',  $req->id);
+                });
+            })
             ->groupBy('absensis.keterangan')->get();
         $x = ['Hadir','Sakit','Izin','Alfa','Dispensasi'];
         $y = [0,0,0,0,0];
         foreach ($diagram as $d) {
             $y[array_search($d->keterangan, $x)] = $d->jumlah;
         }
-        return view('laporan.lapAbsStaf',compact('x','y','absensi','req'));
+        $staf = User::where('role', '<>' ,2)->where('role','<>',7)->get();
+        return view('laporan.lapAbsStaf',compact('x','y','absensi','req','staf'));
     }
-
+    public function presensi($absensi=null,$req = null)
+    {
+         
+        return view('laporan.lapPresensi');
+    }
     public function cetakAbsSiswa(Request $request)
     {
          $absensi = DB::table('absensis')
@@ -456,6 +525,12 @@ class LaporanController extends Controller
             ->join('kelas', 'siswas.kelas_id', '=', 'kelas.id')
             ->where('kelas.id','=',$request->kelas_id)
             ->whereBetween ('absensis.tgl_absen',[$request->from,$request->to])
+            ->when($request->siswa_id != '', function ($query1) use ($request) {
+                return $query1->where('siswas.id',  $request->siswa_id);
+            })
+            ->when($request->kelas_id != '', function ($query2) use ($request) {
+                return $query2->where('kelas.id',  $request->kelas_id);
+            })
             ->orderBy('siswas.nis','asc')->get(); 
         if($request->submit == 'read'){
             return $this->absenSiswa($absensi,$request);
@@ -506,6 +581,9 @@ class LaporanController extends Controller
             ->join('users', 'absensis.user_id', '=', 'users.id')
             ->join('gurus', 'users.username', '=', 'gurus.nip')
             ->whereBetween ('absensis.tgl_absen',[$request->from,$request->to])
+            ->when($request->guru_id != '', function ($query1) use ($request) {
+                    return $query1->where('gurus.id',  $request->guru_id);
+                })
             ->orderBy('gurus.nip','asc')->get();
         
         
@@ -560,6 +638,9 @@ class LaporanController extends Controller
             ->where('role', '<>' ,2)
             ->where('role','<>',7)
             ->whereBetween ('absensis.tgl_absen',[$request->from,$request->to])
+            ->when($request->id != '', function ($query1) use ($request) {
+                    return $query1->where('users.id',  $request->id);
+                })
             ->orderBy('users.username','asc')->get();
         
         

@@ -357,18 +357,17 @@ class NilaiController extends Controller
                                     AND n.tipe = "uas"
                                 ),
                                 0
-                            ) * (60/100),
-                            2
+                            ) * (60/100)
+							,2
                         ) AS nilai'))
                 ->join('jadwals', 'jadwals.id', '=', 'nilais.jadwal_id')
-                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')
-                ->join('kelas', 'kelas.guru_id', '=', 'gurus.id')
+                ->join('gurus', 'jadwals.guru_id', '=', 'gurus.id')								   
                 ->join('mata_pelajarans', 'mata_pelajarans.id', '=', 'jadwals.mata_pelajaran_id')
                 ->join('siswas', 'siswas.id', '=', 'nilais.siswa_id')
                 ->join('users', 'users.username', '=', 'siswas.nis')
                 ->where('users.id',auth()->user()->id)
                 ->whereIn('tipe',array('harian','uts','uas'))
-                ->groupBy('siswas.id','siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran','nilais.id','jadwals.id')
+                ->groupBy('siswas.id','siswas.nama','mata_pelajarans.namamapel','nilais.semester','nilais.tahun_ajaran','jadwals.id')
                 ->get();
             }else{
                 $waliKelas = DB::table('gurus')
